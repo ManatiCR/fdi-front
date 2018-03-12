@@ -142,8 +142,4 @@ $colors: ($highlight1 "highlight1") ($highlight2 "highlight2") ($highlight3 "hig
     }
   }
 }
-
-input[type=submit] {
-  text-align: center;
-}
 </style>

@@ -30,28 +30,28 @@
     <section class="styleguide__buttons">
       <h2 class="h2--styleguide">Buttons</h2>
       <a href="#" class="button button-xlarge button-color-highlight1 button-style-border">Reportá</a>
-      <input type="submit" class="button button-xlarge button-color-highlight2 button-style-border" value="Conocé tus derechos">
+      <button type="button" class="button button-xlarge button-color-highlight2 button-style-border">Conocé tus derechos</button>
 
       <a href="#" class="button button-large button-color-highlight2 button-style-fill">Conocé más</a>
-      <input type="submit" class="button button-large button-color-highlight2 button-style-fill" value="Conocé más">
+      <button type="button" class="button button-large button-color-highlight2 button-style-fill">Conocé más</button>
 
       <a href="#" class="button button-medium button-color-highlight3 button-style-fill">Descargar ></a>
-      <input type="submit" class="button button-medium button-color-highlight3 button-style-fill" value="Descargar >">
+      <button type="button" class="button button-medium button-color-highlight3 button-style-fill">Descargar ></button>
 
       <a href="#" class="button button-small button-color-highlight1 button-style-fill">Continuar ></a>
-      <input type="submit" class="button button-small button-color-highlight1 button-style-fill" value="Continuar >">
+      <button type="button" class="button button-small button-color-highlight1 button-style-fill">Continuar ></button>
       <br><br><br>
       <a href="#" class="button button-xlarge button-color-highlight1 button-style-fill">Reportá</a>
-      <input type="submit" class="button button-xlarge button-color-highlight2 button-style-fill" value="Conocé tus derechos">
+      <button type="button" class="button button-xlarge button-color-highlight2 button-style-fill">Conocé tus derechos</button>
 
       <a href="#" class="button button-large button-color-highlight2 button-style-border">Conocé más</a>
-      <input type="submit" class="button button-large button-color-highlight3 button-style-border" value="Conocé más">
+      <button type="button" class="button button-large button-color-highlight3 button-style-border">Conocé más</button>
 
       <a href="#" class="button button-medium button-color-highlight3 button-style-border">Descargar ></a>
-      <input type="submit" class="button button-medium button-color-highlight2 button-style-border" value="Descargar >">
+      <button type="button" class="button button-medium button-color-highlight2 button-style-border">Descargar ></button>
 
       <a href="#" class="button button-small button-color-highlight1 button-style-border">Continuar ></a>
-      <input type="submit" class="button button-small button-color-highlight3 button-style-border" value="Continuar >">
+      <button type="button" class="button button-small button-color-highlight3 button-style-border">Continuar ></button>
 
     </section>
   </div>
@@ -126,7 +126,7 @@
   a {
     margin-top: 20px;
   }
-  input[type=submit]  {
+  button {
     margin-top: 20px;
   }
 }
