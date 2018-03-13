@@ -24,7 +24,7 @@
       <h2 class="h2--styleguide">Paragraphs</h2>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non bibendum nisl. Phasellus vestibulum dui et congue sagittis. Morbi eros nibh, vulputate non est ac, sollicitudin blandit massa. Duis leo enim, imperdiet eget dolor sed, convallis maximus purus. Morbi quis ornare sapien, quis sollicitudin tortor. Fusce aliquet eros sed mauris mollis aliquam. Etiam at ipsum id tellus convallis scelerisque. / Open Sans, regular, 1.4rem, #4C565D</p>
       <h2 class="h2--styleguide">Content Blocks Paragraphs</h2>
-      <p class="p-conten-block"><strong>El Frente por los Derechos Igualitarios (FDI) es</strong> una unión de organizaciones, colectivos y activistas independientes. Buscamos que se reconozca y garantice el goce de todos los Derechos Humanos en Costa Rica, con énfasis en los de la población de lesbianas, gays, bisexuales, personas trans e intersex. / Open Sans, regular, 1.8rem, #4C565D</p>
+      <p class="p--content-block"><strong>El Frente por los Derechos Igualitarios (FDI) es</strong> una unión de organizaciones, colectivos y activistas independientes. Buscamos que se reconozca y garantice el goce de todos los Derechos Humanos en Costa Rica, con énfasis en los de la población de lesbianas, gays, bisexuales, personas trans e intersex. / Open Sans, regular, 1.8rem, #4C565D</p>
       <a href="#">correo@oficinadenuncias.com</a>
 
       <ul>
@@ -127,8 +127,9 @@
   color: $text;
   font-family: $opensans;
 }
-.p-conten-block {
+.p--content-block {
     font-size: 1.8rem;
+    line-height: 1.5;
 }
 .styleguide__buttons {
   div {

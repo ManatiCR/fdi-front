@@ -40,6 +40,7 @@ h3 {
 
 p {
   font-family: $opensans;
+  line-height: 1.4;
   font-size: 1.4rem;
   color: $text;
 }
@@ -55,10 +56,11 @@ a {
   color: #2dbcdb;
 }
 
-ul {
+li {
   font-family: $opensans;
   font-size: 1.4rem;
   color: $text;
+  margin-bottom: 5px;
 }
 
 .button {
@@ -82,17 +84,17 @@ ul {
 
 .button--large {
   font-size: 2rem;
-  padding: 15px 20px;
+  padding: 15px 35px;
 }
 
 .button--medium {
   font-size: 1.6rem;
-  padding: 12px 15px;
+  padding: 12px 25px;
 }
 
 .button--small {
   font-size: 1.4rem;
-  padding: 8px 10px;
+  padding: 8px 20px;
 }
 
 .button--small.button--style-fill {
