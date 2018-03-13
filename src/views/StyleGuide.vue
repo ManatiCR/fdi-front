@@ -26,33 +26,43 @@
       <h2 class="h2--styleguide">Content Blocks Paragraphs</h2>
       <p class="p-conten-block"><strong>El Frente por los Derechos Igualitarios (FDI) es</strong> una unión de organizaciones, colectivos y activistas independientes. Buscamos que se reconozca y garantice el goce de todos los Derechos Humanos en Costa Rica, con énfasis en los de la población de lesbianas, gays, bisexuales, personas trans e intersex. / Open Sans, regular, 1.8rem, #4C565D</p>
       <a href="#">correo@oficinadenuncias.com</a>
+
+      <ul>
+        <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
+        <li>Quisque semper odio nec justo elementum pulvinar.</li>
+        <li>Cras bibendum dolor sit amet arcu scelerisque vehicula.</li>
+        <li>Donec euismod elit nec risus porta iaculis.</li>
+        <li>Morbi maximus eros sed elit consequat consectetur.</li>
+      </ul>
     </section>
     <section class="styleguide__buttons">
       <h2 class="h2--styleguide">Buttons</h2>
-      <a href="#" class="button button-xlarge button-color-highlight1 button-style-border">Reportá</a>
-      <button type="button" class="button button-xlarge button-color-highlight2 button-style-border">Conocé tus derechos</button>
+      <div>
+        <a href="#" class="button button--xlarge button--color-highlight1 button--style-border">Reportá</a>
+        <button type="button" class="button button--xlarge button--color-highlight2 button--style-border">Conocé tus derechos</button>
 
-      <a href="#" class="button button-large button-color-highlight2 button-style-fill">Conocé más</a>
-      <button type="button" class="button button-large button-color-highlight2 button-style-fill">Conocé más</button>
+        <a href="#" class="button button--large button--color-highlight2 button--style-fill">Conocé más</a>
+        <button type="button" class="button button--large button--color-highlight2 button--style-fill">Conocé más</button>
 
-      <a href="#" class="button button-medium button-color-highlight3 button-style-fill">Descargar ></a>
-      <button type="button" class="button button-medium button-color-highlight3 button-style-fill">Descargar ></button>
+        <a href="#" class="button button--medium button--color-highlight3 button--style-fill">Descargar pero muy largo</a>
+        <button type="button" class="button button--medium button--color-highlight3 button--style-fill">Descargar</button>
 
-      <a href="#" class="button button-small button-color-highlight1 button-style-fill">Continuar ></a>
-      <button type="button" class="button button-small button-color-highlight1 button-style-fill">Continuar ></button>
-      <br><br><br>
-      <a href="#" class="button button-xlarge button-color-highlight1 button-style-fill">Reportá</a>
-      <button type="button" class="button button-xlarge button-color-highlight2 button-style-fill">Conocé tus derechos</button>
+        <a href="#" class="button button--small button--color-highlight1 button--style-fill">Continuar</a>
+        <button type="button" class="button button--small button--color-highlight1 button--style-fill">Continuar botón peque pero largo</button>
+      </div>
+      <div>
+        <a href="#" class="button button--xlarge button--color-highlight1 button--style-fill">Reportá</a>
+        <button type="button" class="button button--xlarge button--color-highlight2 button--style-fill">Conocé tus derechos</button>
 
-      <a href="#" class="button button-large button-color-highlight2 button-style-border">Conocé más</a>
-      <button type="button" class="button button-large button-color-highlight3 button-style-border">Conocé más</button>
+        <a href="#" class="button button--large button--color-highlight2 button--style-border">Conocé más</a>
+        <button type="button" class="button button--large button--color-highlight3 button--style-border">Conocé más</button>
 
-      <a href="#" class="button button-medium button-color-highlight3 button-style-border">Descargar ></a>
-      <button type="button" class="button button-medium button-color-highlight2 button-style-border">Descargar ></button>
+        <a href="#" class="button button--medium button--color-highlight3 button--style-border">Descargar</a>
+        <button type="button" class="button button--medium button--color-highlight2 button--style-border">Descargar</button>
 
-      <a href="#" class="button button-small button-color-highlight1 button-style-border">Continuar ></a>
-      <button type="button" class="button button-small button-color-highlight3 button-style-border">Continuar ></button>
-
+        <a href="#" class="button button--small button--color-highlight1 button--style-border">Continuar</a>
+        <button type="button" class="button button--small button--color-highlight3 button--style-border">Continuar</button>
+      </div>
     </section>
   </div>
 </template>
@@ -121,12 +131,15 @@
     font-size: 1.8rem;
 }
 .styleguide__buttons {
-  display: flex;
-  flex-direction: column;
+  div {
+    margin-top: 30px;
+  }
   a {
+    margin-left: 20px;
     margin-top: 20px;
   }
   button {
+    margin-left: 20px;
     margin-top: 20px;
   }
 }
