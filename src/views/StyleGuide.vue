@@ -37,31 +37,46 @@
     </section>
     <section class="styleguide__buttons">
       <h2 class="h2--styleguide">Buttons</h2>
+      <p>The default button size is medium.</p>
+      <h3>Available classes</h3>
+      <ul>
+        <li>btn</li>
+        <li>btn--xlarge</li>
+        <li>btn--large</li>
+        <li>btn--small</li>
+        <li>btn--fill-highlight1</li>
+        <li>btn--fill-highlight2</li>
+        <li>btn--fill-highlight3</li>
+        <li>btn--border-highlight1</li>
+        <li>btn--border-highlight2</li>
+        <li>btn--border-highlight3</li>
+        <li>btn--arrow</li>
+      </ul>
       <div>
-        <a href="#" class="button button--xlarge button--color-highlight1 button--style-border">Reportá</a>
-        <button type="button" class="button button--xlarge button--color-highlight2 button--style-border">Conocé tus derechos</button>
+        <a href="#" class="btn btn--xlarge btn--border-highlight1">Reportá</a>
+        <button type="button" class="btn btn--xlarge btn--border-highlight2">Conocé tus derechos</button>
 
-        <a href="#" class="button button--large button--color-highlight2 button--style-fill">Conocé más</a>
-        <button type="button" class="button button--large button--color-highlight2 button--style-fill">Conocé más</button>
+        <a href="#" class="btn btn--large btn--fill-highlight2">Conocé más</a>
+        <button type="button" class="btn btn--large btn--fill-highlight2">Conocé más</button>
 
-        <a href="#" class="button button--medium button--color-highlight3 button--style-fill">Descargar pero muy largo</a>
-        <button type="button" class="button button--medium button--color-highlight3 button--style-fill">Descargar</button>
+        <a href="#" class="btn btn--fill-highlight3 btn--arrow">Descargar pero muy largo</a>
+        <button type="button" class="btn btn--fill-highlight3 btn--arrow">Descargar</button>
 
-        <a href="#" class="button button--small button--color-highlight1 button--style-fill">Continuar</a>
-        <button type="button" class="button button--small button--color-highlight1 button--style-fill">Continuar botón peque pero largo</button>
+        <a href="#" class="btn btn--small btn--fill-highlight1 btn--arrow">Continuar</a>
+        <button type="button" class="btn btn--small btn--fill-highlight1 btn--arrow">Continuar botón pequeño pero largo</button>
       </div>
       <div>
-        <a href="#" class="button button--xlarge button--color-highlight1 button--style-fill">Reportá</a>
-        <button type="button" class="button button--xlarge button--color-highlight2 button--style-fill">Conocé tus derechos</button>
+        <a href="#" class="btn btn--xlarge btn--fill-highlight1">Reportá</a>
+        <button type="button" class="btn btn--xlarge btn--fill-highlight2">Conocé tus derechos</button>
 
-        <a href="#" class="button button--large button--color-highlight2 button--style-border">Conocé más</a>
-        <button type="button" class="button button--large button--color-highlight3 button--style-border">Conocé más</button>
+        <a href="#" class="btn btn--large btn--border-highlight2">Conocé más</a>
+        <button type="button" class="btn btn--large btn--border-highlight3">Conocé más</button>
 
-        <a href="#" class="button button--medium button--color-highlight3 button--style-border">Descargar</a>
-        <button type="button" class="button button--medium button--color-highlight2 button--style-border">Descargar</button>
+        <a href="#" class="btn btn--border-highlight3">Descargar</a>
+        <button type="button" class="btn btn--border-highlight2">Descargar</button>
 
-        <a href="#" class="button button--small button--color-highlight1 button--style-border">Continuar</a>
-        <button type="button" class="button button--small button--color-highlight3 button--style-border">Continuar</button>
+        <a href="#" class="btn btn--small btn--border-highlight1">Continuar</a>
+        <button type="button" class="btn btn--small btn--border-highlight3">Continuar</button>
       </div>
     </section>
   </div>
@@ -142,6 +157,9 @@
   button {
     margin-left: 20px;
     margin-top: 20px;
+  }
+  ul {
+    columns: 3;
   }
 }
 </style>

@@ -63,7 +63,7 @@ li {
   margin-bottom: 5px;
 }
 
-.button {
+.btn {
   display: inline-block;
   text-align: center;
   background: none;
@@ -74,30 +74,29 @@ li {
   box-sizing: border-box;
   text-decoration: none;
   color: #fff;
-  font-size: 2rem;
-}
-
-.button--xlarge {
-  font-size: 2rem;
-  padding: 24px 40px;
-}
-
-.button--large {
-  font-size: 2rem;
-  padding: 15px 35px;
-}
-
-.button--medium {
   font-size: 1.6rem;
   padding: 12px 25px;
 }
 
-.button--small {
+.btn--xlarge,
+.btn--large {
+  font-size: 2rem;
+}
+
+.btn--xlarge {
+  padding: 24px 40px;
+}
+
+.btn--large {
+  padding: 15px 35px;
+}
+
+.btn--small {
   font-size: 1.4rem;
   padding: 8px 20px;
 }
 
-.button--small.button--style-fill {
+.btn--arrow {
   &:after {
     content: "";
     margin-left: 4px;
@@ -110,20 +109,7 @@ li {
   }
 }
 
-.button--medium.button--style-fill {
-  &:after {
-    content: "";
-    margin-left: 4px;
-    border: solid #fff;
-    border-width: 0 2px 2px 0;
-    display: inline-block;
-    padding: 3px;
-    transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
-  }
-}
-
-.button--color-highlight1.button--style-border {
+.btn--border-highlight1 {
   border: 4px solid $highlight1;
   color: $text;
   &:hover {
@@ -132,7 +118,7 @@ li {
   }
 }
 
-.button--color-highlight1.button--style-fill {
+.btn--fill-highlight1 {
   color: #fff;
   background: $highlight1;
   &:hover {
@@ -140,7 +126,7 @@ li {
   }
 }
 
-.button--color-highlight2.button--style-border {
+.btn--fill-highlight2 {
   border: 4px solid $highlight2;
   color: $text;
   &:hover {
@@ -149,7 +135,7 @@ li {
   }
 }
 
-.button--color-highlight2.button--style-fill {
+.btn--border-highlight2 {
   color: #fff;
   background: $highlight2;
   &:hover {
@@ -157,7 +143,7 @@ li {
   }
 }
 
-.button--color-highlight3.button--style-border {
+.btn--border-highlight3 {
   border: 4px solid $highlight3;
   color: $text;
   &:hover {
@@ -166,13 +152,12 @@ li {
   }
 }
 
-.button--color-highlight3.button--style-fill {
+.btn--fill-highlight3 {
   color: #fff;
   background: $highlight3;
   &:hover {
     background: darken($highlight3, 10%);
   }
 }
-
 
 </style>
