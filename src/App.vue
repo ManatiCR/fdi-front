@@ -13,6 +13,10 @@
 
 // Base Styles.
 
+* {
+  box-sizing: border-box;
+}
+
 html {
   font-size: 62.5%;
 }
@@ -71,7 +75,6 @@ li {
   cursor: pointer;
   font-weight: 700;
   font-family: $montserrat;
-  box-sizing: border-box;
   text-decoration: none;
   color: #fff;
   font-size: 1.6rem;
@@ -99,7 +102,7 @@ li {
 .btn--arrow {
   &:after {
     content: "";
-    margin-left: 4px;
+    margin-left: 8px;
     border: solid #fff;
     border-width: 0 2px 2px 0;
     display: inline-block;
