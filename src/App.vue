@@ -183,32 +183,28 @@ li {
   width: 100%;
   @media (min-width: $bp-medium) {
     padding: 15px 100px 20px 100px;
+    display: flex;
+    justify-content: space-between;
   }
 }
 
 .site-footer__logo {
   display: block;
-  margin: 0 auto;
-  max-width: 267px;
-  width: 100%;
+  max-width: 100%;
   height: auto;
+  margin: 0 auto;
   @media (min-width: $bp-medium) {
-    display: inline-block;
-  }
-}
-
-.site-footer__social {
-  @media (min-width: $bp-medium) {
-    float: right;
-    display: inline-block;
+    margin: inherit;
   }
 }
 
 .site-footer__social-list {
-  text-align:center;
+  text-align: center;
+  margin: 0;
+  padding: 0;
   li {
-    display: inline;
-    margin: 0 20px;
+    padding: 0 10px;
+    display: inline-block;
     list-style: none;
   }
 }
@@ -218,16 +214,19 @@ li {
   font-family: $opensans;
   font-weight: 700;
   font-size: 1.8rem;
-  margin: 15px 0;
   text-align: center;
+  margin: 15px 0;
   @media (min-width: $bp-medium) {
-    padding-top: 0;
+    text-align: inherit;
+    margin-left: 10px;
   }
 }
 
 .site-footer__social-item {
-  display: inline-block;
-  text-indent: -9999px;
+  display: block;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
   background: url('./assets/images/icons/social-icons.svg') no-repeat 0px 0px #fff;
   border-radius: 50%;
   width: 50px;
