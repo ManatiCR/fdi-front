@@ -177,32 +177,40 @@ li {
 
 // Footer styles.
 .site-footer {
-  display: flex;
-  flex-direction: column;
-  padding: 15px 30px 20px 30px;
+  position: relative;
+  padding: 15px 50px 20px 50px;
   background: $background3;
-  height: 294px;
   width: 100%;
   @media (min-width: $bp-medium) {
-    height: 167px;
-    flex-direction: row;
-    justify-content: space-between;
+    padding: 15px 100px 20px 100px;
   }
 }
 
-.site-footer__social-list {
-  display: flex;
-  justify-content: center;
-  li {
-    margin: 0 20px;
-    list-style: none;
+.site-footer__logo {
+  display: block;
+  margin: 0 auto;
+  max-width: 267px;
+  width: 100%;
+  height: auto;
+  @media (min-width: $bp-medium) {
+    display: inline-block;
   }
 }
 
 .site-footer__social {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  @media (min-width: $bp-medium) {
+    float: right;
+    display: inline-block;
+  }
+}
+
+.site-footer__social-list {
+  text-align:center;
+  li {
+    display: inline;
+    margin: 0 20px;
+    list-style: none;
+  }
 }
 
 .site-footer__social-title {
@@ -210,7 +218,7 @@ li {
   font-family: $opensans;
   font-weight: 700;
   font-size: 1.8rem;
-  padding: 20px 0;
+  margin: 15px 0;
   text-align: center;
   @media (min-width: $bp-medium) {
     padding-top: 0;
