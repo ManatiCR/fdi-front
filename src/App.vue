@@ -1,6 +1,16 @@
 <template>
   <div id="app">
     <router-view/>
+    <footer class="site-footer">
+      <img class="site-footer__logo" src="./assets/images/logo.svg" alt="logo">
+      <nav class="site-footer__social">
+        <h3 class="site-footer__social-title">Contacto:</h3>
+        <ul class="site-footer__social-list">
+          <li><a class="site-footer__social-item site-footer__twitter" target="_blank" href="https://www.facebook.com/FDIcr">Twitter</a></li>
+          <li><a class="site-footer__social-item site-footer__fb" target="_blank" href="https://twitter.com/FDIcr">Facebook</a></li>
+        </ul>
+      </nav>
+    </footer>
   </div>
 </template>
 
@@ -14,6 +24,8 @@
 // Base Styles.
 
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -161,6 +173,68 @@ li {
   &:hover {
     background: darken($highlight3, 10%);
   }
+}
+
+// Footer styles.
+.site-footer {
+  display: flex;
+  flex-direction: column;
+  padding: 15px 30px 20px 30px;
+  background: $background3;
+  height: 294px;
+  width: 100%;
+  @media (min-width: $bp-medium) {
+    height: 167px;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.site-footer__social-list {
+  display: flex;
+  justify-content: center;
+  li {
+    margin: 0 20px;
+    list-style: none;
+  }
+}
+
+.site-footer__social {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.site-footer__social-title {
+  color: $highlight2;
+  font-family: $opensans;
+  font-weight: 700;
+  font-size: 1.8rem;
+  padding: 20px 0;
+  text-align: center;
+  @media (min-width: $bp-medium) {
+    padding-top: 0;
+  }
+}
+
+.site-footer__social-item {
+  display: inline-block;
+  text-indent: -9999px;
+  background: url('./assets/images/icons/social-icons.svg') no-repeat 0px 0px #fff;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  &:hover {
+    background-color: $highlight2;
+  }
+}
+
+.site-footer__twitter {
+  background-position: 11px 12px;
+}
+
+.site-footer__fb {
+  background-position: 11px -31px;
 }
 
 </style>
