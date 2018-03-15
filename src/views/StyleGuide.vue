@@ -131,21 +131,34 @@
 .color--background3:before {
   background-color: $background3;
 }
+
 .h1--styleguide, .h2--styleguide {
   color: $highlight1;
 }
+
 .h1--styleguide-title,
 .h1--styleguide-body {
   color: $text;
 }
+
 .h1--styleguide-body {
   color: $text;
   font-family: $opensans;
 }
+
 .p--content-block {
-    font-size: 1.8rem;
-    line-height: 1.5;
+  font-size: 1.8rem;
+  line-height: 1.5;
 }
+
+h1,h2,h3,p,section,ul {
+  margin: 30px 0;
+}
+
+ul {
+  padding-left: 30px;
+}
+
 .styleguide__buttons {
   div {
     margin-top: 30px;
