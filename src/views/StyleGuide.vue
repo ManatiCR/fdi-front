@@ -1,5 +1,5 @@
 <template>
-  <div class="styleguide">
+  <div class="view-styleguide">
     <h1 class="h1--styleguide">Styleguide</h1>
     <section class="styleguide__colors">
       <h2 class="h2--styleguide">Colors</h2>
