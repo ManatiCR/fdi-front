@@ -1,6 +1,16 @@
 <template>
   <div id="app">
     <router-view/>
+    <footer class="site-footer">
+      <img class="site-footer__logo" src="./assets/images/logo.svg" alt="logo">
+      <nav class="site-footer__social">
+        <h3 class="site-footer__social-title">Contacto:</h3>
+        <ul class="site-footer__social-list">
+          <li><a class="site-footer__social-item site-footer__twitter" target="_blank" href="https://www.facebook.com/FDIcr">Twitter</a></li>
+          <li><a class="site-footer__social-item site-footer__fb" target="_blank" href="https://twitter.com/FDIcr">Facebook</a></li>
+        </ul>
+      </nav>
+    </footer>
   </div>
 </template>
 
@@ -22,6 +32,8 @@ html {
 }
 
 body {
+  margin: 0;
+  padding: 0;
   font-family: $opensans;
 }
 
@@ -161,6 +173,75 @@ li {
   &:hover {
     background: darken($highlight3, 10%);
   }
+}
+
+// Footer styles.
+.site-footer {
+  position: relative;
+  padding: 15px 50px 20px 50px;
+  background: $background3;
+  width: 100%;
+  @media (min-width: $bp-medium) {
+    padding: 15px 100px 20px 100px;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.site-footer__logo {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+  @media (min-width: $bp-medium) {
+    margin: inherit;
+  }
+}
+
+.site-footer__social-list {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  li {
+    padding: 0 10px;
+    display: inline-block;
+    list-style: none;
+  }
+}
+
+.site-footer__social-title {
+  color: $highlight2;
+  font-family: $opensans;
+  font-weight: 700;
+  font-size: 1.8rem;
+  text-align: center;
+  margin: 15px 0;
+  @media (min-width: $bp-medium) {
+    text-align: inherit;
+    margin-left: 10px;
+  }
+}
+
+.site-footer__social-item {
+  display: block;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  background: url('./assets/images/icons/social-icons.svg') no-repeat 0px 0px #fff;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  &:hover {
+    background-color: $highlight2;
+  }
+}
+
+.site-footer__twitter {
+  background-position: 11px 12px;
+}
+
+.site-footer__fb {
+  background-position: 11px -31px;
 }
 
 </style>
