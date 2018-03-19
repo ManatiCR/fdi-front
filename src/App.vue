@@ -1,5 +1,29 @@
 <template>
   <div id="app">
+    <header class="site-header">
+      <h1 class="site-header-title">¡NO MÁS DISCRIMINACIÓN!</h1>
+      <div class="site-header__nav">
+        <p>Una plataforma de:</p>
+        <img class="site-header__logo" src="./assets/images/logo-color.svg" alt="logo">
+        <h3 @click="toggle = !toggle" class="site-header__menu-toggle">Menu</h3>
+        <nav  :class="{'site-header__menu--collapsed': toggle}"  class="site-header__menu">
+          <ul class="site-header__menu-list">
+            <li>
+              <router-link class="site-header__menu-item" :to="{ name: 'reporte'}">Reportá</router-link>
+            </li>
+            <li>
+              <router-link class="site-header__menu-item" :to="{ name: 'derechos'}">Conocé tus derechos</router-link>
+            </li>
+            <li>
+              <router-link class="site-header__menu-item" :to="{ name: 'recursos'}">Recursos</router-link>
+            </li>
+            <li>
+              <router-link class="site-header__menu-item" :to="{ name: 'contacto'}">Contacto</router-link>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
     <router-view/>
     <footer class="site-footer">
       <img class="site-footer__logo" src="./assets/images/logo.svg" alt="logo">
@@ -13,6 +37,17 @@
     </footer>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'simple-counter',
+  data () {
+    return {
+      toggle: true,
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 @import "assets/scss/variables";
