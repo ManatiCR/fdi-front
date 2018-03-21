@@ -2,27 +2,27 @@
   <div id="app">
     <header class="site-header">
       <h1 class="site-header-title">¡NO MÁS DISCRIMINACIÓN!</h1>
-      <div class="site-header__nav">
-        <p>Una plataforma de:</p>
-        <img class="site-header__logo" src="./assets/images/logo-color.svg" alt="logo">
+      <nav class="site-header__nav">
+        <div class="site-header__logo-wrapper">
+          <p>Una plataforma de:</p>
+          <img class="site-header__logo" src="./assets/images/logo-color.svg" alt="logo">
+        </div>
         <h3 @click="siteHeaderMenuToggle = !siteHeaderMenuToggle" class="site-header__menu-toggle">Menu</h3>
-        <nav :class="{'site-header__menu--collapsed': siteHeaderMenuToggle}" class="site-header__menu">
-          <ul class="site-header__menu-list">
-            <li>
-              <router-link active-class="site-header__menu-item--active" class="site-header__menu-item" :to="{ name: 'reporte'}">Reportá</router-link>
-            </li>
-            <li>
-              <router-link active-class="site-header__menu-item--active" class="site-header__menu-item" :to="{ name: 'derechos'}">Conocé tus derechos</router-link>
-            </li>
-            <li>
-              <router-link active-class="site-header__menu-item--active" class="site-header__menu-item" :to="{ name: 'recursos'}">Recursos</router-link>
-            </li>
-            <li>
-              <router-link active-class="site-header__menu-item--active" class="site-header__menu-item" :to="{ name: 'contacto'}">Contacto</router-link>
-            </li>
-          </ul>
-        </nav>
-      </div>
+        <ul :class="{'site-header__menu--collapsed': siteHeaderMenuToggle}" class="site-header__menu-list">
+          <li>
+            <router-link active-class="site-header__menu-item--active" class="site-header__menu-item" :to="{ name: 'reporte'}">Reportá</router-link>
+          </li>
+          <li>
+            <router-link active-class="site-header__menu-item--active" class="site-header__menu-item" :to="{ name: 'derechos'}">Conocé tus derechos</router-link>
+          </li>
+          <li>
+            <router-link active-class="site-header__menu-item--active" class="site-header__menu-item" :to="{ name: 'recursos'}">Recursos</router-link>
+          </li>
+          <li>
+            <router-link active-class="site-header__menu-item--active" class="site-header__menu-item" :to="{ name: 'contacto'}">Contacto</router-link>
+          </li>
+        </ul>
+      </nav>
     </header>
     <router-view/>
     <footer class="site-footer">
@@ -238,9 +238,6 @@ li {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  p, img, h3 {
-    flex: 1 100px;
-  }
   p {
     font-size: 1.1rem;
     padding: 20px 0 0 10px;
@@ -250,18 +247,27 @@ li {
     padding: 0 50px;
     flex-wrap: nowrap;
     p {
+      min-width: 139px;
       font-size: 1.4rem;
       padding: 30px 0;
     }
   }
 }
 
+.site-header__logo-wrapper {
+  flex: 2;
+  margin: 0;
+  display: flex;
+  justify-content: flex-start;
+}
+
 .site-header__logo {
-  width: 109px;
+  width: 122px;
   height: 60px;
-  padding-right: 10px;
+  padding: 0 10px;
   @media (min-width: $bp-medium) {
     height: auto;
+    width: auto;
   }
 }
 
@@ -271,6 +277,7 @@ li {
   text-align: center;
   padding-top: 16px;
   margin: 0;
+  flex: 1 0;
   &:after {
     content: '';
     display: inline-block;
@@ -287,18 +294,6 @@ li {
   }
 }
 
-.site-header__menu {
-  flex: 12 700px;
-  border-top: 1px solid #b4bcc1;
-  border-bottom: 1px solid #b4bcc1;
-  @media (min-width: $bp-medium) {
-    border: none;
-    flex: 12;
-    display: flex;
-    justify-content: flex-end;
-  }
-}
-
 .site-header__menu--collapsed {
   display: none;
   @media (min-width: $bp-medium) {
@@ -308,7 +303,11 @@ li {
 
 .site-header__menu-list {
   list-style: none;
-  padding: 0;
+  padding: 10px 0 0 0;
+  border-top: 1px solid #b4bcc1;
+  border-bottom: 1px solid #b4bcc1;
+  width: 100%;
+  margin: 0;
   li {
     padding: 0 0 10px 10px;
   }
@@ -317,9 +316,9 @@ li {
     border-top: 1px solid #b4bcc1;
   }
   @media (min-width: $bp-medium) {
+    border: none;
     display: flex;
     justify-content: flex-end;
-    width: 100%;
     max-width: 900px;
     li:not(:first-child) {
       padding: 20px 0;
@@ -328,10 +327,7 @@ li {
     li {
       padding-top: 20px;
       flex: 1 1;
-      text-align: right;
-    }
-    li:nth-child(2) {
-      flex: 1 100px;
+      text-align: center;
     }
   }
 }
