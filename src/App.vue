@@ -9,16 +9,16 @@
         <nav :class="{'site-header__menu--collapsed': siteHeaderMenuToggle}" class="site-header__menu">
           <ul class="site-header__menu-list">
             <li>
-              <router-link class="site-header__menu-item" :to="{ name: 'reporte'}">Reportá</router-link>
+              <router-link active-class="site-header__menu-item--active" class="site-header__menu-item" :to="{ name: 'reporte'}">Reportá</router-link>
             </li>
             <li>
-              <router-link class="site-header__menu-item" :to="{ name: 'derechos'}">Conocé tus derechos</router-link>
+              <router-link active-class="site-header__menu-item--active" class="site-header__menu-item" :to="{ name: 'derechos'}">Conocé tus derechos</router-link>
             </li>
             <li>
-              <router-link class="site-header__menu-item" :to="{ name: 'recursos'}">Recursos</router-link>
+              <router-link active-class="site-header__menu-item--active" class="site-header__menu-item" :to="{ name: 'recursos'}">Recursos</router-link>
             </li>
             <li>
-              <router-link class="site-header__menu-item" :to="{ name: 'contacto'}">Contacto</router-link>
+              <router-link active-class="site-header__menu-item--active" class="site-header__menu-item" :to="{ name: 'contacto'}">Contacto</router-link>
             </li>
           </ul>
         </nav>
