@@ -5,8 +5,8 @@
       <div class="site-header__nav">
         <p>Una plataforma de:</p>
         <img class="site-header__logo" src="./assets/images/logo-color.svg" alt="logo">
-        <h3 @click="toggle = !toggle" class="site-header__menu-toggle">Menu</h3>
-        <nav  :class="{'site-header__menu--collapsed': toggle}"  class="site-header__menu">
+        <h3 @click="siteHeaderMenuToggle = !siteHeaderMenuToggle" class="site-header__menu-toggle">Menu</h3>
+        <nav :class="{'site-header__menu--collapsed': siteHeaderMenuToggle}" class="site-header__menu">
           <ul class="site-header__menu-list">
             <li>
               <router-link class="site-header__menu-item" :to="{ name: 'reporte'}">Reportá</router-link>
@@ -43,7 +43,7 @@ export default {
   name: 'simple-counter',
   data () {
     return {
-      toggle: true,
+      siteHeaderMenuToggle: true,
     }
   }
 }
