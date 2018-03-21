@@ -212,11 +212,11 @@ li {
 
 // Header Styles
 .site-header {
-  background: url('./assets/images/background-header-mobile.png');
+  background: url('./assets/images/background-header-mobile.jpg');
   background-repeat: no-repeat;
   background-size: 100%;
   @media (min-width: $bp-medium) {
-    background: url('./assets/images/background-header.png');
+    background: url('./assets/images/background-header.jpg');
     background-size: 100%;
   }
 }
