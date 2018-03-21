@@ -333,9 +333,6 @@ li {
     li:nth-child(2) {
       flex: 1 100px;
     }
-    .router-link-active {
-      border-bottom: 5px solid $highlight2;
-    }
   }
 }
 
@@ -345,6 +342,12 @@ li {
   font-weight: 700;
   text-decoration: none;
   color: $text;
+}
+
+.site-header__menu-item--active {
+  @media (min-width: $bp-medium) {
+    border-bottom: 5px solid $highlight2;
+  }
 }
 
 // Footer styles.
