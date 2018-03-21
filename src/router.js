@@ -43,4 +43,5 @@ export default new Router({
       component: StyleGuide,
     }
   ],
+  linkActiveClass: "site-header__menu-item--active",
 });
