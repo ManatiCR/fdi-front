@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <header class="site-header">
-      <h1 class="site-header-title">¡NO MÁS DISCRIMINACIÓN!</h1>
+      <router-link class="site-header-title-link":to="{ name: 'home'}">
+        <h1 class="site-header-title">¡NO MÁS DISCRIMINACIÓN!</h1>
+      </router-link>
       <nav class="site-header__nav">
         <div class="site-header__logo-wrapper">
           <p>Una plataforma de:</p>
@@ -9,16 +11,16 @@
         </div>
         <h3 @click="siteHeaderMenuToggle = !siteHeaderMenuToggle" class="site-header__menu-toggle">Menu</h3>
         <ul :class="{'site-header__menu--collapsed': siteHeaderMenuToggle}" class="site-header__menu-list">
-          <li>
+          <li @click="siteHeaderMenuToggle = !siteHeaderMenuToggle">
             <router-link active-class="site-header__menu-item--active" class="site-header__menu-item" :to="{ name: 'reporte'}">Reportá</router-link>
           </li>
-          <li>
+          <li @click="siteHeaderMenuToggle = !siteHeaderMenuToggle">
             <router-link active-class="site-header__menu-item--active" class="site-header__menu-item" :to="{ name: 'derechos'}">Conocé tus derechos</router-link>
           </li>
-          <li>
+          <li @click="siteHeaderMenuToggle = !siteHeaderMenuToggle">
             <router-link active-class="site-header__menu-item--active" class="site-header__menu-item" :to="{ name: 'recursos'}">Recursos</router-link>
           </li>
-          <li>
+          <li @click="siteHeaderMenuToggle = !siteHeaderMenuToggle">
             <router-link active-class="site-header__menu-item--active" class="site-header__menu-item" :to="{ name: 'contacto'}">Contacto</router-link>
           </li>
         </ul>
@@ -222,13 +224,15 @@ li {
 }
 
 .site-header-title {
+  display: inline-block;
   padding: 130px 15px 20px 15px;
   text-shadow: 3px 3px 5px $text;
   margin: 0;
-  font-size: 2.4rem;
   color: #fff;
-  max-width: 200px;
+  max-width: 260px;
+  font-size: 3rem;
   @media (min-width: $bp-medium) {
+    font-size: 4.8rem;
     padding-bottom: 50px;
   }
 }
@@ -244,7 +248,7 @@ li {
     margin: 0;
   }
   @media (min-width: $bp-medium) {
-    padding: 0 50px;
+    padding: 0 30px;
     flex-wrap: nowrap;
     p {
       min-width: 139px;
@@ -268,10 +272,12 @@ li {
   @media (min-width: $bp-medium) {
     height: auto;
     width: auto;
+    max-width: 150px;
   }
 }
 
 .site-header__menu-toggle {
+  cursor: pointer;
   color: $text;
   background: $highlight2;
   text-align: center;
@@ -338,6 +344,10 @@ li {
   font-weight: 700;
   text-decoration: none;
   color: $text;
+  line-height: 1.5;
+  &:hover {
+    color: #262e3b;
+  }
 }
 
 .site-header__menu-item--active {
