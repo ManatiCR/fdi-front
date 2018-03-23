@@ -11,8 +11,14 @@
     "e2e:open": "vue-cli-service e2e:open"
   },
   "dependencies": {
+    "apollo-cache-inmemory": "^1.1.11",
+    "apollo-client": "^2.2.7",
+    "apollo-link-batch-http": "^1.2.1",
+    "graphql": "^0.13.2",
+    "graphql-tag": "^2.8.0",
     "register-service-worker": "^1.0.0",
     "vue": "^2.5.13",
+    "vue-apollo": "^3.0.0-beta.5",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },
