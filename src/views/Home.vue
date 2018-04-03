@@ -3,21 +3,21 @@
     <content-block id="home_reporte"></content-block>
     <content-block id="home_derechos"></content-block>
     <content-block id="home_fdi"></content-block>
-    <section class="home_section--espacios">
+    <section class="spaces-home-container">
       <content-block id="home_espacios"></content-block>
-      <discrimination-free-spaces></discrimination-free-spaces>
+      <spaces-home></spaces-home>
     </section>
   </div>
 </template>
 
 <script>
 import ContentBlock from '../components/ContentBlock.vue';
-import DiscriminationFreeSpaces from '../components/DiscriminationFreeSpaces.vue';
+import SpacesHome from '../components/SpacesHome.vue';
 
 export default {
   components: {
     ContentBlock,
-    DiscriminationFreeSpaces,
+    SpacesHome,
   }
 };
 </script>
@@ -25,15 +25,15 @@ export default {
 <style lang="scss">
 @import "../assets/scss/variables";
 
-  .home_section--espacios {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    section {
-      flex: 1 1 100%;
-      @media (min-width: $bp-medium) {
-        flex-basis: 50%;
-      }
+.spaces-home-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  section {
+    flex: 1 1 100%;
+    @media (min-width: $bp-medium) {
+      flex-basis: 50%;
     }
   }
+}
 </style>
