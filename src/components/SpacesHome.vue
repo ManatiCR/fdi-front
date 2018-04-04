@@ -3,7 +3,7 @@
     <ul class="spaces-home__list">
       <li class="spaces-home__item" v-for="(entity, index) in nodeQuery.entities">
         <a class="spaces-home__link" :href='nodeQuery.entities[index].fieldEnlace.url.path'>
-          <img class="spaces-home__img" :src="nodeQuery.entities[index].fieldImagen.derivative.url" alt="">
+          <img class="spaces-home__img" :src="nodeQuery.entities[index].fieldImagen.derivative.url" :alt="nodeQuery.entities[index].entityLabel">
         </a>
       </li>
     </ul>
@@ -31,6 +31,7 @@ const query = gql `query {
       ]
     }) {
       entities {
+        entityLabel
         ... on NodeEspacioLibreDeDiscriminacion {
           fieldImagen {
             derivative (style: medium) {

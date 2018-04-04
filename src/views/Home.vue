@@ -26,12 +26,14 @@ export default {
 @import "../assets/scss/variables";
 
 .spaces-home-container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  @media (min-width: $bp-medium) {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
   section {
-    flex: 1 1 100%;
     @media (min-width: $bp-medium) {
+      flex: 1 1 100%;
       flex-basis: 50%;
     }
   }
