@@ -2,6 +2,7 @@ import Vue from 'vue';
 import { ApolloClient } from 'apollo-client';
 import { BatchHttpLink } from 'apollo-link-batch-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+
 import VueApollo from 'vue-apollo';
 import App from './App.vue';
 import router from './router';
@@ -24,6 +25,13 @@ const apolloClient = new ApolloClient({
 
 // Install the vue plugin.
 Vue.use(VueApollo);
+
+// Set moment to spanish.
+const moment = require('moment')
+require('moment/locale/es')
+Vue.use(require('vue-moment'), {
+    moment
+})
 
 // Create the apollo provider.
 const apolloProvider = new VueApollo({
