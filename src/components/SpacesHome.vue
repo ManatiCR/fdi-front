@@ -34,7 +34,7 @@ const query = gql `query {
         entityLabel
         ... on NodeEspacioLibreDeDiscriminacion {
           fieldImagen {
-            derivative (style: medium) {
+            derivative (style: logo_espacios) {
               url
             }
           }
