@@ -9,6 +9,9 @@ import router from './router';
 import store from './store';
 import config from './config';
 import './registerServiceWorker';
+import moment from 'moment';
+import 'moment/locale/es';
+import vueMoment from 'vue-moment';
 
 Vue.config.productionTip = false;
 
@@ -26,12 +29,9 @@ const apolloClient = new ApolloClient({
 // Install the vue plugin.
 Vue.use(VueApollo);
 
-// Set moment to spanish.
-const moment = require('moment')
-require('moment/locale/es')
-Vue.use(require('vue-moment'), {
-    moment
-})
+Vue.use(vueMoment, {
+  moment
+});
 
 // Create the apollo provider.
 const apolloProvider = new VueApollo({
