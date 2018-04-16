@@ -3,11 +3,13 @@
     <h3 class="resources__title">Recursos Jurídicos</h3>
     <ul class="resources__list">
       <li class="resources__item" v-for="(entity, index) in nodeQuery.entities">
-        <h3 class="resources__item-title">{{nodeQuery.entities[index].entityLabel}}</h3>
-        <p class="resources__category">{{nodeQuery.entities[index].fieldCategoriaRecursoJuridico.entity.entityLabel}}</p>
+        <a :href="entity.fieldEnlace.url.path" target="_blank">
+          <h3 class="resources__item-title">{{entity.entityLabel}}</h3>
+        </a>
+        <p class="resources__category">{{entity.fieldCategoriaRecursoJuridico.entity.entityLabel}}</p>
         <div class="resources__date-button-container">
-          <p class="resources__date"><strong>Vigente desde:</strong> {{ nodeQuery.entities[index].fieldVigencia.value | moment("LL") }}</p>
-          <a :href="nodeQuery.entities[index].fieldEnlace.url.path" class="resources__btn btn btn--small btn--fill-highlight3 btn--arrow">Descargar</a>
+          <p class="resources__date"><strong>Vigente desde:</strong> {{ entity.fieldVigencia.value | moment("LL") }}</p>
+          <a :href="entity.fieldEnlace.url.path" class="resources__btn btn btn--small btn--fill-highlight3 btn--arrow" target="_blank">Descargar</a>
         </div>
       </li>
     </ul>
@@ -87,16 +89,10 @@ export default {
 .resources__list {
   width: 100%;
   padding: 0;
-  li:nth-child(-n+5) {
-    border-bottom: solid 1px gray;
-  }
   @media (min-width: 480px) {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    li:nth-last-child(-n+2) {
-      border: none;
-    }
   }
 }
 
@@ -105,14 +101,32 @@ export default {
   list-style: none;
   margin-bottom: 0;
   padding: 10px 0;
+  border-bottom: solid 1px gray;
+  a {
+    text-decoration: none;
+  }
   @media (min-width: 480px) {
     width: 48%;
+  }
+}
+
+.resources__item:last-child{
+  border: none;
+}
+
+.resources__item:nth-last-child(-n+2) {
+  @media (min-width: 480px) {
+    border: none;
   }
 }
 
 .resources__item-title {
   margin: 0 0 10px 0;
   font-size: 1.4rem;
+  cursor: pointer;
+  &:hover {
+    color: $highlight3;
+  }
 }
 
 .resources__category {
