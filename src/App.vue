@@ -55,7 +55,7 @@ export default {
 @import "assets/scss/variables";
 
 // Google Fonts.
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,700,700i');
 @import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 
 // Base Styles.
