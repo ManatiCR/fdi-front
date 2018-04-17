@@ -2,7 +2,7 @@
   <section class="model">
     <ul class="model__list">
       <li class="model__item" v-for="(entity, index) in nodeQuery.entities">
-        <img class="model__img" :src="entity.fieldImagen.derivative.url" :alt="entity.entityLabel">
+        <img :width="entity.fieldImagen.derivative.width" :height="entity.fieldImagen.derivative.height" class="model__img" :src="entity.fieldImagen.derivative.url" :alt="entity.entityLabel">
         <div class="model__body-container">
           <h3 class="model__title">{{entity.entityLabel}}</h3>
           <p class="model__date">Actualizado el {{ entity.entityChanged | moment("LL") }}</p>
@@ -47,6 +47,8 @@ const query = gql`query($limit: Int!) {
         fieldImagen {
           derivative (style: machote) {
             url
+            width
+            height
           }
         }
         body {
