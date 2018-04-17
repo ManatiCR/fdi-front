@@ -2,12 +2,16 @@ import Vue from 'vue';
 import { ApolloClient } from 'apollo-client';
 import { BatchHttpLink } from 'apollo-link-batch-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+
 import VueApollo from 'vue-apollo';
 import App from './App.vue';
 import router from './router';
 import store from './store';
 import config from './config';
 import './registerServiceWorker';
+import moment from 'moment';
+import 'moment/locale/es';
+import vueMoment from 'vue-moment';
 
 Vue.config.productionTip = false;
 
@@ -24,6 +28,10 @@ const apolloClient = new ApolloClient({
 
 // Install the vue plugin.
 Vue.use(VueApollo);
+
+Vue.use(vueMoment, {
+  moment
+});
 
 // Create the apollo provider.
 const apolloProvider = new VueApollo({
