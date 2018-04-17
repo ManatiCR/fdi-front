@@ -3,9 +3,11 @@
     <h3 class="resources__title">Recursos Jurídicos</h3>
     <ul class="resources__list">
       <li class="resources__item" v-for="(entity, index) in nodeQuery.entities">
-        <a :href="entity.fieldEnlace.url.path" target="_blank">
-          <h3 class="resources__item-title">{{entity.entityLabel}}</h3>
-        </a>
+        <h3 class="resources__item-title">
+          <a :href="entity.fieldEnlace.url.path" target="_blank">
+            {{entity.entityLabel}}
+          </a>
+        </h3>
         <p class="resources__category">{{entity.fieldCategoriaRecursoJuridico.entity.entityLabel}}</p>
         <div class="resources__date-button-container">
           <p class="resources__date"><strong>Vigente desde:</strong> {{ entity.fieldVigencia.value | moment("LL") }}</p>
@@ -110,7 +112,7 @@ export default {
   }
 }
 
-.resources__item:last-child{
+.resources__item:last-child {
   border: none;
 }
 
@@ -122,9 +124,12 @@ export default {
 
 .resources__item-title {
   margin: 0 0 10px 0;
-  font-size: 1.4rem;
   cursor: pointer;
-  &:hover {
+  a {
+    font-size: 1.4rem;
+    color: $text;
+  }
+  a:hover {
     color: $highlight3;
   }
 }
@@ -135,6 +140,7 @@ export default {
   color: $highlight3;
   font-size: 1.2rem;
 }
+
 .resources__date {
   max-width: 135px;
   display: inline-block;
