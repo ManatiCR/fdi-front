@@ -2,8 +2,8 @@
   <section class="spaces-home">
     <ul class="spaces-home__list">
       <li class="spaces-home__item" v-for="(entity, index) in nodeQuery.entities">
-        <a class="spaces-home__link" :href='nodeQuery.entities[index].fieldEnlace.url.path'>
-          <img class="spaces-home__img" :src="nodeQuery.entities[index].fieldImagen.derivative.url" :alt="nodeQuery.entities[index].entityLabel">
+        <a class="spaces-home__link" :href='entity.fieldEnlace.url.path'>
+          <img :width="entity.fieldImagen.derivative.width" :height="entity.fieldImagen.derivative.height" class="spaces-home__img" :src="entity.fieldImagen.derivative.url" :alt="entity.entityLabel">
         </a>
       </li>
     </ul>
@@ -36,6 +36,8 @@ const query = gql `query {
           fieldImagen {
             derivative (style: logo_espacios) {
               url
+              width
+              height
             }
           }
           fieldEnlace {
