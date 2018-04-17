@@ -2,9 +2,9 @@
   <section class="human-rights">
     <ul class="human-rights__list">
       <li class="human-rights__item" v-for="(entity, index) in nodeQuery.entities">
-        <img class="human-rights__img" :src="nodeQuery.entities[index].fieldImagen.derivative.url" alt="">
-        <h3 class="human-rights__title">{{nodeQuery.entities[index].entityLabel}}</h3>
-        <div class="human-rights__body" v-html="nodeQuery.entities[index].body.value"></div>
+        <img :width="entity.fieldImagen.derivative.width" :height="entity.fieldImagen.derivative.height" class="human-rights__img" :src="entity.fieldImagen.derivative.url" :alt="entity.entityLabel">
+        <h3 class="human-rights__title">{{entity.entityLabel}}</h3>
+        <div class="human-rights__body" v-html="entity.body.value"></div>
       </li>
     </ul>
   </section>
@@ -34,8 +34,10 @@ const query = gql `query {
         entityLabel
         ... on NodeDerecho {
           fieldImagen {
-            derivative (style: medium) {
+            derivative (style: logo_derechos) {
               url
+              width
+              height
             }
           }
           body {
