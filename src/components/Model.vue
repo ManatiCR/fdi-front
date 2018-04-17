@@ -114,6 +114,7 @@ export default {
 .model__img {
   max-width: 100%;
   max-height: 280px;
+  height: auto;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -147,7 +148,7 @@ export default {
     height: fit-content;
     max-width: 145px;
     padding: 12px 0;
-    margin-top: 75px;
+    margin-top: 85px;
   }
 }
 </style>
