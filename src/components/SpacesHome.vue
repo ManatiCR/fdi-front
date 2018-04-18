@@ -3,7 +3,7 @@
     <ul class="spaces-home__list">
       <li class="spaces-home__item" v-for="(entity, index) in nodeQuery.entities">
         <a class="spaces-home__link" :href='entity.fieldEnlace.url.path'>
-          <img :width="entity.fieldImagen.derivative.width" :height="entity.fieldImagen.derivative.height" class="spaces-home__img" :src="entity.fieldImagen.derivative.url" :alt="entity.entityLabel">
+          <img :width="(entity.fieldImagen.derivative.width/2)" :height="(entity.fieldImagen.derivative.height/2)" class="spaces-home__img" :src="entity.fieldImagen.derivative.url" :alt="entity.entityLabel">
         </a>
       </li>
     </ul>
