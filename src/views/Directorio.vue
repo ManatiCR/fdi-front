@@ -1,17 +1,16 @@
 <template>
   <section class="view-directorio">
-    <h3 class="directory-page__title">Directorio telefónico oficinas públicas</h3>
-    <!-- <input type="text" class="directory-page-input" v-model="search" v-on:change="filterDirectory"> -->
-    <input type="text" class="directory-page-input" v-model="search" v-on:change="filterDirectory">
-
-    <button type="button">Test</button>
-    <ul class="directory-page__list">
-      <li class="directory-page__item" v-for="entity in filterDirectory">
-        <h3 class="directory-page__item-title">{{entity.entityLabel}}</h3>
-        <p class="directory-page__phone-number">{{entity.fieldTelefono}}</p>
-        <a :href="'mailto:' + entity.fieldCorreo">{{entity.fieldCorreo}}</a>
-      </li>
-    </ul>
+    <div class="directory-page">
+      <h3 class="directory-page__title">Directorio telefónico oficinas públicas</h3>
+      <input type="text" class="directory-page-input" v-model="search" @keyup="filterDirectory">
+      <ul class="directory-page__list">
+        <li class="directory-page__item" v-for="entity in entitiesfiltered">
+          <h3 class="directory-page__item-title">{{entity.entityLabel}}</h3>
+          <a class="directory-page__phone-number" :href="'tel:' + entity.fieldTelefono">{{entity.fieldTelefono}}</a>
+          <a :href="'mailto:' + entity.fieldCorreo">{{entity.fieldCorreo}}</a>
+        </li>
+      </ul>
+    </div>
   </section>
 </template>
 
@@ -51,56 +50,100 @@ export default {
     nodeQuery() {
       return {
         query: query,
+        update(data) {
+          if (data.hasOwnProperty('nodeQuery') &&
+            data.nodeQuery.hasOwnProperty('entities') &&
+            data.nodeQuery.entities instanceof Array &&
+            data.nodeQuery.entities.length > 1) {
+              this.entities = data.nodeQuery.entities;
+              this.entitiesfiltered = data.nodeQuery.entities;
+          }
+        }
       }
     }
   },
   data() {
     return {
-      search: '',
       nodeQuery: {},
+      search: '',
+      entities: {},
+      entitiesfiltered: {},
     }
   },
   methods: {
-    filterDirectory() {
-      alert('ho');
-      // return this.nodeQuery.entities
-      return this.nodeQuery.entities.filter(item => {
-        return item.entityLabel.toLowerCase().indexOf(this.search.toLowerCase()) > -1
-      })
-    }
+    filterDirectory(event) {
+      if (event.key =='Enter') {
+        console.log(event.key);
+      }
+      this.entitiesfiltered = this.entities.filter(entity =>
+        entity.entityLabel.toLowerCase().indexOf(this.search.toLowerCase()) > -1
+      );
+    },
   },
 }
 </script>
 
 <style lang="scss">
-.directory-page {
-  background-color: #fff;
+@import "../assets/scss/variables";
+
+.view-directorio {
   padding: 20px;
+  width: 100%;
+}
+
+.directory-page {
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 .directory-page__title {
-  margin: 0;
+  margin: 0 0 20px 0;
+}
+
+.directory-page-input {
+  border: solid 1px $text;
+  margin-bottom: 20px;
+  color: $text;
 }
 
 .directory-page__list {
   width: 100%;
-  padding: 0 20px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  max-height: 600px;
+  margin: 0 auto;
+  padding: 0;
+  @media (min-width: 480px) {
+    display: flex;
+    flex-wrap: wrap;
+  }
 }
 
 .directory-page__item {
   list-style: none;
-  margin-bottom: 0;
-  padding: 10px 0;
+  margin: 0;
+  padding: 20px;
+  background-color: #FAF5F1;
+  @media (min-width: 480px) {
+    flex: 0 1 44%;
+    margin-right: 20px;
+  }
+  @media (min-width: 768px) {
+    flex: 0 1 30%;
+  }
+  @media (min-width: 1441px) {
+    flex: 0 1 23%;
+  }
 }
 
 .directory-page__item-title,
 .directory-page__phone-number {
   font-size: 1.4rem;
   margin: 0;
+}
+
+.directory-page__phone-number {
+  display: block;
+  color: $text;
+  font-weight: 400;
+  text-decoration: none;
 }
 
 </style>
