@@ -101,7 +101,7 @@ export default {
 }
 
 .directory-page-input {
-  border: solid 1px $text;
+  border: solid 1px #e0e0e0;
   margin-bottom: 20px;
   color: $text;
 }
@@ -120,7 +120,7 @@ export default {
   list-style: none;
   margin: 0;
   padding: 20px;
-  background-color: #FAF5F1;
+  background-color: #eef5fb;
   @media (min-width: 480px) {
     flex: 0 1 44%;
     margin-right: 20px;
