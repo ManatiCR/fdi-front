@@ -2,7 +2,7 @@
   <section class="model">
     <ul class="model__list">
       <li class="model__item" v-for="(entity, index) in nodeQuery.entities">
-        <img :width="entity.fieldImagen.derivative.width" :height="entity.fieldImagen.derivative.height" class="model__img" :src="entity.fieldImagen.derivative.url" :alt="entity.entityLabel">
+        <img :width="(entity.fieldImagen.derivative.width/2)" :height="(entity.fieldImagen.derivative.height/2)" class="model__img" :src="entity.fieldImagen.derivative.url" :alt="entity.entityLabel">
         <div class="model__body-container">
           <h3 class="model__title">{{entity.entityLabel}}</h3>
           <p class="model__date">Actualizado el {{ entity.entityChanged | moment("LL") }}</p>
@@ -113,8 +113,6 @@ export default {
 
 .model__img {
   max-width: 100%;
-  max-height: 280px;
-  height: auto;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -139,7 +137,7 @@ export default {
 }
 
 .model__date {
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .model__btn {
