@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import Home from './views/Home.vue';
 import Reporte from './views/Reporte.vue';
 import Derechos from './views/Derechos.vue';
+import Directorio from './views/Directorio.vue';
 import Recursos from './views/Recursos.vue';
 import Contacto from './views/Contacto.vue';
 import StyleGuide from './views/StyleGuide.vue';
@@ -26,6 +27,11 @@ export default new Router({
       path: '/derechos',
       name: 'derechos',
       component: Derechos,
+    },
+    {
+      path: '/directorio',
+      name: 'directorio',
+      component: Directorio,
     },
     {
       path: '/recursos',
