@@ -2,7 +2,7 @@
   <section class="human-rights">
     <ul class="human-rights__list">
       <li class="human-rights__item" v-for="(entity, index) in nodeQuery.entities">
-        <img :width="entity.fieldImagen.derivative.width" :height="entity.fieldImagen.derivative.height" class="human-rights__img" :src="entity.fieldImagen.derivative.url" :alt="entity.entityLabel">
+        <img :width="(entity.fieldImagen.derivative.width/2)" :height="(entity.fieldImagen.derivative.height/2)" class="human-rights__img" :src="entity.fieldImagen.derivative.url" :alt="entity.entityLabel">
         <h3 class="human-rights__title">{{entity.entityLabel}}</h3>
         <div class="human-rights__body" v-html="entity.body.value"></div>
       </li>
