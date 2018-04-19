@@ -2,7 +2,7 @@
   <section class="view-directorio">
     <div class="directory-page">
       <h3 class="directory-page__title">Directorio telefónico oficinas públicas</h3>
-      <input type="text" class="directory-page-input" v-model="search" @keyup="filterDirectory">
+      <input type="text" placeholder="Buscar" class="directory-page-input" v-model="search" @keyup="filterDirectory">
       <ul class="directory-page__list">
         <li class="directory-page__item" v-for="entity in entitiesfiltered">
           <h3 class="directory-page__item-title">{{entity.entityLabel}}</h3>
@@ -71,10 +71,7 @@ export default {
     }
   },
   methods: {
-    filterDirectory(event) {
-      if (event.key =='Enter') {
-        console.log(event.key);
-      }
+    filterDirectory() {
       this.entitiesfiltered = this.entities.filter(entity =>
         entity.entityLabel.toLowerCase().indexOf(this.search.toLowerCase()) > -1
       );
@@ -102,8 +99,28 @@ export default {
 
 .directory-page-input {
   border: solid 1px #e0e0e0;
+  height: 33px;
+  width: 100%;
   margin-bottom: 20px;
   color: $text;
+  background: url(.././assets/images/icons/search-icon.svg) no-repeat;
+  background-position: right 10px center;
+  padding-left: 10px;
+  &::-webkit-input-placeholder{
+    font-style: italic;
+    color: #e0e0e0;
+  }
+  &::-moz-placeholder {
+    font-style: italic;
+    color: #e0e0e0;
+  }
+  &::-ms-input-placeholder {
+    font-style: italic;
+    color: #e0e0e0;
+  }
+  @media (min-width: 480px) {
+    width: 218px;
+  }
 }
 
 .directory-page__list {
