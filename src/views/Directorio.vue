@@ -106,15 +106,7 @@ export default {
   background: url(.././assets/images/icons/search-icon.svg) no-repeat;
   background-position: right 10px center;
   padding-left: 10px;
-  &::-webkit-input-placeholder{
-    font-style: italic;
-    color: #e0e0e0;
-  }
-  &::-moz-placeholder {
-    font-style: italic;
-    color: #e0e0e0;
-  }
-  &::-ms-input-placeholder {
+  &::placeholder {
     font-style: italic;
     color: #e0e0e0;
   }
