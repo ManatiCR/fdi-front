@@ -59,10 +59,15 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../assets/scss/variables";
+
 .directory {
   background-color: #fff;
-  max-width: 350px;
   padding: 20px;
+  width: 100%;
+  @media (min-width: 768px) {
+    max-width: 350px;
+  }
 }
 
 .directory__title {
@@ -83,6 +88,7 @@ export default {
 .directory__item-title,
 .directory__phone-number {
   font-size: 1.4rem;
+  color: $text;
   margin: 0;
 }
 
