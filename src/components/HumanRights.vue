@@ -89,9 +89,8 @@ export default {
   @media (min-width: 480px) {
     width: 45%;
   }
-  @media (min-width: $bp-medium) {
+  @media (min-width: 1200px) {
     width: 32%;
-    margin-bottom: 0;
   }
 }
 
