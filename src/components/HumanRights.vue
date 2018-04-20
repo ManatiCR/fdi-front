@@ -102,5 +102,8 @@ export default {
 
 .human-rights__body {
   text-align: left;
+  p {
+    line-height: 1.6;
+  }
 }
 </style>
