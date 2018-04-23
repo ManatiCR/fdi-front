@@ -1,22 +1,23 @@
 <template>
-  <section class="resources">
-    <h3 class="resources__title">Recursos Jurídicos</h3>
-    <ul class="resources__list">
-      <li class="resources__item" v-for="(entity, index) in nodeQuery.entities">
-        <h3 class="resources__item-title">
-          <a :href="entity.fieldEnlace.url.path" target="_blank">
-            {{entity.entityLabel}}
-          </a>
-        </h3>
-        <p class="resources__category">{{entity.fieldCategoriaRecursoJuridico.entity.entityLabel}}</p>
-        <!-- <div v-html="entity.body.value"></div> -->
-
-        <div class="resources__date-button-container">
-          <p class="resources__date"><strong>Vigente desde:</strong> {{ entity.fieldVigencia.value | moment("LL") }}</p>
-          <a :href="entity.fieldEnlace.url.path" class="resources__btn btn btn--small btn--fill-highlight3 btn--arrow" target="_blank">Descargar</a>
-        </div>
-      </li>
-    </ul>
+  <section class="view-resources-page">
+    <div class="resources-page">
+      <h3 class="resources-page__title">Recursos Jurídicos</h3>
+      <ul class="resources-page__list">
+        <li class="resources-page__item" v-for="(entity, index) in nodeQuery.entities">
+          <h3 class="resources-page__item-title">
+            <a :href="entity.fieldEnlace.url.path" target="_blank">
+              {{entity.entityLabel}}
+            </a>
+          </h3>
+          <p class="resources-page__category">{{entity.fieldCategoriaRecursoJuridico.entity.entityLabel}}</p>
+          <p class="resources-page__date"><strong>Vigente desde:</strong> {{ entity.fieldVigencia.value | moment("LL") }}</p>
+          <div class="resources-page__body-button-container">
+            <div class="resources-page__body" v-html="entity.body.value"></div>
+            <a :href="entity.fieldEnlace.url.path" class="resources-page__btn btn btn--small btn--fill-highlight3 btn--arrow" target="_blank">Descargar</a>
+          </div>
+        </li>
+      </ul>
+    </div>
   </section>
 </template>
 
@@ -51,6 +52,9 @@ const query = gql `query {
           fieldVigencia {
             value
           }
+          body {
+            value
+          }
           fieldCategoriaRecursoJuridico {
             entity {
               entityLabel
@@ -62,7 +66,7 @@ const query = gql `query {
   }`;
 
 export default {
-  name: 'Resources',
+  name: 'resources-page',
   apollo: {
     nodeQuery() {
       return {
@@ -80,27 +84,22 @@ export default {
 
 <style lang="scss">
 @import "../assets/scss/variables";
-.resources {
+.resources-page {
   padding: 20px;
   max-width: 1000px;
+  margin: 0 auto;
 }
 
-.resources__title {
+.resources-page__title {
   margin: 0;
-  padding: 0;
 }
 
-.resources__list {
+.resources-page__list {
   width: 100%;
   padding: 0;
-  @media (min-width: 480px) {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
 }
 
-.resources__item {
+.resources-page__item {
   width: 100%;
   list-style: none;
   margin-bottom: 0;
@@ -109,28 +108,17 @@ export default {
   a {
     text-decoration: none;
   }
-  @media (min-width: 480px) {
-    width: 31%;
-    margin-left: 10px;
-
-  }
 }
 
-.resources__item:last-child {
+.resources-page__item:last-child {
   border: none;
 }
 
-.resources__item:nth-last-child(-n+3) {
-  @media (min-width: 480px) {
-    border: none;
-  }
-}
-
-.resources__item-title {
+.resources-page__item-title {
   margin: 0 0 10px 0;
   cursor: pointer;
   a {
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     color: $text;
   }
   a:hover {
@@ -138,22 +126,39 @@ export default {
   }
 }
 
-.resources__category {
-  margin: 0;
+.resources-page__category {
   font-weight: 700;
   color: $highlight3;
-  font-size: 1.2rem;
+  font-size: 1.4rem;
+  margin: 0 0 10px 0;
 }
 
-.resources__date {
-  max-width: 135px;
-  display: inline-block;
-  vertical-align: middle;
-  font-size: 1.2rem;
+.resources-page__date {
+  font-size: 1.4rem;
+  margin: 0 0 10px 0;
 }
 
-.resources__btn {
-  font-size: 1.1rem;
+.resources-page__body-button-container {
+  @media (min-width: 480px) {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.resources-page__body {
+  margin-bottom: 10px;
+  flex: 12;
+  p {
+    margin-top: 0;
+  }
+}
+
+.resources-page__btn {
+  font-size: 1.2rem;
   padding: 8px 15px;
+  @media (min-width: 480px) {
+    height: 32px;
+  }
+
 }
 </style>
