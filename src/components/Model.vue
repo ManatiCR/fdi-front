@@ -143,7 +143,7 @@ export default {
 .model__btn {
   @media (min-width: 760px) {
     flex: 2 100px;
-    height: fit-content;
+    height: 45px;
     max-width: 145px;
     padding: 12px 0;
     margin-top: 85px;
