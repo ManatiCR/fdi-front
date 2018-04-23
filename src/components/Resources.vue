@@ -80,7 +80,10 @@ export default {
 @import "../assets/scss/variables";
 .resources {
   padding: 20px;
-  max-width: 700px;
+  background-color: #fff;
+  @media (min-width: 768px) {
+    max-width: 700px;
+  }
 }
 
 .resources__title {
