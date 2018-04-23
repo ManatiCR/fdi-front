@@ -29,8 +29,8 @@ export default new Router({
       component: Derechos,
     },
     {
-      path: '/directorio',
-      name: 'directorio',
+      path: '/recursos/directorio',
+      name: 'recursos directorio',
       component: Directorio,
     },
     {
