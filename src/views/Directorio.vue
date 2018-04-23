@@ -95,6 +95,9 @@ export default {
 
 .directory-page__title {
   margin: 0 0 20px 0;
+  @media (min-width: 480px) {
+    margin-left: 1%;
+  }
 }
 
 .directory-page-input {
@@ -113,6 +116,7 @@ export default {
   }
   @media (min-width: 480px) {
     width: 218px;
+    margin-left: 1%;
   }
 }
 
@@ -132,11 +136,11 @@ export default {
   padding: 20px;
   background-color: #eef5fb;
   @media (min-width: 480px) {
-    flex: 0 1 44%;
-    margin-right: 20px;
+    flex: 0 1 48%;
+    margin: 0 1%;
   }
   @media (min-width: 768px) {
-    flex: 0 1 30%;
+    flex: 0 1 31.33%;
   }
   @media (min-width: 1441px) {
     flex: 0 1 23%;
