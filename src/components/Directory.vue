@@ -8,6 +8,9 @@
         <a :href="'mailto:' + entity.fieldCorreo">{{entity.fieldCorreo}}</a>
       </li>
     </ul>
+    <router-link class="directory__see-all" :to="{ name: 'recursos directorio'}">
+      Ver todos
+    </router-link>
   </section>
 </template>
 
@@ -63,9 +66,10 @@ export default {
 
 .directory {
   background-color: #fff;
-  padding: 20px;
   width: 100%;
+  padding: 20px 20px 40px 20px;
   @media (min-width: 768px) {
+    padding-bottom: 20px;
     max-width: 350px;
   }
 }
@@ -90,6 +94,10 @@ export default {
   font-size: 1.4rem;
   color: $text;
   margin: 0;
+}
+
+.directory__see-all {
+  float: right;
 }
 
 </style>
