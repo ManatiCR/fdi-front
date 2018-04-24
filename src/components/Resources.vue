@@ -15,6 +15,9 @@
         </div>
       </li>
     </ul>
+    <router-link class="resources__see-all" :to="{ name: 'recursos jurídicos'}">
+      Ver todos
+    </router-link>
   </section>
 </template>
 
@@ -79,9 +82,10 @@ export default {
 <style lang="scss">
 @import "../assets/scss/variables";
 .resources {
-  padding: 20px;
+  padding: 20px 20px 60px 20px;
   background-color: #fff;
   @media (min-width: 768px) {
+    padding-bottom: 20px;
     max-width: 700px;
   }
 }
@@ -154,5 +158,10 @@ export default {
 .resources__btn {
   font-size: 1.1rem;
   padding: 8px 15px;
+}
+
+.resources__see-all {
+  margin-top: 22px;
+  float: right;
 }
 </style>

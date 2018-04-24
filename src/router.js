@@ -5,6 +5,7 @@ import Reporte from './views/Reporte.vue';
 import Derechos from './views/Derechos.vue';
 import Directorio from './views/Directorio.vue';
 import Recursos from './views/Recursos.vue';
+import RecursosJuridicos from './views/RecursosJuridicos.vue';
 import Contacto from './views/Contacto.vue';
 import StyleGuide from './views/StyleGuide.vue';
 
@@ -37,6 +38,11 @@ export default new Router({
       path: '/recursos',
       name: 'recursos',
       component: Recursos,
+    },
+    {
+      path: '/recursos/juridicos',
+      name: 'recursos jurídicos',
+      component: RecursosJuridicos,
     },
     {
       path: '/contacto',
