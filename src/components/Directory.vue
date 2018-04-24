@@ -4,8 +4,8 @@
     <ul class="directory__list">
       <li class="directory__item" v-for="(entity, index) in nodeQuery.entities">
         <h3 class="directory__item-title">{{entity.entityLabel}}</h3>
-        <p class="directory__phone-number">{{entity.fieldTelefono}}</p>
-        <a :href="'mailto:' + entity.fieldCorreo">{{entity.fieldCorreo}}</a>
+        <a v-if="entity.fieldTelefono" class="directory__phone-number" :href="'tel:' + entity.fieldTelefono">{{entity.fieldTelefono}}</a>
+        <a v-if="entity.fieldCorreo" :href="'mailto:' + entity.fieldCorreo">{{entity.fieldCorreo}}</a>
       </li>
     </ul>
     <router-link class="directory__see-all" :to="{ name: 'recursos directorio'}">
@@ -94,6 +94,13 @@ export default {
   font-size: 1.4rem;
   color: $text;
   margin: 0;
+}
+
+.directory__phone-number {
+  display: block;
+  color: $text;
+  font-weight: 400;
+  text-decoration: none;
 }
 
 .directory__see-all {
