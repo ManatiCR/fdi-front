@@ -32,8 +32,8 @@
       <nav class="site-footer__social">
         <h3 class="site-footer__social-title">Contacto:</h3>
         <ul class="site-footer__social-list">
-          <li><a class="site-footer__social-item site-footer__twitter" target="_blank" href="https://www.facebook.com/FDIcr">Twitter</a></li>
-          <li><a class="site-footer__social-item site-footer__fb" target="_blank" href="https://twitter.com/FDIcr">Facebook</a></li>
+          <li><a class="site-footer__social-item site-footer__fb" target="_blank" href="https://www.facebook.com/FDIcr">Twitter</a></li>
+          <li><a class="site-footer__social-item site-footer__twitter" target="_blank" href="https://twitter.com/FDIcr">Facebook</a></li>
         </ul>
       </nav>
     </footer>
