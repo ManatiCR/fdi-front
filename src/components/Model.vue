@@ -83,11 +83,6 @@ export default {
 </script>
 
 <style lang="scss">
-.model {
-  padding: 20px;
-  max-width: 1300px;
-  margin: 0 auto;
-}
 
 .model__list {
   width: 100%;

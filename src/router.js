@@ -6,6 +6,7 @@ import Derechos from './views/Derechos.vue';
 import Directorio from './views/Directorio.vue';
 import Recursos from './views/Recursos.vue';
 import RecursosJuridicos from './views/RecursosJuridicos.vue';
+import Machotes from './views/Machotes.vue';
 import Contacto from './views/Contacto.vue';
 import StyleGuide from './views/StyleGuide.vue';
 
@@ -43,6 +44,11 @@ export default new Router({
       path: '/recursos/juridicos',
       name: 'recursos jurídicos',
       component: RecursosJuridicos,
+    },
+    {
+      path: '/recursos/machotes',
+      name: 'recursos machotes',
+      component: Machotes,
     },
     {
       path: '/contacto',
