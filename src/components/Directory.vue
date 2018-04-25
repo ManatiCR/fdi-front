@@ -89,8 +89,7 @@ export default {
   padding: 10px 0;
 }
 
-.directory__item-title,
-.directory__phone-number {
+.directory__item-title {
   font-size: 1.4rem;
   color: $text;
   margin: 0;
@@ -98,9 +97,9 @@ export default {
 
 .directory__phone-number {
   display: block;
-  color: $text;
   font-weight: 400;
-  text-decoration: none;
+  padding: 5px 0;
+  font-size: 1.4rem;
 }
 
 .directory__see-all {

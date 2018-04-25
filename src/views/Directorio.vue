@@ -155,9 +155,9 @@ export default {
 
 .directory-page__phone-number {
   display: block;
-  color: $text;
   font-weight: 400;
-  text-decoration: none;
+  padding: 5px 0;
+  font-size: 1.4rem;
 }
 
 </style>
