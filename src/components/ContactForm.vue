@@ -2,7 +2,7 @@
   <section class="contacto-form">
     <form v-if="contactSent" @submit.prevent="createContact" class="contacto-form__form">
       <div class="input-wrapper">
-        <label class="contacto-form__label" for="name">Nombre:</label>
+        <label class="contacto-form__label" for="name">Nombre <span class="contacto-form__asterisk">*</span></label>
         <input required class="contacto-form__input" type="text" v-model="name" name="name">
       </div>
       <div class="input-wrapper">
@@ -10,15 +10,15 @@
         <input class="contacto-form__input" type="text" v-model="codigo" name="codigo">
       </div>
       <div class="input-wrapper">
-        <label class="contacto-form__label" for="email">Correo electrónico:</label>
+        <label class="contacto-form__label" for="email">Correo electrónico <span class="contacto-form__asterisk">*</span></label>
         <input required class="contacto-form__input" type="email" v-model="email" name="email">
       </div>
       <div class="input-wrapper">
-        <label class="contacto-form__label" for="phone">Teléfono:</label>
+        <label class="contacto-form__label" for="phone">Teléfono</label>
         <input class="contacto-form__input" type="text" v-model="phone" name="phone">
       </div>
       <div class="input-wrapper">
-        <label class="contacto-form__label" for="description">Mensaje:</label>
+        <label class="contacto-form__label" for="description">Mensaje <span class="contacto-form__asterisk">*</span></label>
         <textarea required class="contacto-form__texarea" v-model="description" name="description"></textarea>
       </div>
       <button class="btn btn--fill-highlight3 btn--arrow contacto-form__btn" type="submit">Enviar</button>
@@ -31,9 +31,9 @@
     </div>
     <div v-if="errorMessage" class="contacto-form__error-message">
       <p>
-        Tu Mensaje no ha podido ser enviado.
+        Se ha producido un error y el mensaje no pudo ser enviado. Por favor intenta de nuevo.
       </p>
-      <button @click="errorMessage = !errorMessage" class="btn--small btn btn--fill-highlight3 btn--arrow contacto-form__btn" type="submit">Cerrar</button>
+      <button @click="errorMessage = !errorMessage" class="btn--small btn btn--fill-highlight3 btn--arrow contacto-form__btn" type="submit">Aceptar</button>
     </div>
   </section>
 </template>
@@ -102,21 +102,17 @@ export default {
   position: relative;
 }
 
-.contacto-form__title {
-  display: inline-block;
-  margin: 0 0 40px 0;
-  padding-right: 50px;
-  border-right: solid 5px $highlight2;
-}
-
 .contacto-form__form {
   width: 100%;
   padding-bottom: 20px;
   @media (min-width: 768px) {
-    margin: 0 auto;
     max-width: 700px;
     padding-bottom: 40px;
   }
+}
+
+.contacto-form__asterisk {
+  color: $highlight1;
 }
 
 .input-wrapper {
@@ -164,8 +160,8 @@ export default {
 
 .contacto-form__error-message {
   background: #fff;
-  width: 290px;
-  height: 135px;
+  max-width: 400px;
+  width: 90%;
   border: solid 1px #e0e0e0;
   padding: 20px;
   margin: 0;
