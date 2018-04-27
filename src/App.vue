@@ -212,6 +212,14 @@ li {
   }
 }
 
+.btn--fill-background3 {
+  color: #fff;
+  background: $background3;
+  &:hover {
+    background: darken($background3, 10%);
+  }
+}
+
 // Header Styles
 .site-header {
   background: url('./assets/images/background-header-mobile.jpg');
