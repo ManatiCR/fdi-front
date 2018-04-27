@@ -131,7 +131,7 @@ export default {
   font-size: 1.4rem;
   border: solid 1px #e0e0e0;
   @media (min-width: 768px) {
-    width: 400px;
+    width: 380px;
   }
 }
 
