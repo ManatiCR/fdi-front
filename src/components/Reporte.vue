@@ -6,7 +6,7 @@
     </header>
     <div v-if="formStep === 0" class="create-report__step-0">
       <content-block id="reporte"></content-block>
-      <button @click="gotoStep(1)">Reportá</button>
+      <button @click="gotoStep(1)" class="btn btn--xlarge btn--border-highlight1">Reportá</button>
     </div>
     <div v-if="formStep === 1" class="create-report__step-1">
       <h2>Step 1</h2>
@@ -29,7 +29,7 @@
       :multiple="true"
       :searchable="true"
       ></multiselect>
-      <button @click="gotoStep(2)">Continuar</button>
+      <button @click="gotoStep(2)" class="btn btn--fill-highlight1 btn--arrow">Continuar</button>
     </div>
     <div v-if="formStep === 2" class="create-report__step-2">
       <gmap-map
@@ -49,11 +49,11 @@
         <li @click="goToCurrentLocation()">Ubicación Actual</li>
         <li v-for="(place, index) in places" :key="index" @click="goToPlace(place)">{{ place.name }}</li>
       </ul>
-      <button @click="gotoStep(3)">Continuar</button>
+      <button @click="gotoStep(3)" class="btn btn--fill-highlight1 btn--arrow">Continuar</button>
     </div>
     <div v-if="formStep === 3" class="create-report__step-3">
       <textarea v-model="reportText"></textarea>
-      <button @click="gotoStep(4)">Continuar</button>
+      <button @click="gotoStep(4)" class="btn btn--fill-highlight1 btn--arrow">Continuar</button>
 
     </div>
     <div v-if="formStep === 4" class="create-report__step-4">
@@ -61,8 +61,8 @@
         El FDI te puede brindar el apoyo y asesoría necesaria para realizar una denuncia formal.
         Este acompañamiento sería durante todo el proceso, en caso de que decidás continuar.
       </p>
-      <button @click="gotoStep(4)">Sí quiero</button>
-      <button @click="submitReport()">No, finalizar</button>
+      <button @click="gotoStep(5)" class="btn btn--fill-highlight1">Sí quiero</button>
+      <button @click="gotoStep(6)" class="btn btn--fill-background3">No, finalizar</button>
     </div>
     <div v-if="formStep === 5" class="create-report__step-5">
       <p>
@@ -72,11 +72,11 @@
       <input type="text" placeholder="Nombre" v-model="personName">
       <input type="email" placeholder="Correo electrónico" v-model="personEmail">
       <input type="text" placeholder="Teléfono" v-model="personPhone">
-      <button @click="submitReport()">Enviar</button>
+      <button @click="gotoStep(6)" class="btn btn--fill-highlight1">Enviar</button>
     </div>
     <div v-if="formStep === 6" class="create-report__step-6">
       <p>Guarda el siguiente código, en caso de que cambies de opinión:</p>
-      <router-link :to="{ name: 'home'}">Finalizar</router-link>
+      <router-link :to="{ name: 'home'}" class="btn btn--fill-highlight1">Finalizar</router-link>
     </div>
 
   </div>
@@ -133,6 +133,19 @@ const categoryQuery = gql`query {
   }
 }`;
 
+const reportMutation = gql`mutation ($input: ReporteInput!) {
+  createReporte(input: $input) {
+    entity {
+      entityId
+      fieldCodigoDeSeguimient
+    }
+    errors
+    violations {
+      message
+    }
+  }
+}`
+
 const defaultLocation = {
   lat: 9.5,
   lng: -84,
@@ -156,6 +169,7 @@ export default {
         '¿Querés asesoría o apoyo?',
         'Siempre estaremos dispuestos a ayudarte'
       ],
+      availableCategories: {},
       categories: [],
       subcategories: [],
       reportText: '',
@@ -175,6 +189,9 @@ export default {
     availableCategories() {
       return {
         query: categoryQuery,
+        update(data) {
+          return data;
+        }
       }
     },
   },
@@ -182,6 +199,37 @@ export default {
     gotoStep(step) {
       if (step >= 0 && step <= 7) {
         this.formStep = step;
+      }
+      if (step === 2) {
+        Vue.nextTick(() => {
+          this.$refs.map.$mapCreated.then(() => {
+            this.goToCurrentLocation(true);
+          });
+        });
+      }
+      else if (step === 6) {
+        console.log('Submit form');
+        const report = {
+          title: this.personName ? this.personName : 'Anónimo',
+          field_correo: this.personEmail,
+          body: this.reportText,
+          field_subcategoria_reporte: this.subcategories.map(item => parseInt(item.entityId)),
+          field_categoria_reporte: this.categories.map(item => parseInt(item.entityId)),
+          field_ubicacion: [this.latitude, this.longitude],
+          field_solicita_asesoria_o_apoyo: 'si', // TODO: Fix this.
+          field_lugar: this.placeName,
+        };
+        console.log(report);
+        this.$apollo.mutate({
+          mutation: reportMutation,
+          variables: {
+            input: report,
+          }
+        }).then((data) => {
+          console.log(data);
+        }).catch((error) => {
+          console.log(error);
+        });
       }
     },
     goToCurrentLocation(getPlaces = false) {
@@ -202,8 +250,6 @@ export default {
               location: this.center,
               radius: 500,
             }, (results, status) => {
-              console.log('results', results);
-              console.log('status', status);
               this.places = results;
             });
           }
@@ -235,16 +281,6 @@ export default {
         lng: event.latLng.lng(),
       }
     },
-    submitPosition() {
-      const msg = `Lat: ${this.markerPosition.lat} / Long: ${this.markerPosition.lng}
-Name: ${this.placeName}`;
-      alert(msg);
-    },
   },
-  mounted() {
-    this.$refs.map.$mapCreated.then(() => {
-      this.goToCurrentLocation(true);
-    });
-  }
 }
 </script>
