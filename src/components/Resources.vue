@@ -4,14 +4,17 @@
     <ul class="resources__list">
       <li class="resources__item" v-for="(entity, index) in nodeQuery.entities">
         <h3 class="resources__item-title">
-          <a :href="entity.fieldEnlace.url.path" target="_blank">
+          <a v-if="entity.fieldEnlace" :href="entity.fieldEnlace.url.path" target="_blank">
+            {{entity.entityLabel}}
+          </a>
+          <a v-else>
             {{entity.entityLabel}}
           </a>
         </h3>
-        <p class="resources__category">{{entity.fieldCategoriaRecursoJuridico.entity.entityLabel}}</p>
+        <p v-if="entity.fieldCategoriaRecursoJuridico" class="resources__category">{{entity.fieldCategoriaRecursoJuridico.entity.entityLabel}}</p>
         <div class="resources__date-button-container">
-          <p class="resources__date"><strong>Vigente desde:</strong> {{ entity.fieldVigencia.value | moment("LL") }}</p>
-          <a :href="entity.fieldEnlace.url.path" class="resources__btn btn btn--small btn--fill-highlight3 btn--arrow" target="_blank">Descargar</a>
+          <p v-if="entity.fieldVigencia" class="resources__date"><strong>Vigente desde:</strong> {{ entity.fieldVigencia.value | moment("LL") }}</p>
+          <a v-if="entity.fieldEnlace" :href="entity.fieldEnlace.url.path" class="resources__btn btn btn--small btn--fill-highlight3 btn--arrow" target="_blank">Descargar</a>
         </div>
       </li>
     </ul>

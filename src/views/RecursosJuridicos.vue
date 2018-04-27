@@ -5,15 +5,18 @@
       <ul class="resources-page__list">
         <li class="resources-page__item" v-for="(entity, index) in nodeQuery.entities">
           <h3 class="resources-page__item-title">
-            <a :href="entity.fieldEnlace.url.path" target="_blank">
+            <a v-if="entity.fieldEnlace" :href="entity.fieldEnlace.url.path" target="_blank">
+              {{entity.entityLabel}}
+            </a>
+            <a v-else>
               {{entity.entityLabel}}
             </a>
           </h3>
-          <p class="resources-page__category">{{entity.fieldCategoriaRecursoJuridico.entity.entityLabel}}</p>
-          <p class="resources-page__date"><strong>Vigente desde:</strong> {{ entity.fieldVigencia.value | moment("LL") }}</p>
+          <p v-if="entity.fieldCategoriaRecursoJuridico" class="resources-page__category">{{entity.fieldCategoriaRecursoJuridico.entity.entityLabel}}</p>
+          <p v-if="entity.fieldVigencia" class="resources-page__date"><strong>Vigente desde:</strong> {{ entity.fieldVigencia.value | moment("LL") }}</p>
           <div class="resources-page__body-button-container">
-            <div class="resources-page__body" v-html="entity.body.value"></div>
-            <a :href="entity.fieldEnlace.url.path" class="resources-page__btn btn btn--small btn--fill-highlight3 btn--arrow" target="_blank">Descargar</a>
+            <div v-if="entity.body" class="resources-page__body" v-html="entity.body.value"></div>
+            <a v-if="entity.fieldEnlace" :href="entity.fieldEnlace.url.path" class="resources-page__btn btn btn--small btn--fill-highlight3 btn--arrow" target="_blank">Descargar</a>
           </div>
         </li>
       </ul>

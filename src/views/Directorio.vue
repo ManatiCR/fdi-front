@@ -6,8 +6,8 @@
       <ul class="directory-page__list">
         <li class="directory-page__item" v-for="entity in entitiesfiltered">
           <h3 class="directory-page__item-title">{{entity.entityLabel}}</h3>
-          <a class="directory-page__phone-number" :href="'tel:' + entity.fieldTelefono">{{entity.fieldTelefono}}</a>
-          <a :href="'mailto:' + entity.fieldCorreo">{{entity.fieldCorreo}}</a>
+          <a v-if="entity.fieldTelefono" class="directory-page__phone-number" :href="'tel:' + entity.fieldTelefono">{{entity.fieldTelefono}}</a>
+          <a v-if="entity.fieldCorreo" :href="'mailto:' + entity.fieldCorreo">{{entity.fieldCorreo}}</a>
         </li>
       </ul>
     </div>
@@ -155,9 +155,9 @@ export default {
 
 .directory-page__phone-number {
   display: block;
-  color: $text;
   font-weight: 400;
-  text-decoration: none;
+  padding: 5px 0;
+  font-size: 1.4rem;
 }
 
 </style>
