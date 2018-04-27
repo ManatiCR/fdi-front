@@ -12,6 +12,15 @@ import './registerServiceWorker';
 import moment from 'moment';
 import 'moment/locale/es';
 import vueMoment from 'vue-moment';
+import 'vue-mq'
+import VueMq from 'vue-mq'
+
+Vue.use(VueMq, {
+  breakpoints: {
+    md: 1200,
+    lg: Infinity,
+  }
+})
 
 Vue.config.productionTip = false;
 
