@@ -1,8 +1,8 @@
 <template>
   <div class="view-home">
     <content-block id="home_reporte"></content-block>
-    <content-block id="home_derechos" imagestyles="full"></content-block>
-    <content-block id="home_fdi" ></content-block>
+    <content-block id="home_derechos" imagestyle="full"></content-block>
+    <content-block id="home_fdi" imagestyle="mid" ></content-block>
     <section class="spaces-home-container">
       <content-block id="home_espacios"></content-block>
       <spaces-home></spaces-home>
