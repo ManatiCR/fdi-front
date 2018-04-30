@@ -1,17 +1,18 @@
 <template>
-  <section :class="'content-block ' + componentClass">
-    <h1 :class="'content-block__title ' + componentClass + '__title'">{{ nodeQuery.title }}</h1>
-    <div :class="'content-block__body ' + componentClass + '__body'" v-html="nodeQuery.body"></div>
+  <section :class="'content-block__' + componentClass">
+    <h1 class="content-block__title">{{ nodeQuery.title }}</h1>
+    <div class="content-block__body" v-html="nodeQuery.body"></div>
     <img v-if="$mq >= 'md' && renderImage"
-      :class="'content-block__img ' + componentClass + '__img'"
+      class="content-block__img content-block__img-mid"
       :width="(nodeQuery.imageSmall.width/2)"
       :height="(nodeQuery.imageSmall.height/2)"
       :src="nodeQuery.imageSmall.url" :alt="nodeQuery.title">
     <img v-else-if="$mq <= 'md' && renderImage"
-      :class="'content-block__img ' + componentClass + '__img'"
+      class="content-block__img content-block__img-full"
       :width="(nodeQuery.imageLarge.width/2)"
       :height="(nodeQuery.imageLarge.height/2)"
       :src="nodeQuery.imageLarge.url" :alt="nodeQuery.title">
+      <a v-if="renderLink" :href="blockLink"> Enlace</a>
   </section>
 </template>
 
@@ -98,11 +99,16 @@ export default {
             data.nodeQuery.entities.length === 1) {
             const entity = data.nodeQuery.entities[0];
 
-            this.componentClass = 'content-block-' + this.id.replace("_", "-");
+            this.componentClass = this.id.replace("_", "-");
             if (this.componentImages.findIndex(e => e === this.id) > -1) {
               this.renderImage = true;
               this.imageSmall = entity.imageSmall.derivative;
               this.imageLarge = entity.imageLarge.derivative;
+            }
+
+            if (this.componentLinks.findIndex(e => e === this.id) > -1) {
+              this.renderLink = true;
+              this.blockLink = 'http://www.google.com';
             }
 
             return {
@@ -122,7 +128,10 @@ export default {
       nodeQuery: {},
       componentClass: '',
       renderImage: false,
+      renderLink: false,
       componentImages: ['derechos_header', 'home_fdi', 'home_derechos'],
+      componentLinks: ['home_reporte', 'home_derechos', 'home_fd', 'home_espacios', 'reporte'],
+      blockLink: '',
       imageSmall: '',
       imageLarge: '',
       imageStyleSmall: '',
