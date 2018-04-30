@@ -29,6 +29,7 @@
         Volver al home
       </router-link>
     </div>
+    <div @click="errorMessage = !errorMessage" v-if="errorMessage" class="contacto-form__error-message-overlay"></div>
     <div v-if="errorMessage" class="contacto-form__error-message">
       <p>
         Se ha producido un error y el mensaje no pudo ser enviado. Por favor intenta de nuevo.
@@ -158,8 +159,22 @@ export default {
   max-width: 500px;
 }
 
+.contacto-form__error-message-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1;
+  cursor: pointer;
+}
+
 .contacto-form__error-message {
   background: #fff;
+  z-index: 2;
   max-width: 400px;
   width: 90%;
   border: solid 1px #e0e0e0;

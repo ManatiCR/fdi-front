@@ -1,7 +1,7 @@
 <template>
   <section class="view-contacto">
     <div class="contacto">
-      <h1 class="contacto__title">Contactanos</h1>
+      <h1 class="contacto__title">Contáctanos</h1>
       <div class="contacto__content-wrapper">
         <contact-form></contact-form>
         <content-block id="contacto" class="contacto-content-block"></content-block>
