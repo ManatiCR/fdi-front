@@ -31,9 +31,7 @@
     </div>
     <div @click="errorMessage = !errorMessage" v-if="errorMessage" class="contacto-form__error-message-overlay"></div>
     <div v-if="errorMessage" class="contacto-form__error-message">
-      <p>
-        Se ha producido un error y el mensaje no pudo ser enviado. Por favor intenta de nuevo.
-      </p>
+      <p>Se ha producido un error y el mensaje no pudo ser enviado. Por favor intenta de nuevo.</p>
       <button @click="errorMessage = !errorMessage" class="btn--small btn btn--fill-highlight3 btn--arrow contacto-form__btn" type="submit">Aceptar</button>
     </div>
   </section>
@@ -184,6 +182,13 @@ export default {
   top: 45%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.contacto-form__error-message p {
+  background: url(.././assets/images/icons/warning.png) no-repeat;
+  background-size: 33px;
+  background-position: left center;
+  padding-left: 53px;
 }
 
 </style>
