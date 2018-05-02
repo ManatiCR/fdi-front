@@ -1,6 +1,5 @@
 <template>
   <section :class="'content-block__' + componentClass">
-    <h1 class="content-block__title">{{ nodeQuery.title }}</h1>
     <img v-if="$mq >= 'md' && renderImage"
       class="content-block__img content-block__img-mid"
       :width="(nodeQuery.imageSmall.width/2)"
@@ -11,13 +10,15 @@
       :width="(nodeQuery.imageLarge.width/2)"
       :height="(nodeQuery.imageLarge.height/2)"
       :src="nodeQuery.imageLarge.url" :alt="nodeQuery.title">
+    <h1 v-if="renderTitleTop" class="content-block__title">{{ nodeQuery.title }}</h1>
     <div class="content-block__body-button-wrapper">
-        <div class="content-block__body" v-html="nodeQuery.body"></div>
-        <a v-if="renderLink" :class="'btn ' +  blockLink.classes" :href="blockLink.url">{{ blockLink.label }}</a>
-        <router-link v-if="renderRouterLink"
-          :class="'btn ' +  blockLink.classes"
-          :to="{ name: blockLink.url}">{{ blockLink.label }}
-        </router-link>
+      <h1 v-if="renderTitleBody" class="content-block__title">{{ nodeQuery.title }}</h1>
+      <div class="content-block__body" v-html="nodeQuery.body"></div>
+      <a v-if="renderLink" :class="'btn ' +  blockLink.classes" :href="blockLink.url">{{ blockLink.label }}</a>
+      <router-link v-if="renderRouterLink"
+        :class="'btn ' +  blockLink.classes"
+        :to="{ name: blockLink.url}">{{ blockLink.label }}
+      </router-link>
     </div>
   </section>
 
@@ -124,6 +125,16 @@ export default {
               }
             }
 
+            if ( this.componentTitle.findIndex(e => e.componentId == this.id)  > -1) {
+              var index = this.componentTitle.findIndex(e => e.componentId == this.id);
+              if (this.componentTitle[index].position === 'top') {
+                this.renderTitleTop = true;
+              }
+              else {
+                this.renderTitleBody = true;
+              }
+            }
+
             return {
               title: entity.entityLabel,
               body: entity.body.value,
@@ -144,13 +155,23 @@ export default {
       renderLink: false,
       renderRouterLink: false,
       componentImages: ['derechos_header', 'home_fdi', 'home_derechos'],
+      renderTitleTop: false,
+      renderTitleBody: false,
       componentLinks: [
         {componentId: 'home_reporte', classes: 'btn--xlarge btn--border-highlight1', label: 'Reporta', url: 'reporte', external: false},
         {componentId: 'home_derechos', classes: 'btn--xlarge btn--border-highlight2', label: 'Conocé tus derechos', url: 'derechos', external: false},
         {componentId: 'home_fdi', classes: 'btn--large btn--fill-highlight2', label: 'Conocé más', url: 'https://www.fdi.cr', external: true},
         {componentId: 'home_espacios', classes: 'btn--border-white', label: 'Ver más', url: 'espacios', external: false},
       ],
-      link: '',
+      componentTitle: [
+        {componentId: 'home_fdi', position: 'top'},
+        {componentId: 'home_espacios', position: 'body'},
+        {componentId: 'reporte', position: 'body'},
+        {componentId: 'derechos_header', position: 'body'},
+        {componentId: 'derechos_footer', position: 'body'},
+        {componentId: 'recursos', position: 'body'},
+        {componentId: 'contacto', position: 'body'},
+      ],
       blockLink: '',
       imageSmall: '',
       imageLarge: '',
