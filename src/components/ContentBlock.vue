@@ -1,7 +1,6 @@
 <template>
   <section :class="'content-block__' + componentClass">
     <h1 class="content-block__title">{{ nodeQuery.title }}</h1>
-    <div class="content-block__body" v-html="nodeQuery.body"></div>
     <img v-if="$mq >= 'md' && renderImage"
       class="content-block__img content-block__img-mid"
       :width="(nodeQuery.imageSmall.width/2)"
@@ -12,8 +11,16 @@
       :width="(nodeQuery.imageLarge.width/2)"
       :height="(nodeQuery.imageLarge.height/2)"
       :src="nodeQuery.imageLarge.url" :alt="nodeQuery.title">
-      <a v-if="renderLink" :href="blockLink"> Enlace</a>
+    <div class="content-block__body-button-wrapper">
+        <div class="content-block__body" v-html="nodeQuery.body"></div>
+        <a v-if="renderLink" :class="'btn ' +  blockLink.classes" :href="blockLink.url">{{ blockLink.label }}</a>
+        <router-link v-if="renderRouterLink"
+          :class="'btn ' +  blockLink.classes"
+          :to="{ name: blockLink.url}">{{ blockLink.label }}
+        </router-link>
+    </div>
   </section>
+
 </template>
 
 <script>
@@ -106,9 +113,15 @@ export default {
               this.imageLarge = entity.imageLarge.derivative;
             }
 
-            if (this.componentLinks.findIndex(e => e === this.id) > -1) {
-              this.renderLink = true;
-              this.blockLink = 'http://www.google.com';
+            if ( this.componentLinks.findIndex(e => e.componentId == this.id)  > -1) {
+              var index = this.componentLinks.findIndex(e => e.componentId == this.id);
+              this.blockLink = this.componentLinks[index];
+              if (this.blockLink.external) {
+                this.renderLink = true;
+              }
+              else {
+                this.renderRouterLink = true;
+              }
             }
 
             return {
@@ -129,8 +142,15 @@ export default {
       componentClass: '',
       renderImage: false,
       renderLink: false,
+      renderRouterLink: false,
       componentImages: ['derechos_header', 'home_fdi', 'home_derechos'],
-      componentLinks: ['home_reporte', 'home_derechos', 'home_fd', 'home_espacios', 'reporte'],
+      componentLinks: [
+        {componentId: 'home_reporte', classes: 'btn--xlarge btn--border-highlight1', label: 'Reporta', url: 'reporte', external: false},
+        {componentId: 'home_derechos', classes: 'btn--xlarge btn--border-highlight2', label: 'Conocé tus derechos', url: 'derechos', external: false},
+        {componentId: 'home_fdi', classes: 'btn--large btn--fill-highlight2', label: 'Conocé más', url: 'https://www.fdi.cr', external: true},
+        {componentId: 'home_espacios', classes: 'btn--border-white', label: 'Ver más', url: 'espacios', external: false},
+      ],
+      link: '',
       blockLink: '',
       imageSmall: '',
       imageLarge: '',
@@ -154,6 +174,20 @@ export default {
 
 .content-block__img {
   height: auto;
+}
+
+.content-block__home-espacios {
+  .content-block__body-button-wrapper {
+    background: $highlight1;
+  }
+}
+.btn--border-white {
+  border: 4px solid white;
+  color: white;
+  &:hover {
+    border: 4px solid $text;
+    color: $text;
+  }
 }
 
 </style>
