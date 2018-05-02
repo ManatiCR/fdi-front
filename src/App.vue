@@ -178,7 +178,7 @@ li {
   }
 }
 
-.btn--fill-highlight2 {
+.btn--border-highlight2 {
   border: 4px solid $highlight2;
   color: $text;
   &:hover {
@@ -187,7 +187,7 @@ li {
   }
 }
 
-.btn--border-highlight2 {
+.btn--fill-highlight2 {
   color: #fff;
   background: $highlight2;
   &:hover {
