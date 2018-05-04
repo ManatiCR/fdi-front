@@ -358,7 +358,7 @@ export default {
     }
     @media (min-width: 1000px) {
       padding: 40px;
-      top: calc(50% - 125px);
+      top: calc(50% - 135px);
       margin: 0;
       left: inherit;
       right: 5%;
@@ -376,13 +376,16 @@ export default {
       margin: 0 auto;
       max-width: 1400px;
       display: flex;
-      align-items: flex-start;
     }
   }
   .content-block__img-wrapper {
+    align-self: flex-start;
     position: relative;
     margin-bottom: 20px;
     flex: 2;
+    @media (min-width: 768px) {
+      margin-bottom: 0;
+    }
   }
   .content-block__body-button-wrapper {
     background-color: #fff;
