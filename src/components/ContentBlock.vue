@@ -218,33 +218,10 @@ export default {
   }
 }
 
-// Component Home reporte
-.content-block__home-reporte {
-  background: #eef5fb url(.././assets/images/patron-1.png) no-repeat top -50px right -50px;
-  .content-block__btn {
-    order: -1;
-    flex-basis: 250px;
-    margin-bottom: 20px;
-  }
-}
-// Component Home reporte -- end
-
-// Component Home recursos
-.content-block__recursos {
-  background: $highlight1 url(.././assets/images/patron-2.png) no-repeat top -50px right -50px;
-  .content-block__body p, .content-block__title {
-    color: #fff;
-  }
-  .content-block__title {
-    border-right: solid 5px $highlight2;
-    padding-right: 50px;
-    text-align: left;
-  }
-}
-// Component Home recursos -- end
-
-// Components Home reporte and recursos shared styles
-.content-block__home-reporte, .content-block__recursos {
+// Components Home reporte, recursos derechos header shared styles
+.content-block__home-reporte,
+.content-block__recursos,
+.content-block__derechos-footer {
   padding: 0 20px;
   background-size: 300px;
   @media (min-width: 480px) {
@@ -273,28 +250,89 @@ export default {
     }
   }
 }
-// Components Home reporte and recursos shared styles -- end
+// Components Home reporte, recursos derechos header shared styles -- end
 
-// Component Home derechos
-.content-block__home-derechos {
+// Component Home reporte
+.content-block__home-reporte {
+  background: #eef5fb url(.././assets/images/patron-1.png) no-repeat;
+  .content-block__btn {
+    order: -1;
+    flex-basis: 250px;
+    margin-bottom: 20px;
+  }
+}
+// Component Home reporte -- end
+
+// Component Home recursos and derechos header
+.content-block__recursos, .content-block__derechos-footer {
+  background: $highlight1 url(.././assets/images/patron-2.png) no-repeat;
+  .content-block__body p, .content-block__title {
+    color: #fff;
+  }
+  .content-block__title {
+    border-right: solid 5px $highlight2;
+    padding-right: 50px;
+    text-align: left;
+  }
+}
+// Component Home recursos and derechos header -- end
+
+// Component derechos header
+.content-block__derechos-footer {
+  .content-block__content-wrapper {
+    padding-top: 40px;
+    padding-bottom: 100px;
+  }
+  .content-block__body-button-wrapper {
+      justify-content: flex-start;
+  }
+  .content-block__body p, .content-block__title {
+    text-align: left;
+  }
+}
+// Component derechos header -- end
+
+// Components Home reporte, recursos derechos header shared background size styles
+.content-block__home-reporte,
+.content-block__recursos,
+.content-block__derechos-footer {
+  background-position: top -50px right -50px;
+  background-size: 300px;
+  @media (min-width: 480px) {
+    background-size: 400px;
+  }
+}
+// Components Home reporte, recursos derechos header shared background size styles -- end
+
+// Component Home derechos and derechos header
+.content-block__home-derechos,
+.content-block__derechos-header {
   .content-block__content-wrapper {
     position: relative;
   }
   .content-block__body-button-wrapper {
     background: #fff;
-    text-align: center;
     max-width: 600px;
-    width: calc(100% - 40px);
-    height: 300px;
     position: absolute;
     margin: 0 auto;
-    padding: 20px;
     top: calc(50% - 160px);
     left: 0;
     right: 0;
     @media (min-width: 425px) {
       top: calc(50% - 135px);
-      height: 260px;
+    }
+  }
+}
+// Component Home derechos and derechos header -- end
+
+// Component Home derechos -- end
+.content-block__home-derechos {
+  .content-block__body-button-wrapper {
+    width: calc(100% - 40px);
+    padding: 20px;
+    text-align: center;
+    @media (min-width: 425px) {
+      padding: 40px;
     }
   }
   .content-block__body {
@@ -302,6 +340,32 @@ export default {
   }
 }
 // Component Home derechos -- end
+
+// Component derechos header -- end
+.content-block__derechos-header {
+  .content-block__title {
+    margin: 0 0 20px 0;
+    border-right: solid 5px $highlight2;
+    padding-right: 50px;
+    display: inline-block;
+  }
+  .content-block__body-button-wrapper {
+    width: calc(100% - 20px);
+    padding: 15px;
+    top: calc(50% - 165px);
+    @media (min-width: 360px) {
+      padding: 20px;
+    }
+    @media (min-width: 1000px) {
+      padding: 40px;
+      top: calc(50% - 125px);
+      margin: 0;
+      left: inherit;
+      right: 5%;
+    }
+  }
+}
+// Component derechos header -- end
 
 // Component home FDI
 .content-block__home-fdi {
