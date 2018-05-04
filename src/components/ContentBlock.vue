@@ -171,6 +171,8 @@ export default {
       renderTitleTop: false,
       renderTitleBody: false,
       componentImages: ['derechos_header', 'home_fdi', 'home_derechos'],
+      renderTitleTop: false,
+      renderTitleBody: false,
       componentLinks: [
         {componentId: 'home_reporte', classes: 'btn--xlarge btn--border-highlight1', label: 'Reporta', url: 'reporte', external: false},
         {componentId: 'home_derechos', classes: 'btn--xlarge btn--border-highlight2', label: 'Conocé tus derechos', url: 'derechos', external: false},
@@ -239,7 +241,6 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-
   }
   .content-block__body {
     flex: 0 1 100%;
@@ -278,7 +279,6 @@ export default {
       height: 260px;
     }
   }
-
   .content-block__body {
     margin-bottom: 20px;
   }
@@ -361,7 +361,7 @@ export default {
       }
     }
     @media (min-width: 768px) {
-      padding: 80px;  
+      padding: 80px;
     }
   }
   .content-block__title, .content-block__body p {
