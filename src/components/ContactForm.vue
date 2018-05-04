@@ -31,7 +31,7 @@
     </div>
     <div @click="errorMessage = !errorMessage" v-if="errorMessage" class="contacto-form__error-message-overlay"></div>
     <div v-if="errorMessage" class="contacto-form__error-message">
-      <p>Se ha producido un error y el mensaje no pudo ser enviado. Por favor intenta de nuevo.</p>
+      <p>Se ha producido un error y el mensaje no pudo ser enviado. Por favor intentá de nuevo.</p>
       <button @click="errorMessage = !errorMessage" class="btn--small btn btn--fill-highlight3 btn--arrow contacto-form__btn" type="submit">Aceptar</button>
     </div>
   </section>
