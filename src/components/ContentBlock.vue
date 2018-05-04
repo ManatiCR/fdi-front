@@ -421,14 +421,39 @@ export default {
 }
 // Component home FDI -- end
 
+
 // Component home espacios
-.content-block__home-espacios {
+.content-block__home-espacios,
+.content-block__contacto {
   margin-bottom: 80px;
   margin: auto;
   .content-block__body-button-wrapper {
     text-align: center;
-    background: $highlight1;
     padding: 20px;
+    @media (min-width: 768px) {
+      padding: 80px;
+    }
+  }
+  .content-block__title, .content-block__body p {
+    text-align: left;
+    margin: 0;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+}
+
+// Component contacto
+.content-block__contacto {
+  .content-block__body-button-wrapper {
+    background: #496581;
+  }
+}
+// Component contacto -- end
+
+// Component home espacios
+.content-block__home-espacios {
+  .content-block__body-button-wrapper {
+    background: $highlight1;
     position: relative;
     @media (min-width: $bp-medium) {
       margin-right: 20px;
@@ -442,15 +467,6 @@ export default {
         background-color: lighten($highlight1, 30%);
       }
     }
-    @media (min-width: 768px) {
-      padding: 80px;
-    }
-  }
-  .content-block__title, .content-block__body p {
-    text-align: left;
-    margin: 0;
-    color: #fff;
-    margin-bottom: 20px;
   }
 }
 
@@ -466,4 +482,5 @@ export default {
   }
 }
 // Component home espacios -- end
+
 </style>
