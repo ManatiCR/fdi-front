@@ -1,24 +1,26 @@
 <template>
   <section :class="'content-block__' + componentClass">
-    <img v-if="$mq >= 'md' && renderImage"
-      class="content-block__img content-block__img-mid"
-      :width="(nodeQuery.imageSmall.width/2)"
-      :height="(nodeQuery.imageSmall.height/2)"
-      :src="nodeQuery.imageSmall.url" :alt="nodeQuery.title">
-    <img v-else-if="$mq <= 'md' && renderImage"
-      class="content-block__img content-block__img-full"
-      :width="(nodeQuery.imageLarge.width/2)"
-      :height="(nodeQuery.imageLarge.height/2)"
-      :src="nodeQuery.imageLarge.url" :alt="nodeQuery.title">
-    <h1 v-if="renderTitleTop" class="content-block__title">{{ nodeQuery.title }}</h1>
-    <div class="content-block__body-button-wrapper">
-      <h1 v-if="renderTitleBody" class="content-block__title">{{ nodeQuery.title }}</h1>
-      <div class="content-block__body" v-html="nodeQuery.body"></div>
-      <a v-if="renderLink" :class="'btn ' +  blockLink.classes" :href="blockLink.url">{{ blockLink.label }}</a>
-      <router-link v-if="renderRouterLink"
-        :class="'btn ' +  blockLink.classes"
-        :to="{ name: blockLink.url}">{{ blockLink.label }}
-      </router-link>
+    <div class="content-block__content-wrapper">
+      <div v-if="renderImage" class="content-block__img-wrapper">
+        <picture class="content-block__img">
+          <source media="(min-width: 1000px)"
+          :srcset="imageLarge.url + ' 2x'">
+          <source media="(min-width: 768px)"
+            :srcset="imageMedium.url + ' 2x,'">
+          <img :alt="nodeQuery.title"
+           :srcset="imageSmall.url + ' 2x'">
+        </picture>
+        <h1 v-if="renderTitleTop" class="content-block__title">{{ nodeQuery.title }}</h1>
+      </div>
+      <div class="content-block__body-button-wrapper">
+        <h1 v-if="renderTitleBody" class="content-block__title">{{ nodeQuery.title }}</h1>
+        <div class="content-block__body" v-html="nodeQuery.body"></div>
+        <a v-if="renderLink" :class="'btn content-block__btn ' +  blockLink.classes" :href="blockLink.url">{{ blockLink.label }}</a>
+        <router-link v-if="renderRouterLink"
+          :class="'btn content-block__btn ' +  blockLink.classes"
+          :to="{ name: blockLink.url}">{{ blockLink.label }}
+        </router-link>
+      </div>
     </div>
   </section>
 
@@ -27,7 +29,7 @@
 <script>
 import gql from 'graphql-tag';
 
-const query = gql`query($id: String!, $imageStyleSmall: ImageStyleId!, $imageStyleLarge: ImageStyleId!) {
+const query = gql`query($id: String!, $imageStyleSmall: ImageStyleId!, $imageStyleLarge: ImageStyleId!, $imageStyleMedium: ImageStyleId!) {
   nodeQuery(limit: 1,
     offset: 0,
     filter: {
@@ -52,6 +54,13 @@ const query = gql`query($id: String!, $imageStyleSmall: ImageStyleId!, $imageSty
           },
           imageSmall: fieldImagen {
             derivative (style: $imageStyleSmall){
+              url
+              width
+              height
+            }
+          }
+          imageMedium: fieldImagen {
+            derivative (style: $imageStyleMedium){
               url
               width
               height
@@ -82,16 +91,19 @@ export default {
         if (this.imagestyle === 'full') {
           this.imageStyleSmall = 'content_full_small';
           this.imageStyleLarge = 'content_full_large';
+          this.imageStyleMedium = 'content_full_medium';
         }
         else if (this.imagestyle === 'mid') {
           this.imageStyleSmall = 'content_mid_small';
           this.imageStyleLarge = 'content_mid_large';
+          this.imageStyleMedium = 'content_mid_medium';
         }
       }
       else {
         // The argument can not be empty or undefined.
         this.imageStyleSmall = 'medium';
         this.imageStyleLarge = 'medium';
+        this.imageStyleMedium = 'medium';
       }
       return {
         query: query,
@@ -99,6 +111,7 @@ export default {
           id: this.id,
           imageStyleSmall: this.imageStyleSmall,
           imageStyleLarge: this.imageStyleLarge,
+          imageStyleMedium: this.imageStyleMedium,
         },
         update(data) {
           if (data.hasOwnProperty('nodeQuery') &&
@@ -112,6 +125,7 @@ export default {
               this.renderImage = true;
               this.imageSmall = entity.imageSmall.derivative;
               this.imageLarge = entity.imageLarge.derivative;
+              this.imageMedium = entity.imageMedium.derivative;
             }
 
             if ( this.componentLinks.findIndex(e => e.componentId == this.id)  > -1) {
@@ -175,8 +189,10 @@ export default {
       blockLink: '',
       imageSmall: '',
       imageLarge: '',
+      imageMedium: '',
       imageStyleSmall: '',
       imageStyleLarge: '',
+      imageStyleMedium: '',
     }
   },
 }
@@ -185,31 +201,187 @@ export default {
 <style lang="scss">
 @import "../assets/scss/variables";
 
-.content-block {
-
-}
-
-.content-block-home-reporte {
-
-}
-
-.content-block__img {
+.content-block__img img{
+  max-width: 100%;
+  width: 100%;
   height: auto;
 }
 
-.content-block__home-espacios {
+.content-block__body p {
+  line-height: 1.5;
+  font-size: 1.6rem;
+  margin: 0;
+  @media (min-width: 768px) {
+    font-size: 1.8rem;
+  }
+}
+
+// Component Home reporte
+.content-block__home-reporte {
+  background: #eef5fb url(.././assets/images/patron-1.png) no-repeat;
+  background-position: top -50px right -50px;
+  background-size: 300px;
+  padding: 0 20px;
+  @media (min-width: 480px) {
+    background-size: 400px;
+  }
+  .content-block__content-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 100px 0 20px 0;
+    display: block;
+    @media (min-width: 768px) {
+      padding: 100px 0 150px 0;
+    }
+  }
   .content-block__body-button-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+  }
+  .content-block__body {
+    flex: 0 1 100%;
+    text-align: left;
+    @media (min-width: 768px) {
+      text-align: center;
+    }
+  }
+  .content-block__btn {
+    order: -1;
+    flex-basis: 250px;
+    margin-bottom: 20px;
+  }
+}
+// Component Home reporte -- end
+
+// Component Home derechos
+.content-block__home-derechos {
+  .content-block__content-wrapper {
+    position: relative;
+  }
+  .content-block__body-button-wrapper {
+    background: #fff;
+    text-align: center;
+    max-width: 600px;
+    width: calc(100% - 40px);
+    height: 300px;
+    position: absolute;
+    margin: 0 auto;
+    padding: 20px;
+    top: calc(50% - 160px);
+    left: 0;
+    right: 0;
+    @media (min-width: 425px) {
+      top: calc(50% - 135px);
+      height: 260px;
+    }
+  }
+
+  .content-block__body {
+    margin-bottom: 20px;
+  }
+}
+// Component Home derechos -- end
+
+// Component home FDI
+.content-block__home-fdi {
+  padding: 40px 20px;
+  background: #eef5fb;
+  .content-block__content-wrapper {
+    @media (min-width: 768px) {
+      margin: 0 auto;
+      max-width: 1400px;
+      display: flex;
+      align-items: flex-start;
+    }
+  }
+  .content-block__img-wrapper {
+    position: relative;
+    margin-bottom: 20px;
+    flex: 2;
+  }
+  .content-block__body-button-wrapper {
+    background-color: #fff;
+    text-align: center;
+    padding: 20px 20px 20px 20px;
+    flex: 1;
+    @media (min-width: 768px) {
+      margin: 0 0 0 20px;
+    }
+  }
+  .content-block__body {
+    margin-bottom: 20px;
+    p {
+      text-align: left;
+    }
+  }
+  .content-block__btn {
+    margin: 0 auto;
+    @media (min-width: 768px) {
+      float: right;
+    }
+  }
+  .content-block__title {
+    position: absolute;
+    bottom: 20%;
+    left: 20px;
+    text-shadow: 3px 3px 5px $text;
+    color: #fff;
+    max-width: 250px;
+    font-size: 1.8rem;
+    @media (min-width: 768px) {
+      font-size: 2.4rem;
+      max-width: 350px;
+    }
+  }
+}
+// Component home FDI -- end
+
+// Component home espacios
+.content-block__home-espacios {
+  margin-bottom: 80px;
+  margin: auto;
+  .content-block__body-button-wrapper {
+    text-align: center;
     background: $highlight1;
+    padding: 20px;
+    position: relative;
+    @media (min-width: $bp-medium) {
+      margin-right: 20px;
+      &:after {
+        content: "";
+        position: absolute;
+        top: 10%;
+        right: -20px;
+        height: 80%;
+        width: 20px;
+        background-color: lighten($highlight1, 30%);
+      }
+    }
+    @media (min-width: 768px) {
+      padding: 80px;  
+    }
+  }
+  .content-block__title, .content-block__body p {
+    text-align: left;
+    margin: 0;
+    color: #fff;
+    margin-bottom: 20px;
   }
 }
 
 .btn--border-white {
-  border: 4px solid white;
-  color: white;
+  border: 4px solid #fff;
+  color: #fff;
   &:hover {
-    border: 4px solid $text;
-    color: $text;
+    background: #fff;
+    color: $highlight1;
+  }
+  @media (min-width: 768px) {
+    float: right;
   }
 }
-
+// Component home espacios -- end
 </style>

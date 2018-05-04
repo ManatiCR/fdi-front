@@ -26,15 +26,24 @@ export default {
 @import "../assets/scss/variables";
 
 .spaces-home-container {
+  max-width: 1400px;
+  margin:  0 auto;
   @media (min-width: $bp-medium) {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    margin-bottom: 80px;
   }
   section {
     @media (min-width: $bp-medium) {
       flex: 1 1 100%;
       flex-basis: 50%;
+    }
+  }
+  .content-block__home-espacios {
+    margin-bottom: 80px;
+    @media (min-width: $bp-medium) {
+      margin-bottom: 0;
     }
   }
 }

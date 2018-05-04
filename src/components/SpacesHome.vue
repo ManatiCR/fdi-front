@@ -71,6 +71,9 @@ export default {
 <style lang="scss">
 @import "../assets/scss/variables";
 
+.spaces-home {
+  margin: auto;
+}
 .spaces-home__list {
   max-width: 700px;
   display: flex;
