@@ -2,9 +2,10 @@
   <section class="spaces-home">
     <ul class="spaces-home__list">
       <li class="spaces-home__item" v-for="(entity, index) in nodeQuery.entities">
-        <a class="spaces-home__link" :href='entity.fieldEnlace.url.path'>
-          <img :width="(entity.fieldImagen.derivative.width/2)" :height="(entity.fieldImagen.derivative.height/2)" class="spaces-home__img" :src="entity.fieldImagen.derivative.url" :alt="entity.entityLabel">
+        <a v-if="entity.fieldEnlace" class="spaces-home__link" :href='entity.fieldEnlace.url.path'>
+          <img v-if="entity.fieldImagen" :width="(entity.fieldImagen.derivative.width/2)" :height="(entity.fieldImagen.derivative.height/2)" class="spaces-home__img" :src="entity.fieldImagen.derivative.url" :alt="entity.entityLabel">
         </a>
+        <img v-else :width="(entity.fieldImagen.derivative.width/2)" :height="(entity.fieldImagen.derivative.height/2)" class="spaces-home__img" :src="entity.fieldImagen.derivative.url" :alt="entity.entityLabel">
       </li>
     </ul>
   </section>
