@@ -220,10 +220,33 @@ export default {
 
 // Component Home reporte
 .content-block__home-reporte {
-  background: #eef5fb url(.././assets/images/patron-1.png) no-repeat;
-  background-position: top -50px right -50px;
-  background-size: 300px;
+  background: #eef5fb url(.././assets/images/patron-1.png) no-repeat top -50px right -50px;
+  .content-block__btn {
+    order: -1;
+    flex-basis: 250px;
+    margin-bottom: 20px;
+  }
+}
+// Component Home reporte -- end
+
+// Component Home recursos
+.content-block__recursos {
+  background: $highlight1 url(.././assets/images/patron-2.png) no-repeat top -50px right -50px;
+  .content-block__body p, .content-block__title {
+    color: #fff;
+  }
+  .content-block__title {
+    border-right: solid 5px $highlight2;
+    padding-right: 50px;
+    text-align: left;
+  }
+}
+// Component Home recursos -- end
+
+// Components Home reporte and recursos shared styles
+.content-block__home-reporte, .content-block__recursos {
   padding: 0 20px;
+  background-size: 300px;
   @media (min-width: 480px) {
     background-size: 400px;
   }
@@ -249,13 +272,8 @@ export default {
       text-align: center;
     }
   }
-  .content-block__btn {
-    order: -1;
-    flex-basis: 250px;
-    margin-bottom: 20px;
-  }
 }
-// Component Home reporte -- end
+// Components Home reporte and recursos shared styles -- end
 
 // Component Home derechos
 .content-block__home-derechos {
