@@ -1,5 +1,6 @@
 <template>
   <section class="view-resources-page">
+    <content-block id="recursos"></content-block>
     <div class="resources-page">
       <h3 class="resources-page__title">Recursos Jurídicos</h3>
       <ul class="resources-page__list">
@@ -25,6 +26,7 @@
 </template>
 
 <script>
+import ContentBlock from '../components/ContentBlock.vue';
 import gql from 'graphql-tag';
 
 const query = gql `query {
@@ -70,6 +72,9 @@ const query = gql `query {
 
 export default {
   name: 'resources-page',
+  components: {
+    ContentBlock,
+  },
   apollo: {
     nodeQuery() {
       return {
