@@ -1,13 +1,40 @@
 <template>
   <section class="contacto-form">
     <form v-if="contactSent" @submit.prevent="createContact" class="contacto-form__form">
+      <h3>Seleccione el motivo de contacto <span class="contacto-form__asterisk">*</span></h3>
+      <div class="input-wrapper">
+        <div class="input-wrapper-radio">
+          <input required v-model="causePicked" type="radio" id="suggest-space" name="cause" value="recomendar_espacio">
+          <label class="contacto-form__label" for="suggest-space">Recomendar sitio libre de discriminación</label>
+        </div>
+        <div class="input-wrapper-radio">
+          <input v-model="causePicked" type="radio" id="have-code" name="cause" value="tengo_codigo">
+          <label class="contacto-form__label" for="have-code">Tengo código de seguimiento</label>
+        </div>
+        <div class="input-wrapper-radio">
+          <input v-model="causePicked" type="radio" id="radio-other" name="cause" value="otro">
+          <label class="contacto-form__label" for="radio-other">Otro</label>
+        </div>
+      </div>
+      <div v-if="causePicked == 'recomendar_espacio'" class="input-wrapper">
+        <label class="contacto-form__label" for="spaceName">Nombre del lugar</label>
+        <input required class="contacto-form__input" type="text" v-model="spaceName" name="spaceName">
+      </div>
+      <div v-if="causePicked == 'recomendar_espacio'" class="input-wrapper">
+        <label class="contacto-form__label" for="webSite">Sitio web</label>
+        <input required class="contacto-form__input" type="url" v-model="webSite" name="webSite">
+      </div>
+      <div v-if="causePicked == 'otro'" class="input-wrapper">
+        <label class="contacto-form__label" for="anotherCause">Motivo de contacto</label>
+        <input required class="contacto-form__input" type="text" v-model="anotherCause" id="anotherCause">
+      </div>
+      <div v-if="causePicked == 'tengo_codigo'" class="input-wrapper">
+        <label class="contacto-form__label" for="code">Código de seguimiento</label>
+        <input class="contacto-form__input" type="text" v-model="code" id="code">
+      </div>
       <div class="input-wrapper">
         <label class="contacto-form__label" for="name">Nombre <span class="contacto-form__asterisk">*</span></label>
         <input required class="contacto-form__input" type="text" v-model="name" name="name">
-      </div>
-      <div class="input-wrapper">
-        <label class="contacto-form__label"for="codigo">¿Tenés código de seguimiento?</label>
-        <input class="contacto-form__input" type="text" v-model="codigo" name="codigo">
       </div>
       <div class="input-wrapper">
         <label class="contacto-form__label" for="email">Correo electrónico <span class="contacto-form__asterisk">*</span></label>
@@ -56,6 +83,9 @@ mutation createContacto($input: ContactoInput!) {
 
 export default {
   name: 'ContactoForm',
+  props: [
+    'cause'
+  ],
   data () {
     return {
       input: {},
@@ -63,9 +93,13 @@ export default {
       name: '',
       phone: '',
       email: '',
-      codigo: '',
+      code: '',
       contactSent: true,
       errorMessage: false,
+      anotherCause: '',
+      webSite: '',
+      spaceName: '',
+      causePicked: this.cause,
     }
   },
   methods: {
@@ -78,7 +112,11 @@ export default {
             field_correo: this.email,
             field_telefono: this.phone,
             body: this.description,
-            field_codigo_de_seguimient: this.codigo
+            field_codigo_de_seguimient: this.code,
+            field_motivo_de_contacto: this.causePicked,
+            field_otro_motivo: this.anotherCause,
+            field_nombre_del_sitio: this.spaceName,
+            field_sitio_web: this.webSite
           },
         },
       }).then((data) => {
@@ -149,6 +187,10 @@ export default {
   resize: none;
 }
 
+.input-wrapper-radio {
+  margin-bottom: 20px;
+}
+
 .contacto-form__btn {
   float: right;
 }
@@ -178,10 +220,10 @@ export default {
   border: solid 1px #e0e0e0;
   padding: 20px;
   margin: 0;
-  position: absolute;
-  top: 45%;
   left: 50%;
+  top: 50%;
   transform: translate(-50%, -50%);
+  position: fixed;
 }
 
 .contacto-form__error-message p {
@@ -189,6 +231,60 @@ export default {
   background-size: 33px;
   background-position: left center;
   padding-left: 53px;
+}
+
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+  position: absolute;
+  z-index: -9;
+}
+
+[type="radio"]:checked + label,
+[type="radio"]:not(:checked) + label {
+  position: relative;
+  padding-left: 28px;
+  cursor: pointer;
+  line-height: 20px;
+  display: inline-block;
+}
+
+[type="radio"]:checked + label:before,
+[type="radio"]:not(:checked) + label:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #d2d2d2;
+  border-radius: 100%;
+  background: #fff;
+}
+
+[type="radio"]:checked + label:after,
+[type="radio"]:not(:checked) + label:after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  background: $highlight1;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  border-radius: 100%;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+[type="radio"]:not(:checked) + label:after {
+  opacity: 0;
+  -webkit-transform: scale(0);
+  transform: scale(0);
+}
+
+[type="radio"]:checked + label:after {
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
 }
 
 </style>
