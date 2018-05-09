@@ -16,19 +16,19 @@
           <label class="contacto-form__label" for="radio-other">Otro</label>
         </div>
       </div>
-      <div v-if="causePicked == 'recomendar_espacio'" class="input-wrapper">
+      <div v-if="causePicked === 'recomendar_espacio'" class="input-wrapper">
         <label class="contacto-form__label" for="spaceName">Nombre del lugar</label>
         <input required class="contacto-form__input" type="text" v-model="spaceName" name="spaceName">
       </div>
-      <div v-if="causePicked == 'recomendar_espacio'" class="input-wrapper">
+      <div v-if="causePicked === 'recomendar_espacio'" class="input-wrapper">
         <label class="contacto-form__label" for="webSite">Sitio web</label>
         <input required class="contacto-form__input" type="url" v-model="webSite" name="webSite">
       </div>
-      <div v-if="causePicked == 'otro'" class="input-wrapper">
+      <div v-if="causePicked === 'otro'" class="input-wrapper">
         <label class="contacto-form__label" for="anotherCause">Motivo de contacto</label>
         <input required class="contacto-form__input" type="text" v-model="anotherCause" id="anotherCause">
       </div>
-      <div v-if="causePicked == 'tengo_codigo'" class="input-wrapper">
+      <div v-if="causePicked === 'tengo_codigo'" class="input-wrapper">
         <label class="contacto-form__label" for="code">Código de seguimiento</label>
         <input class="contacto-form__input" type="text" v-model="code" id="code">
       </div>
