@@ -19,12 +19,9 @@ export default {
 </script>
 
 <style lang="scss">
-.view-machotes {
-}
 .model {
   margin: 0 auto;
   max-width: 1300px;
   padding: 20px;
-
 }
 </style>

@@ -102,7 +102,7 @@ export default {
 .human-rights__body {
   text-align: left;
   p {
-    font-size: 1.6;
+    font-size: 1.6rem;
     line-height: 1.5;
   }
 }

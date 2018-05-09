@@ -13,7 +13,6 @@ import moment from 'moment';
 import 'moment/locale/es';
 import vueMoment from 'vue-moment';
 
-
 Vue.config.productionTip = false;
 
 const batchHttpLink = new BatchHttpLink({

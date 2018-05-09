@@ -58,7 +58,7 @@ export default {
   margin-top: 80px;
   @media (min-width: 1100px) {
     margin-top: 0;
-    flex: 0 1  40%;
+    flex: 0 1 40%;
   }
 }
 
