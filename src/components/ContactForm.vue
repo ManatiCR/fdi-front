@@ -2,15 +2,19 @@
   <section class="contacto-form">
     <form v-if="contactSent" @submit.prevent="createContact" class="contacto-form__form">
       <div class="input-wrapper">
-        <label class="contacto-form__label" for="name">Nombre <span class="contacto-form__asterisk">*</span></label>
+        <label class="contacto-form__label" for="name">
+          Nombre <span class="contacto-form__asterisk">*</span>
+        </label>
         <input required class="contacto-form__input" type="text" v-model="name" name="name">
       </div>
       <div class="input-wrapper">
-        <label class="contacto-form__label"for="codigo">¿Tenés código de seguimiento?</label>
+        <label class="contacto-form__label" for="codigo">¿Tenés código de seguimiento?</label>
         <input class="contacto-form__input" type="text" v-model="codigo" name="codigo">
       </div>
       <div class="input-wrapper">
-        <label class="contacto-form__label" for="email">Correo electrónico <span class="contacto-form__asterisk">*</span></label>
+        <label class="contacto-form__label" for="email">
+          Correo electrónico <span class="contacto-form__asterisk">*</span>
+        </label>
         <input required class="contacto-form__input" type="email" v-model="email" name="email">
       </div>
       <div class="input-wrapper">
@@ -18,30 +22,51 @@
         <input class="contacto-form__input" type="text" v-model="phone" name="phone">
       </div>
       <div class="input-wrapper">
-        <label class="contacto-form__label" for="description">Mensaje <span class="contacto-form__asterisk">*</span></label>
-        <textarea required class="contacto-form__texarea" v-model="description" name="description"></textarea>
+        <label class="contacto-form__label" for="description">
+          Mensaje <span class="contacto-form__asterisk">*</span>
+        </label>
+        <textarea required class="contacto-form__texarea" v-model="description" name="description">
+        </textarea>
       </div>
-      <button class="btn btn--fill-highlight3 btn--arrow contacto-form__btn" type="submit">Enviar</button>
+      <button class="btn btn--fill-highlight3 btn--arrow contacto-form__btn" type="submit">
+        Enviar
+      </button>
     </form>
     <div v-else class="contacto-form__successful-message">
-      <p>Tu mensaje ha sido enviado. Pronto serás contactado por un miembro del Frente por los derechos igualitarios.</p>
-      <router-link class="btn--small btn btn--fill-highlight3 btn--arrow resources__see-all" :to="{ name: 'home'}">
+      <p>
+        Tu mensaje ha sido enviado. Pronto serás contactado por un miembro del Frente por los
+        derechos igualitarios.
+      </p>
+      <router-link
+        class="btn--small btn btn--fill-highlight3 btn--arrow resources__see-all"
+        :to="{ name: 'home'}"
+      >
         Volver al home
       </router-link>
     </div>
-    <div @click="errorMessage = !errorMessage" v-if="errorMessage" class="contacto-form__error-message-overlay"></div>
+    <div
+      @click="errorMessage = !errorMessage"
+      v-if="errorMessage"
+      class="contacto-form__error-message-overlay"
+    ></div>
     <div v-if="errorMessage" class="contacto-form__error-message">
-      <p>Se ha producido un error y el mensaje no pudo ser enviado. Por favor intentá de nuevo.</p>
-      <button @click="errorMessage = !errorMessage" class="btn--small btn btn--fill-highlight3 btn--arrow contacto-form__btn" type="submit">Aceptar</button>
+      <p>
+        Se ha producido un error y el mensaje no pudo ser enviado. Por favor intentá de nuevo.
+      </p>
+      <button
+        @click="errorMessage = !errorMessage"
+        class="btn--small btn btn--fill-highlight3 btn--arrow contacto-form__btn"
+        type="submit">
+        Aceptar
+      </button>
     </div>
   </section>
 </template>
 
 <script>
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
-const CREATE_CONTACTO = gql`
-mutation createContacto($input: ContactoInput!) {
+const CREATE_CONTACTO = gql`mutation createContacto($input: ContactoInput!) {
   createContacto(input: $input) {
     entity {
       entityId
@@ -51,12 +76,11 @@ mutation createContacto($input: ContactoInput!) {
       message
     }
   }
-}
-`
+}`;
 
 export default {
   name: 'ContactoForm',
-  data () {
+  data() {
     return {
       input: {},
       description: '',
@@ -66,10 +90,10 @@ export default {
       codigo: '',
       contactSent: true,
       errorMessage: false,
-    }
+    };
   },
   methods: {
-    createContact () {
+    createContact() {
       this.$apollo.mutate({
         mutation: CREATE_CONTACTO,
         variables: {
@@ -78,18 +102,18 @@ export default {
             field_correo: this.email,
             field_telefono: this.phone,
             body: this.description,
-            field_codigo_de_seguimient: this.codigo
+            field_codigo_de_seguimient: this.codigo,
           },
         },
-      }).then((data) => {
+      }).then(() => {
         this.contactSent = false;
       }).catch((error) => {
         this.errorMessage = true;
-        console.error(error)
+        console.error(error);
       });
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="scss">

@@ -65,6 +65,6 @@ export default new Router({
       path: '/styleguide',
       name: 'styleguide',
       component: StyleGuide,
-    }
+    },
   ],
 });

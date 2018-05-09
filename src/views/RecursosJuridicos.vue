@@ -4,7 +4,11 @@
     <div class="resources-page">
       <h3 class="resources-page__title">Recursos Jurídicos</h3>
       <ul class="resources-page__list">
-        <li class="resources-page__item" v-for="(entity, index) in nodeQuery.entities">
+        <li
+          class="resources-page__item"
+          v-for="(entity, index) in nodeQuery.entities"
+          :key="index"
+        >
           <h3 class="resources-page__item-title">
             <a v-if="entity.fieldEnlace" :href="entity.fieldEnlace.url.path" target="_blank">
               {{entity.entityLabel}}
@@ -13,11 +17,28 @@
               {{entity.entityLabel}}
             </a>
           </h3>
-          <p v-if="entity.fieldCategoriaRecursoJuridico" class="resources-page__category">{{entity.fieldCategoriaRecursoJuridico.entity.entityLabel}}</p>
-          <p v-if="entity.fieldVigencia" class="resources-page__date"><strong>Vigente desde:</strong> {{ entity.fieldVigencia.value | moment("LL") }}</p>
+          <p
+            v-if="entity.fieldCategoriaRecursoJuridico"
+            class="resources-page__category"
+          >
+            {{entity.fieldCategoriaRecursoJuridico.entity.entityLabel}}
+          </p>
+          <p
+            v-if="entity.fieldVigencia"
+            class="resources-page__date"
+          >
+            <strong>Vigente desde:</strong> {{ entity.fieldVigencia.value | moment("LL") }}
+          </p>
           <div class="resources-page__body-button-container">
             <div v-if="entity.body" class="resources-page__body" v-html="entity.body.value"></div>
-            <a v-if="entity.fieldEnlace" :href="entity.fieldEnlace.url.path" class="resources-page__btn btn btn--small btn--fill-highlight3 btn--arrow" target="_blank">Descargar</a>
+            <a
+              v-if="entity.fieldEnlace"
+              :href="entity.fieldEnlace.url.path"
+              class="resources-page__btn btn btn--small btn--fill-highlight3 btn--arrow"
+              target="_blank"
+            >
+              Descargar
+            </a>
           </div>
         </li>
       </ul>
@@ -29,7 +50,7 @@
 import ContentBlock from '../components/ContentBlock.vue';
 import gql from 'graphql-tag';
 
-const query = gql `query {
+const query = gql`query {
   nodeQuery(limit: 9999,
     sort: [
       {
@@ -45,30 +66,31 @@ const query = gql `query {
           value: ["recurso_juridico"]
         }
       ]
-    }) {
-      entities {
-        entityLabel
-        ... on NodeRecursoJuridico {
-          fieldEnlace{
-            url {
-              path
-            }
+    }
+  ) {
+    entities {
+      entityLabel
+      ... on NodeRecursoJuridico {
+        fieldEnlace{
+          url {
+            path
           }
-          fieldVigencia {
-            value
-          }
-          body {
-            value
-          }
-          fieldCategoriaRecursoJuridico {
-            entity {
-              entityLabel
-            }
+        }
+        fieldVigencia {
+          value
+        }
+        body {
+          value
+        }
+        fieldCategoriaRecursoJuridico {
+          entity {
+            entityLabel
           }
         }
       }
     }
-  }`;
+  }
+}`;
 
 export default {
   name: 'resources-page',
@@ -78,16 +100,16 @@ export default {
   apollo: {
     nodeQuery() {
       return {
-        query: query,
-      }
-    }
+        query,
+      };
+    },
   },
   data() {
     return {
       nodeQuery: {},
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="scss">

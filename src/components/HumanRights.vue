@@ -1,10 +1,21 @@
 <template>
   <section class="human-rights">
     <ul class="human-rights__list">
-      <li class="human-rights__item" v-for="(entity, index) in nodeQuery.entities">
-        <img v-if="entity.fieldImagen" :width="(entity.fieldImagen.derivative.width/2)" :height="(entity.fieldImagen.derivative.height/2)" class="human-rights__img" :src="entity.fieldImagen.derivative.url" :alt="entity.entityLabel">
+      <li
+        class="human-rights__item"
+        v-for="(entity, index) in nodeQuery.entities"
+        :key="index"
+      >
+        <img
+          v-if="entity.fieldImagen"
+          :width="(entity.fieldImagen.derivative.width/2)"
+          :height="(entity.fieldImagen.derivative.height/2)"
+          class="human-rights__img"
+          :src="entity.fieldImagen.derivative.url"
+          :alt="entity.entityLabel"
+        >
         <h3 class="human-rights__title">{{entity.entityLabel}}</h3>
-        <div v-if="entity.body"class="human-rights__body" v-html="entity.body.value"></div>
+        <div v-if="entity.body" class="human-rights__body" v-html="entity.body.value"></div>
       </li>
     </ul>
   </section>
@@ -13,7 +24,7 @@
 <script>
 import gql from 'graphql-tag';
 
-const query = gql `query {
+const query = gql`query {
   nodeQuery(limit: 6,
     sort: [
       {
@@ -29,40 +40,41 @@ const query = gql `query {
           value: ["derecho"]
         }
       ]
-    }) {
-      entities {
-        entityLabel
-        ... on NodeDerecho {
-          fieldImagen {
-            derivative (style: logo_derechos) {
-              url
-              width
-              height
-            }
+    }
+  ) {
+    entities {
+      entityLabel
+      ... on NodeDerecho {
+        fieldImagen {
+          derivative (style: logo_derechos) {
+            url
+            width
+            height
           }
-          body {
-            value
-          }
+        }
+        body {
+          value
         }
       }
     }
-  }`;
+  }
+}`;
 
 export default {
   name: 'HumanRights',
   apollo: {
     nodeQuery() {
       return {
-        query: query,
-      }
-    }
+        query,
+      };
+    },
   },
   data() {
     return {
       nodeQuery: {},
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="scss">

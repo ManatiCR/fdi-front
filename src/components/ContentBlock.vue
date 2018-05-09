@@ -110,7 +110,7 @@ export default {
         this.imageStyleMedium = 'medium';
       }
       return {
-        query: query,
+        query,
         variables: {
           id: this.id,
           imageStyleSmall: this.imageStyleSmall,
@@ -118,10 +118,10 @@ export default {
           imageStyleMedium: this.imageStyleMedium,
         },
         update(data) {
-          if (data.hasOwnProperty('nodeQuery') &&
-            data.nodeQuery.hasOwnProperty('entities') &&
-            data.nodeQuery.entities instanceof Array &&
-            data.nodeQuery.entities.length === 1) {
+          if (Object.prototype.hasOwnProperty.call(data, 'nodeQuery') &&
+          Object.prototype.hasOwnProperty.call(data.nodeQuery, 'entities') &&
+          data.nodeQuery.entities instanceof Array &&
+          data.nodeQuery.entities.length === 1) {
             const entity = data.nodeQuery.entities[0];
 
             this.componentClass = this.id.replace("_", "-");
@@ -164,9 +164,10 @@ export default {
               imageLarge: this.imageLarge,
             }
           }
-        }
-      }
-    }
+          return data;
+        },
+      };
+    },
   },
   data() {
     return {
@@ -207,7 +208,7 @@ export default {
       imageStyleMedium: '',
     }
   },
-}
+};
 </script>
 
 <style lang="scss">

@@ -2,10 +2,25 @@
   <section class="directory">
     <h3 class="directory__title">Directorio telefónico oficinas públicas</h3>
     <ul class="directory__list">
-      <li class="directory__item" v-for="(entity, index) in nodeQuery.entities">
+      <li
+        class="directory__item"
+        v-for="(entity, index) in nodeQuery.entities"
+        :key="index"
+      >
         <h3 class="directory__item-title">{{entity.entityLabel}}</h3>
-        <a v-if="entity.fieldTelefono" class="directory__phone-number" :href="'tel:' + entity.fieldTelefono">{{entity.fieldTelefono}}</a>
-        <a v-if="entity.fieldCorreo" :href="'mailto:' + entity.fieldCorreo">{{entity.fieldCorreo}}</a>
+        <a
+          v-if="entity.fieldTelefono"
+          class="directory__phone-number"
+          :href="'tel:' + entity.fieldTelefono"
+        >
+          {{entity.fieldTelefono}}
+        </a>
+        <a
+          v-if="entity.fieldCorreo"
+          :href="'mailto:' + entity.fieldCorreo"
+        >
+          {{entity.fieldCorreo}}
+        </a>
       </li>
     </ul>
     <router-link class="directory__see-all" :to="{ name: 'recursos directorio'}">
@@ -17,7 +32,7 @@
 <script>
 import gql from 'graphql-tag';
 
-const query = gql `query {
+const query = gql`query {
   nodeQuery(limit: 5,
     sort: [
       {
@@ -33,32 +48,33 @@ const query = gql `query {
           value: ["directorio"]
         }
       ]
-    }) {
-      entities {
-        entityLabel
-        ... on NodeDirectorio {
-          fieldCorreo
-          fieldTelefono
-        }
+    }
+  ) {
+    entities {
+      entityLabel
+      ... on NodeDirectorio {
+        fieldCorreo
+        fieldTelefono
       }
     }
-  }`;
+  }
+}`;
 
 export default {
   name: 'directory',
   apollo: {
     nodeQuery() {
       return {
-        query: query,
-      }
-    }
+        query,
+      };
+    },
   },
   data() {
     return {
       nodeQuery: {},
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="scss">
