@@ -2,12 +2,33 @@
   <section class="view-directorio">
     <div class="directory-page">
       <h3 class="directory-page__title">Directorio telefónico oficinas públicas</h3>
-      <input type="text" placeholder="Buscar" class="directory-page-input" v-model="search" @keyup="filterDirectory">
+      <input
+        type="text"
+        placeholder="Buscar"
+        class="directory-page-input"
+        v-model="search"
+        @keyup="filterDirectory"
+      >
       <ul class="directory-page__list">
-        <li class="directory-page__item" v-for="entity in entitiesfiltered">
+        <li
+          class="directory-page__item"
+          v-for="(entity, index) in entitiesfiltered"
+          :key="index"
+        >
           <h3 class="directory-page__item-title">{{entity.entityLabel}}</h3>
-          <a v-if="entity.fieldTelefono" class="directory-page__phone-number" :href="'tel:' + entity.fieldTelefono">{{entity.fieldTelefono}}</a>
-          <a v-if="entity.fieldCorreo" :href="'mailto:' + entity.fieldCorreo">{{entity.fieldCorreo}}</a>
+          <a
+            v-if="entity.fieldTelefono"
+            class="directory-page__phone-number"
+            :href="'tel:' + entity.fieldTelefono"
+          >
+            {{entity.fieldTelefono}}
+          </a>
+          <a
+            v-if="entity.fieldCorreo"
+            :href="'mailto:' + entity.fieldCorreo"
+          >
+            {{entity.fieldCorreo}}
+          </a>
         </li>
       </ul>
     </div>
@@ -17,7 +38,7 @@
 <script>
 import gql from 'graphql-tag';
 
-const query = gql `query {
+const query = gql`query {
   nodeQuery(limit: 9999,
     sort: [
       {
@@ -33,34 +54,35 @@ const query = gql `query {
           value: ["directorio"]
         }
       ]
-    }) {
-      entities {
-        entityLabel
-        ... on NodeDirectorio {
-          fieldCorreo
-          fieldTelefono
-        }
+    }
+  ) {
+    entities {
+      entityLabel
+      ... on NodeDirectorio {
+        fieldCorreo
+        fieldTelefono
       }
     }
-  }`;
+  }
+}`;
 
 export default {
   name: 'directory-page',
   apollo: {
     nodeQuery() {
       return {
-        query: query,
+        query,
         update(data) {
-          if (data.hasOwnProperty('nodeQuery') &&
-            data.nodeQuery.hasOwnProperty('entities') &&
-            data.nodeQuery.entities instanceof Array &&
-            data.nodeQuery.entities.length > 1) {
-              this.entities = data.nodeQuery.entities;
-              this.entitiesfiltered = data.nodeQuery.entities;
+          if (Object.prototype.hasOwnProperty.call(data, 'nodeQuery') &&
+          Object.nodeQuery.prototype.hasOwnProperty.call(data, 'entities') &&
+          data.nodeQuery.entities instanceof Array &&
+          data.nodeQuery.entities.length > 1) {
+            this.entities = data.nodeQuery.entities;
+            this.entitiesfiltered = data.nodeQuery.entities;
           }
-        }
-      }
-    }
+        },
+      };
+    },
   },
   data() {
     return {
@@ -68,16 +90,16 @@ export default {
       search: '',
       entities: {},
       entitiesfiltered: {},
-    }
+    };
   },
   methods: {
     filterDirectory() {
-      this.entitiesfiltered = this.entities.filter(entity =>
+      this.entitiesfiltered = this.entities.filter(entity => (
         entity.entityLabel.toLowerCase().indexOf(this.search.toLowerCase()) > -1
-      );
+      ));
     },
   },
-}
+};
 </script>
 
 <style lang="scss">
