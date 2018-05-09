@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <header class="site-header">
-      <router-link class="site-header-title-link":to="{ name: 'home'}">
+      <router-link class="site-header-title-link" :to="{ name: 'home'}">
         <h1 class="site-header-title">¡NO MÁS DISCRIMINACIÓN!</h1>
       </router-link>
       <nav class="site-header__nav">
@@ -9,19 +9,51 @@
           <p>Una plataforma de:</p>
           <img class="site-header__logo" src="./assets/images/logo-color.svg" alt="logo">
         </div>
-        <h3 @click="siteHeaderMenuToggle = !siteHeaderMenuToggle" class="site-header__menu-toggle">Menu</h3>
-        <ul :class="{'site-header__menu--collapsed': siteHeaderMenuToggle}" class="site-header__menu-list">
+        <h3
+          @click="siteHeaderMenuToggle = !siteHeaderMenuToggle"
+          class="site-header__menu-toggle"
+        >
+          Menu
+        </h3>
+        <ul
+          :class="{'site-header__menu--collapsed': siteHeaderMenuToggle}"
+          class="site-header__menu-list"
+        >
           <li @click="siteHeaderMenuToggle = !siteHeaderMenuToggle">
-            <router-link active-class="site-header__menu-item--active" class="site-header__menu-item" :to="{ name: 'reporte'}">Reportá</router-link>
+            <router-link
+              active-class="site-header__menu-item--active"
+              class="site-header__menu-item"
+              :to="{ name: 'reporte'}"
+            >
+              Reportá
+            </router-link>
           </li>
           <li @click="siteHeaderMenuToggle = !siteHeaderMenuToggle">
-            <router-link active-class="site-header__menu-item--active" class="site-header__menu-item" :to="{ name: 'derechos'}">Conocé tus derechos</router-link>
+            <router-link
+              active-class="site-header__menu-item--active"
+              class="site-header__menu-item"
+              :to="{ name: 'derechos'}"
+            >
+              Conocé tus derechos
+            </router-link>
           </li>
           <li @click="siteHeaderMenuToggle = !siteHeaderMenuToggle">
-            <router-link active-class="site-header__menu-item--active" class="site-header__menu-item" :to="{ name: 'recursos'}">Recursos</router-link>
+            <router-link
+              active-class="site-header__menu-item--active"
+              class="site-header__menu-item"
+              :to="{ name: 'recursos'}"
+            >
+              Recursos
+            </router-link>
           </li>
           <li @click="siteHeaderMenuToggle = !siteHeaderMenuToggle">
-            <router-link active-class="site-header__menu-item--active" class="site-header__menu-item" :to="{ name: 'contacto'}">Contacto</router-link>
+            <router-link
+              active-class="site-header__menu-item--active"
+              class="site-header__menu-item"
+              :to="{ name: 'contacto'}"
+            >
+              Contacto
+            </router-link>
           </li>
         </ul>
       </nav>
@@ -32,8 +64,24 @@
       <nav class="site-footer__social">
         <h3 class="site-footer__social-title">Contacto:</h3>
         <ul class="site-footer__social-list">
-          <li><a class="site-footer__social-item site-footer__fb" target="_blank" href="https://www.facebook.com/FDIcr">Twitter</a></li>
-          <li><a class="site-footer__social-item site-footer__twitter" target="_blank" href="https://twitter.com/FDIcr">Facebook</a></li>
+          <li>
+            <a
+              class="site-footer__social-item site-footer__fb"
+              target="_blank"
+              href="https://www.facebook.com/FDIcr"
+            >
+              Twitter
+            </a>
+          </li>
+          <li>
+            <a
+              class="site-footer__social-item site-footer__twitter"
+              target="_blank"
+              href="https://twitter.com/FDIcr"
+            >
+              Facebook
+            </a>
+          </li>
         </ul>
       </nav>
     </footer>
@@ -43,12 +91,12 @@
 <script>
 export default {
   name: 'simple-counter',
-  data () {
+  data() {
     return {
       siteHeaderMenuToggle: true,
-    }
-  }
-}
+    };
+  },
+};
 </script>
 
 <style lang="scss">
