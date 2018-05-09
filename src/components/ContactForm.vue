@@ -4,71 +4,183 @@
       <h3>Seleccione el motivo de contacto <span class="contacto-form__asterisk">*</span></h3>
       <div class="input-wrapper">
         <div class="input-wrapper-radio">
-          <input required v-model="causePicked" type="radio" id="suggest-space" name="cause" value="recomendar_espacio">
-          <label class="contacto-form__label" for="suggest-space">Recomendar sitio libre de discriminación</label>
+          <input
+            required v-model="causePicked"
+            type="radio"
+            id="suggest-space"
+            name="cause"
+            value="recomendar_espacio"
+          >
+          <label
+            class="contacto-form__label"
+            for="suggest-space">
+            Recomendar sitio libre de discriminación
+          </label>
         </div>
         <div class="input-wrapper-radio">
-          <input v-model="causePicked" type="radio" id="have-code" name="cause" value="tengo_codigo">
-          <label class="contacto-form__label" for="have-code">Tengo código de seguimiento</label>
+          <input
+            v-model="causePicked"
+            type="radio"
+            id="have-code"
+            name="cause"
+            value="tengo_codigo"
+          >
+          <label
+            class="contacto-form__label"
+            for="have-code">
+            Tengo código de seguimiento
+          </label>
         </div>
         <div class="input-wrapper-radio">
-          <input v-model="causePicked" type="radio" id="radio-other" name="cause" value="otro">
-          <label class="contacto-form__label" for="radio-other">Otro</label>
+          <input
+            v-model="causePicked"
+            type="radio"
+            id="radio-other"
+            name="cause"
+            value="otro"
+          >
+          <label
+            class="contacto-form__label"
+            for="radio-other">
+            Otro
+          </label>
         </div>
       </div>
       <div v-if="causePicked === 'recomendar_espacio'" class="input-wrapper">
-        <label class="contacto-form__label" for="spaceName">Nombre del lugar</label>
-        <input required class="contacto-form__input" type="text" v-model="spaceName" name="spaceName">
+        <label
+          class="contacto-form__label"
+          for="spaceName"
+          >Nombre del lugar
+        </label>
+        <input
+          required
+          class="contacto-form__input"
+          type="text"
+          v-model="spaceName"
+          name="spaceName"
+        >
       </div>
       <div v-if="causePicked === 'recomendar_espacio'" class="input-wrapper">
-        <label class="contacto-form__label" for="webSite">Sitio web</label>
-        <input required class="contacto-form__input" type="url" v-model="webSite" name="webSite">
+        <label
+          class="contacto-form__label"
+          for="webSite">
+          Sitio web
+        </label>
+        <input
+          required
+          class="contacto-form__input"
+          type="url"
+          v-model="webSite"
+          name="webSite"
+        >
       </div>
       <div v-if="causePicked === 'otro'" class="input-wrapper">
-        <label class="contacto-form__label" for="anotherCause">Motivo de contacto</label>
-        <input required class="contacto-form__input" type="text" v-model="anotherCause" id="anotherCause">
+        <label
+          class="contacto-form__label"
+          for="anotherCause">
+          Motivo de contacto
+        </label>
+        <input
+          required
+          class="contacto-form__input"
+          type="text"
+          v-model="anotherCause"
+          id="anotherCause"
+        >
       </div>
       <div v-if="causePicked === 'tengo_codigo'" class="input-wrapper">
         <label class="contacto-form__label" for="code">Código de seguimiento</label>
         <input class="contacto-form__input" type="text" v-model="code" id="code">
       </div>
       <div class="input-wrapper">
-        <label class="contacto-form__label" for="name">Nombre <span class="contacto-form__asterisk">*</span></label>
-        <input required class="contacto-form__input" type="text" v-model="name" name="name">
+        <label
+          class="contacto-form__label"
+          for="name">
+          Nombre<span class="contacto-form__asterisk">*</span>
+        </label>
+        <input
+          required
+          class="contacto-form__input"
+          type="text"
+          v-model="name"
+          name="name"
+        >
       </div>
       <div class="input-wrapper">
-        <label class="contacto-form__label" for="email">Correo electrónico <span class="contacto-form__asterisk">*</span></label>
-        <input required class="contacto-form__input" type="email" v-model="email" name="email">
+        <label class="contacto-form__label" for="email">
+          Correo electrónico <span class="contacto-form__asterisk">*</span>
+        </label>
+        <input
+          required
+          class="contacto-form__input"
+          type="email"
+          v-model="email"
+          name="email"
+        >
       </div>
       <div class="input-wrapper">
         <label class="contacto-form__label" for="phone">Teléfono</label>
-        <input class="contacto-form__input" type="text" v-model="phone" name="phone">
+        <input
+          class="contacto-form__input"
+          type="text"
+          v-model="phone"
+          name="phone"
+        >
       </div>
       <div class="input-wrapper">
-        <label class="contacto-form__label" for="description">Mensaje <span class="contacto-form__asterisk">*</span></label>
-        <textarea required class="contacto-form__texarea" v-model="description" name="description"></textarea>
+        <label class="contacto-form__label" for="description">
+          Mensaje <span class="contacto-form__asterisk">*</span>
+        </label>
+        <textarea
+          required
+          class="contacto-form__texarea"
+          v-model="description"
+          name="description"
+        >
+        </textarea>
       </div>
-      <button class="btn btn--fill-highlight3 btn--arrow contacto-form__btn" type="submit">Enviar</button>
+      <button
+        class="btn btn--fill-highlight3 btn--arrow contacto-form__btn"
+        type="submit">
+        Enviar
+      </button>
     </form>
     <div v-else class="contacto-form__successful-message">
-      <p>Tu mensaje ha sido enviado. Pronto serás contactado por un miembro del Frente por los derechos igualitarios.</p>
-      <router-link class="btn--small btn btn--fill-highlight3 btn--arrow resources__see-all" :to="{ name: 'home'}">
+      <p>
+        Tu mensaje ha sido enviado. Pronto serás contactado por un miembro del Frente por los
+        derechos igualitarios.
+      </p>
+      <router-link
+        class="btn--small btn btn--fill-highlight3 btn--arrow resources__see-all"
+        :to="{ name: 'home'}"
+      >
         Volver al home
       </router-link>
     </div>
-    <div @click="errorMessage = !errorMessage" v-if="errorMessage" class="contacto-form__error-message-overlay"></div>
+    <div
+      @click="errorMessage = !errorMessage"
+      v-if="errorMessage"
+      class="contacto-form__error-message-overlay"
+    ></div>
     <div v-if="errorMessage" class="contacto-form__error-message">
-      <p>Se ha producido un error y el mensaje no pudo ser enviado. Por favor intenta de nuevo.</p>
-      <button @click="errorMessage = !errorMessage" class="btn--small btn btn--fill-highlight3 btn--arrow contacto-form__btn" type="submit">Aceptar</button>
+      <p>
+        Se ha producido un error y el mensaje no pudo ser enviado. Por favor intenta de nuevo.
+      </p>
+      <button
+        @click="errorMessage = !errorMessage"
+        class="btn--small btn btn--fill-highlight3 btn--arrow contacto-form__btn"
+        type="submit"
+      >
+        Aceptar
+      </button>
     </div>
   </section>
 </template>
 
 <script>
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
-const CREATE_CONTACTO = gql`
-mutation createContacto($input: ContactoInput!) {
+const CREATE_CONTACTO = gql`mutation createContacto($input: ContactoInput!) {
   createContacto(input: $input) {
     entity {
       entityId
@@ -78,15 +190,14 @@ mutation createContacto($input: ContactoInput!) {
       message
     }
   }
-}
-`
+}`;
 
 export default {
   name: 'ContactoForm',
   props: [
-    'cause'
+    'cause',
   ],
-  data () {
+  data() {
     return {
       input: {},
       description: '',
@@ -100,10 +211,10 @@ export default {
       webSite: '',
       spaceName: '',
       causePicked: this.cause,
-    }
+    };
   },
   methods: {
-    createContact () {
+    createContact() {
       this.$apollo.mutate({
         mutation: CREATE_CONTACTO,
         variables: {
@@ -116,18 +227,18 @@ export default {
             field_motivo_de_contacto: this.causePicked,
             field_otro_motivo: this.anotherCause,
             field_nombre_del_sitio: this.spaceName,
-            field_sitio_web: this.webSite
+            field_sitio_web: this.webSite,
           },
         },
-      }).then((data) => {
+      }).then(() => {
         this.contactSent = false;
       }).catch((error) => {
         this.errorMessage = true;
-        console.error(error)
+        console.error(error);
       });
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="scss">
