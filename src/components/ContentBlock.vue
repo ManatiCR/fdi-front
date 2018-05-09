@@ -20,6 +20,10 @@
           :class="'btn content-block__btn ' +  blockLink.classes"
           :to="{ name: blockLink.url}">{{ blockLink.label }}
         </router-link>
+        <router-link v-if="renderLinkSuggestSpace"
+          class="btn content-block__btn btn--large btn--fill-highlight2"
+          :to="{ name: 'contacto', query: { cause: 'recomendar_lugar' }}">Recomendar lugar
+        </router-link>
       </div>
     </div>
   </section>
@@ -149,6 +153,10 @@ export default {
               }
             }
 
+            if(this.id === 'espacios') {
+              this.renderLinkSuggestSpace = true;
+            }
+
             return {
               title: entity.entityLabel,
               body: entity.body.value,
@@ -187,7 +195,9 @@ export default {
         {componentId: 'derechos_footer', position: 'body'},
         {componentId: 'recursos', position: 'body'},
         {componentId: 'contacto', position: 'body'},
+        {componentId: 'espacios', position: 'body'},
       ],
+      renderLinkSuggestSpace: false,
       blockLink: '',
       imageSmall: '',
       imageLarge: '',
@@ -218,7 +228,8 @@ export default {
   }
 }
 
-// Components Home reporte, recursos derechos header shared styles
+// Components Home reporte, espacios, recursos derechos header shared styles
+.content-block__espacios,
 .content-block__home-reporte,
 .content-block__recursos,
 .content-block__derechos-footer {
@@ -252,9 +263,15 @@ export default {
 }
 // Components Home reporte, recursos derechos header shared styles -- end
 
-// Component Home reporte
+// Component Home reporte and espacios background
+.content-block__espacios,
 .content-block__home-reporte {
   background: #eef5fb url(.././assets/images/patron-1.png) no-repeat;
+}
+// Component Home reporte and espacios background -- end
+
+// Component Home reporte
+.content-block__home-reporte {
   .content-block__btn {
     order: -1;
     flex-basis: 250px;
@@ -277,12 +294,8 @@ export default {
 }
 // Component Home recursos and derechos header -- end
 
-// Component derechos header
+// Component derechos footer
 .content-block__derechos-footer {
-  .content-block__content-wrapper {
-    padding-top: 40px;
-    padding-bottom: 100px;
-  }
   .content-block__body-button-wrapper {
       justify-content: flex-start;
   }
@@ -290,9 +303,26 @@ export default {
     text-align: left;
   }
 }
-// Component derechos header -- end
+// Component derechos footer -- end
 
-// Components Home reporte, recursos derechos header shared background size styles
+// Component espacios
+.content-block__espacios p {
+  margin-bottom: 20px;
+}
+// Component espacios -- end
+
+// Component derechos footer and espacios -- end
+.content-block__derechos-footer,
+.content-block__espacios {
+  .content-block__content-wrapper {
+    padding-top: 40px;
+    padding-bottom: 100px;
+  }
+}
+// Component derechos footer and espacios -- end
+
+// Components Home reporte, espacios, recursos derechos header shared background size styles
+.content-block__espacios,
 .content-block__home-reporte,
 .content-block__recursos,
 .content-block__derechos-footer {
@@ -302,7 +332,7 @@ export default {
     background-size: 400px;
   }
 }
-// Components Home reporte, recursos derechos header shared background size styles -- end
+// Components Home reporte, espacios, recursos derechos header shared background size styles -- end
 
 // Component Home derechos and derechos header
 .content-block__home-derechos,

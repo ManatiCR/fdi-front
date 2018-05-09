@@ -1,28 +1,31 @@
 <template>
   <section class="spaces">
-    <ul class="spaces__list">
-      <li class="spaces__item" v-for="space in spaces">
-        <a v-if="space.fieldEnlace" class="spaces__link" :href='space.fieldEnlace.url.path'>
-          <img v-if="space.fieldImagen" :width="(space.fieldImagen.derivative.width/2)" :height="(space.fieldImagen.derivative.height/2)" class="spaces__img" :src="space.fieldImagen.derivative.url" :alt="space.entityLabel">
-        </a>
-        <img v-else :width="(space.fieldImagen.derivative.width/2)" :height="(space.fieldImagen.derivative.height/2)" class="spaces__img" :src="space.fieldImagen.derivative.url" :alt="space.entityLabel">
-      </li>
-    </ul>
-    <button v-if="!suggestSpace" class="btn spaces__btn btn--fill-highlight2" type="button" @click="showMore" name="button">Ver más</button>
-    <router-link v-if="suggestSpace" class="btn spaces__btn btn--fill-highlight2" :to="{ name: 'contacto', query: {cause: 'recomendar_espacio' }}">
-      Recomendar Espacio
-    </router-link>
-    <div @click="closeOverlay" v-if="noMoreMessage || suggestSpaceMessage" class="spaces__no-more-message-overlay"></div>
-    <div v-if="noMoreMessage" class="spaces__no-more-message">
-      <p>Se ha producido un error y no pudieron ser cargados más espacios. Por favor intentá de nuevo.</p>
-      <button @click="noMoreMessage = !noMoreMessage" class="btn--small btn btn--fill-highlight3 btn--arrow spaces__btn-error" type="submit">Aceptar</button>
-    </div>
-    <div v-if="suggestSpaceMessage" class="spaces__suggest-space-message">
-      <p>No contamos con más espacios libres de discriminación. ¿Conocés alguno?
-      <router-link v-if="suggestSpace" class="suggest-space-btn" :to="{ name: 'contacto', query: {cause: 'recomendar_espacio' }}">
-        Recomendá uno
-      </router-link></p>
-      <button @click="suggestSpaceMessage = !suggestSpaceMessage" class="btn--small btn btn--fill-highlight3 btn--arrow spaces__btn-error" type="submit">Cerrar</button>
+    <content-block id="espacios"></content-block>
+    <div class="spaces-wrapper">
+      <ul class="spaces__list">
+        <li class="spaces__item" v-for="space in spaces">
+          <a v-if="space.fieldEnlace" class="spaces__link" :href='space.fieldEnlace.url.path'>
+            <img v-if="space.fieldImagen" :width="(space.fieldImagen.derivative.width/2)" :height="(space.fieldImagen.derivative.height/2)" class="spaces__img" :src="space.fieldImagen.derivative.url" :alt="space.entityLabel">
+          </a>
+          <img v-else :width="(space.fieldImagen.derivative.width/2)" :height="(space.fieldImagen.derivative.height/2)" class="spaces__img" :src="space.fieldImagen.derivative.url" :alt="space.entityLabel">
+        </li>
+      </ul>
+      <button v-if="!suggestSpace" class="btn spaces__btn btn--fill-highlight2" type="button" @click="showMore" name="button">Ver más</button>
+      <router-link v-if="suggestSpace" class="btn spaces__btn btn--fill-highlight2" :to="{ name: 'contacto', query: {cause: 'recomendar_espacio' }}">
+        Recomendar Espacio
+      </router-link>
+      <div @click="closeOverlay" v-if="noMoreMessage || suggestSpaceMessage" class="spaces__no-more-message-overlay"></div>
+      <div v-if="noMoreMessage" class="spaces__no-more-message">
+        <p>Se ha producido un error y no pudieron ser cargados más espacios. Por favor intentá de nuevo.</p>
+        <button @click="noMoreMessage = !noMoreMessage" class="btn--small btn btn--fill-highlight3 btn--arrow spaces__btn-error" type="submit">Aceptar</button>
+      </div>
+      <div v-if="suggestSpaceMessage" class="spaces__suggest-space-message">
+        <p>No contamos con más espacios libres de discriminación. ¿Conocés alguno?
+        <router-link v-if="suggestSpace" class="suggest-space-btn" :to="{ name: 'contacto', query: {cause: 'recomendar_espacio' }}">
+          Recomendá uno
+        </router-link></p>
+        <button @click="suggestSpaceMessage = !suggestSpaceMessage" class="btn--small btn btn--fill-highlight3 btn--arrow spaces__btn-error" type="submit">Cerrar</button>
+      </div>
     </div>
   </section>
 </template>
@@ -141,14 +144,18 @@ export default {
 
 <style lang="scss">
 @import "../assets/scss/variables";
+.content-block__espacios {
+  margin-bottom: 80px;
+}
 
-.spaces {
-  max-width: 1500px;
+.spaces-wrapper {
+  max-width: 1400px;
   position: relative;
   margin: auto;
   padding: 20px;
   padding-bottom: 120px;
 }
+
 .spaces__list {
   display: flex;
   flex-wrap: wrap;
@@ -164,16 +171,18 @@ export default {
 }
 
 .spaces__item {
-  width: 45%;
-  padding: 5px;
+  width: 50%;
+  padding: 7px 10px;
   list-style: none;
-  margin-bottom: 20px;
   @media (min-width: 480px) {
-    width: 30%;
+    padding: 15px 20px;
+    width: 33%;
   }
   @media (min-width: $bp-medium) {
+    width: 25%;
+  }
+  @media (min-width: 1100px) {
     width: 20%;
-    margin-bottom: 0;
   }
 }
 
@@ -184,7 +193,6 @@ export default {
 
 .spaces__img {
   width: 100%;
-  max-width: 195px;
   height: auto;
 }
 
