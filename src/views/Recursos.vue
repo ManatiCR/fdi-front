@@ -18,12 +18,13 @@
 import Directory from '../components/Directory.vue';
 import Model from '../components/Model.vue';
 import Resources from '../components/Resources.vue';
+
 export default {
   components: {
     Resources,
     Model,
     Directory,
-  }
+  },
 };
 </script>
 
