@@ -54,7 +54,7 @@ export default {
         update(data) {
           console.log('data', data);
           if (Object.prototype.hasOwnProperty.call(data, 'nodeQuery') &&
-          Object.prototype.nodeQuery.hasOwnProperty.call(data, 'entities') &&
+          Object.prototype.hasOwnProperty.call(data.nodeQuery, 'entities') &&
           data.nodeQuery.entities instanceof Array &&
           data.nodeQuery.entities.length === 1) {
             const entity = data.nodeQuery.entities[0];

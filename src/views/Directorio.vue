@@ -74,7 +74,7 @@ export default {
         query,
         update(data) {
           if (Object.prototype.hasOwnProperty.call(data, 'nodeQuery') &&
-          Object.nodeQuery.prototype.hasOwnProperty.call(data, 'entities') &&
+          Object.prototype.hasOwnProperty.call(data.nodeQuery, 'entities') &&
           data.nodeQuery.entities instanceof Array &&
           data.nodeQuery.entities.length > 1) {
             this.entities = data.nodeQuery.entities;
