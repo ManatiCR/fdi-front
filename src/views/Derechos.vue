@@ -7,9 +7,10 @@
 
 <script>
 import HumanRights from '../components/HumanRights.vue';
+
 export default {
   components: {
     HumanRights,
-  }
+  },
 };
 </script>
