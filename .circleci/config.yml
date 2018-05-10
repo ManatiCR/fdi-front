@@ -46,15 +46,15 @@ jobs:
           - v1-dependencies-
 
       - run:
-        name: Deploy Application to Github Pages
-        command: |
-          git worktree add compiled gh-pages
-          npm run build
-          cp -R dist/* compiled/
-          cd compiled
-          git add .
-          git commit -m "Update compiled site"
-          git push
+          name: Deploy Application to Github Pages
+          command: |
+            git worktree add compiled gh-pages
+            npm run build
+            cp -R dist/* compiled/
+            cd compiled
+            git add .
+            git commit -m "Update compiled site"
+            git push
       - save_cache:
           paths:
             - node_modules
