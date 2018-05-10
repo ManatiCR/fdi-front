@@ -47,7 +47,13 @@
       </gmap-map>
       <ul>
         <li @click="goToCurrentLocation()">Ubicación Actual</li>
-        <li v-for="(place, index) in places" :key="index" @click="goToPlace(place)">{{ place.name }}</li>
+        <li
+          v-for="(place, index) in places"
+          :key="index"
+          @click="goToPlace(place)"
+        >
+          {{ place.name }}
+        </li>
       </ul>
       <button @click="gotoStep(3)" class="btn btn--fill-highlight1 btn--arrow">Continuar</button>
     </div>
@@ -144,12 +150,12 @@ const reportMutation = gql`mutation ($input: ReporteInput!) {
       message
     }
   }
-}`
+}`;
 
 const defaultLocation = {
   lat: 9.5,
   lng: -84,
-}
+};
 
 export default {
   name: 'reporte',
@@ -167,7 +173,7 @@ export default {
         'Contanos qué sucedió:',
         '¿Querés asesoría o apoyo?',
         '¿Querés asesoría o apoyo?',
-        'Siempre estaremos dispuestos a ayudarte'
+        'Siempre estaremos dispuestos a ayudarte',
       ],
       availableCategories: {},
       categories: [],
@@ -183,7 +189,7 @@ export default {
       placeName: '',
       locationStatus: 'unset',
       zoom: 7,
-    }
+    };
   },
   apollo: {
     availableCategories() {
@@ -191,8 +197,8 @@ export default {
         query: categoryQuery,
         update(data) {
           return data;
-        }
-      }
+        },
+      };
     },
   },
   methods: {
@@ -206,15 +212,14 @@ export default {
             this.goToCurrentLocation(true);
           });
         });
-      }
-      else if (step === 6) {
+      } else if (step === 6) {
         console.log('Submit form');
         const report = {
           title: this.personName ? this.personName : 'Anónimo',
           field_correo: this.personEmail,
           body: this.reportText,
-          field_subcategoria_reporte: this.subcategories.map(item => parseInt(item.entityId)),
-          field_categoria_reporte: this.categories.map(item => parseInt(item.entityId)),
+          field_subcategoria_reporte: this.subcategories.map(item => parseInt(item.entityId, 10)),
+          field_categoria_reporte: this.categories.map(item => parseInt(item.entityId, 10)),
           field_ubicacion: [this.latitude, this.longitude],
           field_solicita_asesoria_o_apoyo: 'si', // TODO: Fix this.
           field_lugar: this.placeName,
@@ -224,7 +229,7 @@ export default {
           mutation: reportMutation,
           variables: {
             input: report,
-          }
+          },
         }).then((data) => {
           console.log(data);
         }).catch((error) => {
@@ -245,11 +250,13 @@ export default {
           this.markerDraggable = true;
           this.placeName = '';
           if (getPlaces) {
+            /* global google */
             const service = new google.maps.places.PlacesService(this.$refs.map.$mapObject);
             service.nearbySearch({
               location: this.center,
               radius: 500,
             }, (results, status) => {
+              console.log(status); // TODO: Use this to add extra error checking.
               this.places = results;
             });
           }
@@ -258,8 +265,7 @@ export default {
           this.center = defaultLocation;
           this.markerPosition = defaultLocation;
         });
-      }
-      else {
+      } else {
         this.locationStatus = 'unavailable';
         this.center = defaultLocation;
         this.markerPosition = defaultLocation;
@@ -269,7 +275,7 @@ export default {
       this.markerPosition = {
         lat: place.geometry.location.lat(),
         lng: place.geometry.location.lng(),
-      }
+      };
       this.center = this.markerPosition;
       this.$refs.map.$mapObject.setZoom(17);
       this.placeName = place.name;
@@ -279,8 +285,8 @@ export default {
       this.markerPosition = {
         lat: event.latLng.lat(),
         lng: event.latLng.lng(),
-      }
+      };
     },
   },
-}
+};
 </script>
