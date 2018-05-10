@@ -40,7 +40,7 @@ jobs:
             npm run build
             cp -R dist/* compiled/
             cd compiled
-            git add .
+            git add -u
             git commit -m "Update compiled site"
             git push -u origin gh-pages
 workflows:
