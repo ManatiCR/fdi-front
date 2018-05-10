@@ -30,6 +30,8 @@ jobs:
       - run:
           name: Deploy Application to Github Pages
           command: |
+            git config --global user.email "ci@estudiomanati.com"
+            git config --global user.name "CI Bot"
             git fetch origin gh-pages:gh-pages
             git worktree add compiled gh-pages
             npm run build
