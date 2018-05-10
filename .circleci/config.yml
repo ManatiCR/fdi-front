@@ -37,11 +37,15 @@ jobs:
 
     steps:
       - checkout
+
+      # Download and cache dependencies
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-      -run:
+
+      - run:
         name: Deploy Application to Github Pages
         command: |
           git worktree add compiled gh-pages
@@ -51,7 +55,10 @@ jobs:
           git add .
           git commit -m "Update compiled site"
           git push
-
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
 workflows:
   version: 2
   build-deploys:
