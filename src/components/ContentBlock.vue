@@ -42,37 +42,38 @@ const query = gql`query($id: String!) {
 export default {
   name: 'ContentBlock',
   props: [
-    'id'
+    'id',
   ],
   apollo: {
     nodeQuery() {
       return {
-        query: query,
+        query,
         variables: {
-          id: this.id
+          id: this.id,
         },
         update(data) {
           console.log('data', data);
-          if (data.hasOwnProperty('nodeQuery') &&
-            data.nodeQuery.hasOwnProperty('entities') &&
-            data.nodeQuery.entities instanceof Array &&
-            data.nodeQuery.entities.length === 1) {
+          if (Object.prototype.hasOwnProperty.call(data, 'nodeQuery') &&
+          Object.prototype.hasOwnProperty.call(data.nodeQuery, 'entities') &&
+          data.nodeQuery.entities instanceof Array &&
+          data.nodeQuery.entities.length === 1) {
             const entity = data.nodeQuery.entities[0];
             return {
               title: entity.entityLabel,
               body: entity.body.value,
               image: entity.fieldImagen,
-            }
+            };
           }
-        }
-      }
-    }
+          return data;
+        },
+      };
+    },
   },
   data() {
     return {
       title: '',
       nodeQuery: {},
-    }
+    };
   },
-}
+};
 </script>

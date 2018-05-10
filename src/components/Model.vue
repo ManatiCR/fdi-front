@@ -1,14 +1,37 @@
 <template>
   <section class="model">
     <ul class="model__list">
-      <li class="model__item" v-for="(entity, index) in nodeQuery.entities">
-        <img :width="(entity.fieldImagen.derivative.width/2)" :height="(entity.fieldImagen.derivative.height/2)" class="model__img" :src="entity.fieldImagen.derivative.url" :alt="entity.entityLabel">
+      <li
+        class="model__item"
+        v-for="(entity, index) in nodeQuery.entities"
+        :key="index"
+      >
+        <img
+          v-if="entity.fieldImagen"
+          :width="(entity.fieldImagen.derivative.width/2)"
+          :height="(entity.fieldImagen.derivative.height/2)"
+          class="model__img"
+          :src="entity.fieldImagen.derivative.url"
+          :alt="entity.entityLabel"
+        >
         <div class="model__body-container">
-          <h3 class="model__title">{{entity.entityLabel}}</h3>
-          <p class="model__date">Actualizado el {{ entity.entityChanged | moment("LL") }}</p>
-          <div class="model__body" v-html="entity.body.value"></div>
+          <h3 class="model__title">
+            {{entity.entityLabel}}
+            </h3>
+          <p class="model__date">
+            Actualizado el {{ entity.entityChanged | moment("LL") }}
+            </p>
+          <div
+            v-if="entity.body" class="model__body" v-html="entity.body.value"></div>
         </div>
-        <a :href="entity.fieldMachote.entity.url" download class="model__btn btn btn--fill-highlight3 btn--arrow">Descargar</a>
+        <a
+          v-if="entity.fieldMachote"
+          :href="entity.fieldMachote.entity.url"
+          download
+          class="model__btn btn btn--fill-highlight3 btn--arrow"
+        >
+          Descargar
+        </a>
       </li>
     </ul>
   </section>
@@ -62,32 +85,27 @@ const query = gql`query($limit: Int!) {
 export default {
   name: 'Model',
   props: [
-    'limit'
+    'limit',
   ],
   apollo: {
     nodeQuery() {
       return {
-        query: query,
+        query,
         variables: {
           limit: this.limit,
         },
-      }
-    }
+      };
+    },
   },
   data() {
     return {
       nodeQuery: {},
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="scss">
-.model {
-  padding: 20px;
-  max-width: 1300px;
-  margin: 0 auto;
-}
 
 .model__list {
   width: 100%;

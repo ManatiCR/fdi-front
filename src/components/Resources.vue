@@ -2,16 +2,37 @@
   <section class="resources">
     <h3 class="resources__title">Recursos Jurídicos</h3>
     <ul class="resources__list">
-      <li class="resources__item" v-for="(entity, index) in nodeQuery.entities">
+      <li
+        class="resources__item"
+        v-for="(entity, index) in nodeQuery.entities"
+        :key="index"
+      >
         <h3 class="resources__item-title">
-          <a :href="entity.fieldEnlace.url.path" target="_blank">
+          <a v-if="entity.fieldEnlace" :href="entity.fieldEnlace.url.path" target="_blank">
+            {{entity.entityLabel}}
+          </a>
+          <a v-else>
             {{entity.entityLabel}}
           </a>
         </h3>
-        <p class="resources__category">{{entity.fieldCategoriaRecursoJuridico.entity.entityLabel}}</p>
+        <p
+          v-if="entity.fieldCategoriaRecursoJuridico"
+          class="resources__category"
+        >
+          {{entity.fieldCategoriaRecursoJuridico.entity.entityLabel}}
+        </p>
         <div class="resources__date-button-container">
-          <p class="resources__date"><strong>Vigente desde:</strong> {{ entity.fieldVigencia.value | moment("LL") }}</p>
-          <a :href="entity.fieldEnlace.url.path" class="resources__btn btn btn--small btn--fill-highlight3 btn--arrow" target="_blank">Descargar</a>
+          <p v-if="entity.fieldVigencia" class="resources__date">
+            <strong>Vigente desde:</strong> {{ entity.fieldVigencia.value | moment("LL") }}
+          </p>
+          <a
+            v-if="entity.fieldEnlace"
+            :href="entity.fieldEnlace.url.path"
+            class="resources__btn btn btn--small btn--fill-highlight3 btn--arrow"
+            target="_blank"
+          >
+            Descargar
+          </a>
         </div>
       </li>
     </ul>
@@ -24,7 +45,7 @@
 <script>
 import gql from 'graphql-tag';
 
-const query = gql `query {
+const query = gql`query {
   nodeQuery(limit: 6,
     sort: [
       {
@@ -40,43 +61,44 @@ const query = gql `query {
           value: ["recurso_juridico"]
         }
       ]
-    }) {
-      entities {
-        entityLabel
-        ... on NodeRecursoJuridico {
-          fieldEnlace{
-            url {
-              path
-            }
+    }
+  ) {
+    entities {
+      entityLabel
+      ... on NodeRecursoJuridico {
+        fieldEnlace{
+          url {
+            path
           }
-          fieldVigencia {
-            value
-          }
-          fieldCategoriaRecursoJuridico {
-            entity {
-              entityLabel
-            }
+        }
+        fieldVigencia {
+          value
+        }
+        fieldCategoriaRecursoJuridico {
+          entity {
+            entityLabel
           }
         }
       }
     }
-  }`;
+  }
+}`;
 
 export default {
   name: 'Resources',
   apollo: {
     nodeQuery() {
       return {
-        query: query,
-      }
-    }
+        query,
+      };
+    },
   },
   data() {
     return {
       nodeQuery: {},
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="scss">

@@ -1,6 +1,12 @@
   <template>
   <div class="view-recursos">
-    <model :limit="2"></model>
+    <section class="resources-model-wrapper">
+      <h3 class="resources__model-title">Machotes</h3>
+      <router-link class="resources-model__see-all" :to="{ name: 'recursos machotes'}">
+        Ver todos
+      </router-link>
+      <model :limit="2"></model>
+    </section>
     <section class="resources-directory-wrapper">
       <resources></resources>
       <directory></directory>
@@ -12,18 +18,34 @@
 import Directory from '../components/Directory.vue';
 import Model from '../components/Model.vue';
 import Resources from '../components/Resources.vue';
+
 export default {
   components: {
     Resources,
     Model,
     Directory,
-  }
+  },
 };
 </script>
 
 
 <style lang="scss">
 @import "../assets/scss/variables";
+
+.resources-model-wrapper {
+  padding: 20px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.resources__model-title {
+  display: inline;
+}
+
+.resources-model__see-all {
+  float: right;
+}
+
 .resources-directory-wrapper {
   background-color: #eef5fb;
   padding: 20px;
