@@ -148,7 +148,7 @@
     <div v-else class="contacto-form__successful-message">
       <p>
         Tu mensaje ha sido enviado. Pronto serás contactado por un miembro del Frente por los
-        derechos igualitarios.
+        Derechos Igualitarios.
       </p>
       <router-link
         class="btn--small btn btn--fill-highlight3 btn--arrow resources__see-all"

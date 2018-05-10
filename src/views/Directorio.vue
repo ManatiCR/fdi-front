@@ -2,7 +2,7 @@
   <section class="view-directorio">
     <content-block id="recursos"></content-block>
     <div class="directory-page">
-      <h3 class="directory-page__title">Directorio telefónico oficinas públicas</h3>
+      <h3 class="directory-page__title">Directorio telefónico</h3>
       <input
         type="text"
         placeholder="Buscar"

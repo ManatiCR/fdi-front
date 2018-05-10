@@ -27,7 +27,7 @@
         </router-link>
         <router-link v-if="renderLinkSuggestSpace"
           class="btn content-block__btn btn--large btn--fill-highlight2"
-          :to="{ name: 'contacto', query: { cause: 'recomendar_lugar' }}">Recomendar lugar
+          :to="{ name: 'contacto', query: { reason: 'recomendar_espacio' }}">Recomendar lugar
         </router-link>
       </div>
     </div>
@@ -185,7 +185,7 @@ export default {
         {
           componentId: 'home_reporte',
           classes: 'btn--xlarge btn--border-highlight1',
-          label: 'Reporta',
+          label: 'Reportá',
           url: 'reporte',
           external: false,
         },

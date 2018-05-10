@@ -3,7 +3,7 @@
     <div class="contacto">
       <h1 class="contacto__title">Contáctanos</h1>
       <div class="contacto__content-wrapper">
-        <contact-form :cause="this.$route.query.cause"></contact-form>
+        <contact-form :reason="this.$route.query.reason"></contact-form>
         <content-block id="contacto" class="contacto-content-block"></content-block>
       </div>
     </div>
