@@ -5,10 +5,10 @@
       <div class="input-wrapper">
         <div class="input-wrapper-radio">
           <input
-            required v-model="causePicked"
+            required v-model="reasonPicked"
             type="radio"
             id="suggest-space"
-            name="cause"
+            name="reason"
             value="recomendar_espacio"
           >
           <label
@@ -19,10 +19,10 @@
         </div>
         <div class="input-wrapper-radio">
           <input
-            v-model="causePicked"
+            v-model="reasonPicked"
             type="radio"
             id="have-code"
-            name="cause"
+            name="reason"
             value="tengo_codigo"
           >
           <label
@@ -33,10 +33,10 @@
         </div>
         <div class="input-wrapper-radio">
           <input
-            v-model="causePicked"
+            v-model="reasonPicked"
             type="radio"
             id="radio-other"
-            name="cause"
+            name="reason"
             value="otro"
           >
           <label
@@ -46,7 +46,7 @@
           </label>
         </div>
       </div>
-      <div v-if="causePicked === 'recomendar_espacio'" class="input-wrapper">
+      <div v-if="reasonPicked === 'recomendar_espacio'" class="input-wrapper">
         <label
           class="contacto-form__label"
           for="spaceName"
@@ -60,7 +60,7 @@
           name="spaceName"
         >
       </div>
-      <div v-if="causePicked === 'recomendar_espacio'" class="input-wrapper">
+      <div v-if="reasonPicked === 'recomendar_espacio'" class="input-wrapper">
         <label
           class="contacto-form__label"
           for="webSite">
@@ -74,21 +74,21 @@
           name="webSite"
         >
       </div>
-      <div v-if="causePicked === 'otro'" class="input-wrapper">
+      <div v-if="reasonPicked === 'otro'" class="input-wrapper">
         <label
           class="contacto-form__label"
-          for="anotherCause">
+          for="anotherReason">
           Motivo de contacto
         </label>
         <input
           required
           class="contacto-form__input"
           type="text"
-          v-model="anotherCause"
-          id="anotherCause"
+          v-model="anotherReason"
+          id="anotherReason"
         >
       </div>
-      <div v-if="causePicked === 'tengo_codigo'" class="input-wrapper">
+      <div v-if="reasonPicked === 'tengo_codigo'" class="input-wrapper">
         <label class="contacto-form__label" for="code">Código de seguimiento</label>
         <input class="contacto-form__input" type="text" v-model="code" id="code">
       </div>
@@ -195,7 +195,7 @@ const CREATE_CONTACTO = gql`mutation createContacto($input: ContactoInput!) {
 export default {
   name: 'ContactoForm',
   props: [
-    'cause',
+    'reason',
   ],
   data() {
     return {
@@ -207,10 +207,10 @@ export default {
       code: '',
       contactSent: true,
       errorMessage: false,
-      anotherCause: '',
+      anotherReason: '',
       webSite: '',
       spaceName: '',
-      causePicked: this.cause,
+      reasonPicked: this.reason,
     };
   },
   methods: {
@@ -224,8 +224,8 @@ export default {
             field_telefono: this.phone,
             body: this.description,
             field_codigo_de_seguimient: this.code,
-            field_motivo_de_contacto: this.causePicked,
-            field_otro_motivo: this.anotherCause,
+            field_motivo_de_contacto: this.reasonPicked,
+            field_otro_motivo: this.anotherReason,
             field_nombre_del_sitio: this.spaceName,
             field_sitio_web: this.webSite,
           },
@@ -382,19 +382,16 @@ export default {
   top: 4px;
   left: 4px;
   border-radius: 100%;
-  -webkit-transition: all 0.2s ease;
   transition: all 0.2s ease;
 }
 
 [type="radio"]:not(:checked) + label:after {
   opacity: 0;
-  -webkit-transform: scale(0);
   transform: scale(0);
 }
 
 [type="radio"]:checked + label:after {
   opacity: 1;
-  -webkit-transform: scale(1);
   transform: scale(1);
 }
 
