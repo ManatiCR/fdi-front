@@ -15,7 +15,12 @@
       <div class="content-block__body-button-wrapper">
         <h1 v-if="renderTitleBody" class="content-block__title">{{ nodeQuery.title }}</h1>
         <div class="content-block__body" v-html="nodeQuery.body"></div>
-        <a v-if="renderLink" :class="'btn content-block__btn ' +  blockLink.classes" :href="blockLink.url">{{ blockLink.label }}</a>
+        <a
+          v-if="renderLink"
+          :class="'btn content-block__btn ' +  blockLink.classes"
+          :href="blockLink.url">
+          {{ blockLink.label }}
+        </a>
         <router-link v-if="renderRouterLink"
           :class="'btn content-block__btn ' +  blockLink.classes"
           :to="{ name: blockLink.url}">{{ blockLink.label }}
@@ -96,14 +101,12 @@ export default {
           this.imageStyleSmall = 'content_full_small';
           this.imageStyleLarge = 'content_full_large';
           this.imageStyleMedium = 'content_full_medium';
-        }
-        else if (this.imagestyle === 'mid') {
+        } else if (this.imagestyle === 'mid') {
           this.imageStyleSmall = 'content_mid_small';
           this.imageStyleLarge = 'content_mid_large';
           this.imageStyleMedium = 'content_mid_medium';
         }
-      }
-      else {
+      } else {
         // The argument can not be empty or undefined.
         this.imageStyleSmall = 'medium';
         this.imageStyleLarge = 'medium';
@@ -124,7 +127,7 @@ export default {
           data.nodeQuery.entities.length === 1) {
             const entity = data.nodeQuery.entities[0];
 
-            this.componentClass = this.id.replace("_", "-");
+            this.componentClass = this.id.replace('_', '-');
             if (this.componentImages.findIndex(e => e === this.id) > -1) {
               this.renderImage = true;
               this.imageSmall = entity.imageSmall.derivative;
@@ -132,28 +135,26 @@ export default {
               this.imageMedium = entity.imageMedium.derivative;
             }
 
-            if ( this.componentLinks.findIndex(e => e.componentId == this.id)  > -1) {
-              var index = this.componentLinks.findIndex(e => e.componentId == this.id);
+            if (this.componentLinks.findIndex(e => e.componentId === this.id) > -1) {
+              const index = this.componentLinks.findIndex(e => e.componentId === this.id);
               this.blockLink = this.componentLinks[index];
               if (this.blockLink.external) {
                 this.renderLink = true;
-              }
-              else {
+              } else {
                 this.renderRouterLink = true;
               }
             }
 
-            if ( this.componentTitle.findIndex(e => e.componentId == this.id)  > -1) {
-              var index = this.componentTitle.findIndex(e => e.componentId == this.id);
+            if (this.componentTitle.findIndex(e => e.componentId === this.id) > -1) {
+              const index = this.componentTitle.findIndex(e => e.componentId === this.id);
               if (this.componentTitle[index].position === 'top') {
                 this.renderTitleTop = true;
-              }
-              else {
+              } else {
                 this.renderTitleBody = true;
               }
             }
 
-            if(this.id === 'espacios') {
+            if (this.id === 'espacios') {
               this.renderLinkSuggestSpace = true;
             }
 
@@ -162,7 +163,7 @@ export default {
               body: entity.body.value,
               imageSmall: this.imageSmall,
               imageLarge: this.imageLarge,
-            }
+            };
           }
           return data;
         },
@@ -180,23 +181,69 @@ export default {
       renderTitleTop: false,
       renderTitleBody: false,
       componentImages: ['derechos_header', 'home_fdi', 'home_derechos'],
-      renderTitleTop: false,
-      renderTitleBody: false,
       componentLinks: [
-        {componentId: 'home_reporte', classes: 'btn--xlarge btn--border-highlight1', label: 'Reporta', url: 'reporte', external: false},
-        {componentId: 'home_derechos', classes: 'btn--xlarge btn--border-highlight2', label: 'Conocé tus derechos', url: 'derechos', external: false},
-        {componentId: 'home_fdi', classes: 'btn--large btn--fill-highlight2', label: 'Conocé más', url: 'https://www.fdi.cr', external: true},
-        {componentId: 'home_espacios', classes: 'btn--border-white', label: 'Ver más', url: 'espacios', external: false},
+        {
+          componentId: 'home_reporte',
+          classes: 'btn--xlarge btn--border-highlight1',
+          label: 'Reporta',
+          url: 'reporte',
+          external: false,
+        },
+        {
+          componentId: 'home_derechos',
+          classes: 'btn--xlarge btn--border-highlight2',
+          label: 'Conocé tus derechos',
+          url: 'derechos',
+          external: false,
+        },
+        {
+          componentId: 'home_fdi',
+          classes: 'btn--large btn--fill-highlight2',
+          label: 'Conocé más',
+          url: 'https://www.fdi.cr',
+          external: true,
+        },
+        {
+          componentId: 'home_espacios',
+          classes: 'btn--border-white',
+          label: 'Ver más',
+          url: 'espacios',
+          external: false,
+        },
       ],
       componentTitle: [
-        {componentId: 'home_fdi', position: 'top'},
-        {componentId: 'home_espacios', position: 'body'},
-        {componentId: 'reporte', position: 'body'},
-        {componentId: 'derechos_header', position: 'body'},
-        {componentId: 'derechos_footer', position: 'body'},
-        {componentId: 'recursos', position: 'body'},
-        {componentId: 'contacto', position: 'body'},
-        {componentId: 'espacios', position: 'body'},
+        {
+          componentId: 'home_fdi',
+          position: 'top',
+        },
+        {
+          componentId: 'home_espacios',
+          position: 'body',
+        },
+        {
+          componentId: 'reporte',
+          position: 'body',
+        },
+        {
+          componentId: 'derechos_header',
+          position: 'body',
+        },
+        {
+          componentId: 'derechos_footer',
+          position: 'body',
+        },
+        {
+          componentId: 'recursos',
+          position: 'body',
+        },
+        {
+          componentId: 'contacto',
+          position: 'body',
+        },
+        {
+          componentId: 'espacios',
+          position: 'body',
+        },
       ],
       renderLinkSuggestSpace: false,
       blockLink: '',
@@ -206,7 +253,7 @@ export default {
       imageStyleSmall: '',
       imageStyleLarge: '',
       imageStyleMedium: '',
-    }
+    };
   },
 };
 </script>

@@ -37,8 +37,8 @@
 </template>
 
 <script>
-import ContentBlock from '../components/ContentBlock.vue';
 import gql from 'graphql-tag';
+import ContentBlock from '../components/ContentBlock.vue';
 
 const query = gql`query {
   nodeQuery(limit: 9999,

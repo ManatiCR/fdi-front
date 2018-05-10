@@ -3,38 +3,82 @@
     <content-block id="espacios"></content-block>
     <div class="spaces-wrapper">
       <ul class="spaces__list">
-        <li class="spaces__item" v-for="space in spaces">
+        <li class="spaces__item" v-for="space in spaces" :key="space.entityLabel">
           <a v-if="space.fieldEnlace" class="spaces__link" :href='space.fieldEnlace.url.path'>
-            <img v-if="space.fieldImagen" :width="(space.fieldImagen.derivative.width/2)" :height="(space.fieldImagen.derivative.height/2)" class="spaces__img" :src="space.fieldImagen.derivative.url" :alt="space.entityLabel">
+            <img
+              v-if="space.fieldImagen"
+              :width="(space.fieldImagen.derivative.width/2)"
+              :height="(space.fieldImagen.derivative.height/2)"
+              class="spaces__img"
+              :src="space.fieldImagen.derivative.url"
+              :alt="space.entityLabel"
+            >
           </a>
-          <img v-else :width="(space.fieldImagen.derivative.width/2)" :height="(space.fieldImagen.derivative.height/2)" class="spaces__img" :src="space.fieldImagen.derivative.url" :alt="space.entityLabel">
+          <img
+            v-else
+            :width="(space.fieldImagen.derivative.width/2)"
+            :height="(space.fieldImagen.derivative.height/2)"
+            class="spaces__img"
+            :src="space.fieldImagen.derivative.url"
+            :alt="space.entityLabel"
+          >
         </li>
       </ul>
-      <button v-if="!suggestSpace" class="btn spaces__btn btn--fill-highlight2" type="button" @click="showMore" name="button">Ver más</button>
-      <router-link v-if="suggestSpace" class="btn spaces__btn btn--fill-highlight2" :to="{ name: 'contacto', query: {cause: 'recomendar_espacio' }}">
+      <button
+        v-if="!suggestSpace"
+        class="btn spaces__btn btn--fill-highlight2"
+        type="button"
+        @click="showMore"
+        name="button">
+        Ver más
+      </button>
+      <router-link
+        v-if="suggestSpace"
+        class="btn spaces__btn btn--fill-highlight2"
+        :to="{ name: 'contacto', query: {reason: 'recomendar_espacio' }}">
         Recomendar Espacio
       </router-link>
-      <div @click="closeOverlay" v-if="noMoreMessage || suggestSpaceMessage" class="spaces__no-more-message-overlay"></div>
+      <div
+        @click="closeOverlay"
+        v-if="noMoreMessage || suggestSpaceMessage"
+        class="spaces__no-more-message-overlay">
+      </div>
       <div v-if="noMoreMessage" class="spaces__no-more-message">
-        <p>Se ha producido un error y no pudieron ser cargados más espacios. Por favor intentá de nuevo.</p>
-        <button @click="noMoreMessage = !noMoreMessage" class="btn--small btn btn--fill-highlight3 btn--arrow spaces__btn-error" type="submit">Aceptar</button>
+        <p>
+          Se ha producido un error y no pudieron ser cargados más espacios.
+          Por favor intentá de nuevo.
+        </p>
+        <button
+          @click="noMoreMessage = !noMoreMessage"
+          class="btn--small btn btn--fill-highlight3 btn--arrow spaces__btn-error"
+          type="submit">
+          Aceptar
+      </button>
       </div>
       <div v-if="suggestSpaceMessage" class="spaces__suggest-space-message">
         <p>No contamos con más espacios libres de discriminación. ¿Conocés alguno?
-        <router-link v-if="suggestSpace" class="suggest-space-btn" :to="{ name: 'contacto', query: {cause: 'recomendar_espacio' }}">
+        <router-link
+          v-if="suggestSpace"
+          class="suggest-space-btn"
+          :to="{ name: 'contacto', query: {reason: 'recomendar_espacio' }}">
           Recomendá uno
         </router-link></p>
-        <button @click="suggestSpaceMessage = !suggestSpaceMessage" class="btn--small btn btn--fill-highlight3 btn--arrow spaces__btn-error" type="submit">Cerrar</button>
+        <button
+          @click="suggestSpaceMessage = !suggestSpaceMessage"
+          class="btn--small btn btn--fill-highlight3 btn--arrow spaces__btn-error"
+          type="submit">
+          Cerrar
+        </button>
       </div>
     </div>
   </section>
 </template>
 
 <script>
-import ContentBlock from '../components/ContentBlock.vue';
 import gql from 'graphql-tag';
+import ContentBlock from '../components/ContentBlock.vue';
 
-const query = gql `query getSpaces($limit: Int!) {
+const query = gql`query getSpaces($limit: Int!) {
   nodeQuery(limit: $limit,
     sort: [
       {
@@ -80,20 +124,20 @@ export default {
   apollo: {
     nodeQuery() {
       return {
-        query: query,
+        query,
         variables: {
           limit: this.limit,
         },
         update(data) {
-          if (data.hasOwnProperty('nodeQuery') &&
-            data.nodeQuery.hasOwnProperty('entities') &&
-            data.nodeQuery.entities instanceof Array &&
-            data.nodeQuery.entities.length > 1) {
-              this.spaces = data.nodeQuery.entities;
+          if (Object.prototype.hasOwnProperty.call(data, 'nodeQuery') &&
+          Object.prototype.hasOwnProperty.call(data.nodeQuery, 'entities') &&
+          data.nodeQuery.entities instanceof Array &&
+          data.nodeQuery.entities.length > 1) {
+            this.spaces = data.nodeQuery.entities;
           }
-        }
-      }
-    }
+        },
+      };
+    },
   },
   methods: {
     showMore() {
@@ -103,31 +147,31 @@ export default {
           limit: this.limit,
         },
         updateQuery: (previousResult, { fetchMoreResult }) => {
-          const newSpaces = fetchMoreResult.nodeQuery.entities;
-          if (fetchMoreResult.nodeQuery.entities.length === previousResult.nodeQuery.entities.length) {
+          if (fetchMoreResult.nodeQuery.entities.length ===
+            previousResult.nodeQuery.entities.length) {
             this.suggestSpaceMessage = true;
             this.suggestSpace = true;
           }
           return {
             nodeQuery: {
+              /* eslint no-underscore-dangle: ["error", { "allow": ["__typename"] }] */
               __typename: previousResult.nodeQuery.__typename,
               entities: fetchMoreResult.nodeQuery.entities,
             },
-          }
+          };
         },
       }).catch((error) => {
-        this.noMoreMessage = true
-        console.error(error)
+        this.noMoreMessage = true;
+        console.error(error);
       });
     },
-    closeOverlay () {
+    closeOverlay() {
       if (this.noMoreMessage) {
         this.noMoreMessage = false;
-      }
-      else if (this.suggestSpaceMessage) {
+      } else if (this.suggestSpaceMessage) {
         this.suggestSpaceMessage = false;
       }
-    }
+    },
   },
   data() {
     return {
@@ -137,9 +181,9 @@ export default {
       noMoreMessage: false,
       suggestSpaceMessage: false,
       suggestSpace: false,
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="scss">
