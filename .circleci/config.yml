@@ -37,6 +37,7 @@ jobs:
             git config --global user.name "CI Bot"
             git fetch origin gh-pages:gh-pages
             git worktree add compiled gh-pages
+            rm -r compiled/*
             npm run build
             cp -R dist/* compiled/
             cd compiled
