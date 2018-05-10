@@ -39,7 +39,7 @@ jobs:
             cd compiled
             git add .
             git commit -m "Update compiled site"
-            git push
+            git push -u origin gh-pages
 workflows:
   version: 2
   build-deploys:
