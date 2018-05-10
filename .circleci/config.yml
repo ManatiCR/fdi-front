@@ -53,6 +53,7 @@ jobs:
       - run:
           name: Deploy Application to Github Pages
           command: |
+            git fetch origin gh-pages:gh-pages
             git worktree add compiled gh-pages
             npm run build
             cp -R dist/* compiled/
