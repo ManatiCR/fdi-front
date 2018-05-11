@@ -95,7 +95,68 @@ export default {
   ],
   apollo: {
     nodeQuery() {
-      // Load the image style according to the prop.
+      return {
+        query,
+        variables() {
+          this.setImageStyles();
+          return {
+            id: this.id,
+            imageStyleSmall: this.imageStyleSmall,
+            imageStyleLarge: this.imageStyleLarge,
+            imageStyleMedium: this.imageStyleMedium,
+          };
+        },
+        update(data) {
+          if (Object.prototype.hasOwnProperty.call(data, 'nodeQuery') &&
+          Object.prototype.hasOwnProperty.call(data.nodeQuery, 'entities') &&
+          data.nodeQuery.entities instanceof Array &&
+          data.nodeQuery.entities.length === 1) {
+            const entity = data.nodeQuery.entities[0];
+            return {
+              title: entity.entityLabel,
+              body: entity.body.value,
+            };
+          }
+          return data;
+        },
+        result(ApolloQueryResult) {
+          const entity = ApolloQueryResult.data.nodeQuery.entities[0];
+          this.componentClass = this.id.replace('_', '-');
+          if (this.componentImages.findIndex(e => e === this.id) > -1) {
+            this.renderImage = true;
+            this.imageSmall = entity.imageSmall.derivative;
+            this.imageLarge = entity.imageLarge.derivative;
+            this.imageMedium = entity.imageMedium.derivative;
+          }
+
+          if (this.componentLinks.findIndex(e => e.componentId === this.id) > -1) {
+            const index = this.componentLinks.findIndex(e => e.componentId === this.id);
+            this.blockLink = this.componentLinks[index];
+            if (this.blockLink.external) {
+              this.renderLink = true;
+            } else {
+              this.renderRouterLink = true;
+            }
+          }
+
+          if (this.componentTitle.findIndex(e => e.componentId === this.id) > -1) {
+            const index = this.componentTitle.findIndex(e => e.componentId === this.id);
+            if (this.componentTitle[index].position === 'top') {
+              this.renderTitleTop = true;
+            } else {
+              this.renderTitleBody = true;
+            }
+          }
+
+          if (this.id === 'espacios') {
+            this.renderLinkSuggestSpace = true;
+          }
+        },
+      };
+    },
+  },
+  methods: {
+    setImageStyles() {
       if (typeof this.imagestyle !== 'undefined') {
         if (this.imagestyle === 'full') {
           this.imageStyleSmall = 'content_full_small';
@@ -112,62 +173,6 @@ export default {
         this.imageStyleLarge = 'medium';
         this.imageStyleMedium = 'medium';
       }
-      return {
-        query,
-        variables: {
-          id: this.id,
-          imageStyleSmall: this.imageStyleSmall,
-          imageStyleLarge: this.imageStyleLarge,
-          imageStyleMedium: this.imageStyleMedium,
-        },
-        update(data) {
-          if (Object.prototype.hasOwnProperty.call(data, 'nodeQuery') &&
-          Object.prototype.hasOwnProperty.call(data.nodeQuery, 'entities') &&
-          data.nodeQuery.entities instanceof Array &&
-          data.nodeQuery.entities.length === 1) {
-            const entity = data.nodeQuery.entities[0];
-
-            this.componentClass = this.id.replace('_', '-');
-            if (this.componentImages.findIndex(e => e === this.id) > -1) {
-              this.renderImage = true;
-              this.imageSmall = entity.imageSmall.derivative;
-              this.imageLarge = entity.imageLarge.derivative;
-              this.imageMedium = entity.imageMedium.derivative;
-            }
-
-            if (this.componentLinks.findIndex(e => e.componentId === this.id) > -1) {
-              const index = this.componentLinks.findIndex(e => e.componentId === this.id);
-              this.blockLink = this.componentLinks[index];
-              if (this.blockLink.external) {
-                this.renderLink = true;
-              } else {
-                this.renderRouterLink = true;
-              }
-            }
-
-            if (this.componentTitle.findIndex(e => e.componentId === this.id) > -1) {
-              const index = this.componentTitle.findIndex(e => e.componentId === this.id);
-              if (this.componentTitle[index].position === 'top') {
-                this.renderTitleTop = true;
-              } else {
-                this.renderTitleBody = true;
-              }
-            }
-
-            if (this.id === 'espacios') {
-              this.renderLinkSuggestSpace = true;
-            }
-
-            return {
-              title: entity.entityLabel,
-              body: entity.body.value,
-              imageSmall: this.imageSmall,
-              imageLarge: this.imageLarge,
-            };
-          }
-          return data;
-        },
-      };
     },
   },
   data() {

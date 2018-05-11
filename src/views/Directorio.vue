@@ -114,6 +114,7 @@ export default {
   padding: 20px;
   max-width: 1000px;
   margin: 0 auto;
+  margin-bottom: 80px;
 }
 
 .directory-page__title {
