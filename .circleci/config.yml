@@ -25,25 +25,18 @@ jobs:
       - checkout
       - run: npm install
       - run:
-          name: Update git version
-          command: |
-            echo "deb http://ftp.debian.org/debian jessie-backports main" | sudo tee --append /etc/apt/sources.list
-            sudo apt-get update
-            sudo apt-get -t jessie-backports install git
-      - run:
           name: Deploy Application to Github Pages
           command: |
             git config --global user.email "ci@estudiomanati.com"
             git config --global user.name "CI Bot"
-            git fetch origin gh-pages:gh-pages
-            git worktree add compiled gh-pages
-            rm -r compiled/*
+            git clone https://github.com/fdicr-nmd/fdicr-nmd.github.io.git
+            rm -r fdicr-nmd.github.io/*
             npm run build
-            cp -R dist/* compiled/
-            cd compiled
+            cp -R dist/* fdicr-nmd.github.io/
+            cd fdicr-nmd.github.io
             git add -u
             git commit -m "Update compiled site"
-            git push -u origin gh-pages
+            git push
 workflows:
   version: 2
   build-deploys:
@@ -60,7 +53,7 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - /feature\/.*/
       - deploy:
           requires:
             - deploy-hold
