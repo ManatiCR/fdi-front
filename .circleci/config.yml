@@ -1,0 +1,60 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:8.11
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run: npm install
+      # run tests!
+      - run: npm run lint
+  deploy:
+    docker:
+      - image: circleci/node:8.11
+    working_directory: ~/repo
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "00:e0:7a:72:c7:e3:5b:0d:61:3f:35:e5:f5:d1:b7:db"
+      - checkout
+      - run: npm install
+      - run:
+          name: Deploy Application to Github Pages
+          command: |
+            git config --global user.email "ci@estudiomanati.com"
+            git config --global user.name "CI Bot"
+            git config --global push.default simple
+            git clone git@github.com:fdicr-nmd/fdicr-nmd.github.io.git
+            rm -r fdicr-nmd.github.io/*
+            npm run build
+            cp -R dist/* fdicr-nmd.github.io/
+            cd fdicr-nmd.github.io
+            git add -A
+            git commit -m "Update compiled site"
+            git push
+workflows:
+  version: 2
+  build-deploys:
+    jobs:
+      - build:
+          filters:
+            branches:
+              ignore:
+                - gh-pages
+      - deploy-hold:
+          type: approval
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
+      - deploy:
+          requires:
+            - deploy-hold

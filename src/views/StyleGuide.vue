@@ -1,5 +1,5 @@
 <template>
-  <div class="styleguide">
+  <div class="view-styleguide">
     <h1 class="h1--styleguide">Styleguide</h1>
     <section class="styleguide__colors">
       <h2 class="h2--styleguide">Colors</h2>
@@ -22,9 +22,22 @@
       <h2>H2: Derechos humanos   /   2.4rem</h2>
       <h3>H3: Derecho a la salud  / 2rem</h3>
       <h2 class="h2--styleguide">Paragraphs</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non bibendum nisl. Phasellus vestibulum dui et congue sagittis. Morbi eros nibh, vulputate non est ac, sollicitudin blandit massa. Duis leo enim, imperdiet eget dolor sed, convallis maximus purus. Morbi quis ornare sapien, quis sollicitudin tortor. Fusce aliquet eros sed mauris mollis aliquam. Etiam at ipsum id tellus convallis scelerisque. / Open Sans, regular, 1.4rem, #4C565D</p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non bibendum nisl.
+        Phasellus vestibulum dui et congue sagittis. Morbi eros nibh, vulputate non est ac,
+        sollicitudin blandit massa. Duis leo enim, imperdiet eget dolor sed, convallis
+        maximus purus. Morbi quis ornare sapien, quis sollicitudin tortor. Fusce aliquet eros
+        sed mauris mollis aliquam. Etiam at ipsum id tellus convallis scelerisque. / Open Sans,
+        regular, 1.4rem, #4C565D
+      </p>
       <h2 class="h2--styleguide">Content Blocks Paragraphs</h2>
-      <p class="p--content-block"><strong>El Frente por los Derechos Igualitarios (FDI) es</strong> una unión de organizaciones, colectivos y activistas independientes. Buscamos que se reconozca y garantice el goce de todos los Derechos Humanos en Costa Rica, con énfasis en los de la población de lesbianas, gays, bisexuales, personas trans e intersex. / Open Sans, regular, 1.8rem, #4C565D</p>
+      <p class="p--content-block">
+        <strong>El Frente por los Derechos Igualitarios (FDI) es</strong> una unión de
+        organizaciones, colectivos y activistas independientes. Buscamos que se reconozca y
+        garantice el goce de todos los Derechos Humanos en Costa Rica, con énfasis en los de la
+        población de lesbianas, gays, bisexuales, personas trans e intersex. / Open Sans, regular,
+        1.8rem, #4C565D
+      </p>
       <a href="#">correo@oficinadenuncias.com</a>
 
       <ul>
@@ -53,30 +66,62 @@
         <li>btn--arrow</li>
       </ul>
       <div>
-        <a href="#" class="btn btn--xlarge btn--border-highlight1">Reportá</a>
-        <button type="button" class="btn btn--xlarge btn--border-highlight2">Conocé tus derechos</button>
+        <a href="#" class="btn btn--xlarge btn--border-highlight1">
+          Reportá
+        </a>
+        <button type="button" class="btn btn--xlarge btn--border-highlight2">
+          Conocé tus derechos
+        </button>
 
-        <a href="#" class="btn btn--large btn--fill-highlight2">Conocé más</a>
-        <button type="button" class="btn btn--large btn--fill-highlight2">Conocé más</button>
+        <a href="#" class="btn btn--large btn--fill-highlight2">
+          Conocé más
+        </a>
+        <button type="button" class="btn btn--large btn--fill-highlight2">
+          Conocé más
+        </button>
 
-        <a href="#" class="btn btn--fill-highlight3 btn--arrow">Descargar pero muy largo</a>
-        <button type="button" class="btn btn--fill-highlight3 btn--arrow">Descargar</button>
+        <a href="#" class="btn btn--fill-highlight3 btn--arrow">
+          Descargar pero muy largo
+        </a>
+        <button type="button" class="btn btn--fill-highlight3 btn--arrow">
+          Descargar
+        </button>
 
-        <a href="#" class="btn btn--small btn--fill-highlight1 btn--arrow">Continuar</a>
-        <button type="button" class="btn btn--small btn--fill-highlight1 btn--arrow">Continuar botón pequeño pero largo</button>
+        <a href="#" class="btn btn--small btn--fill-highlight1 btn--arrow">
+          Continuar
+        </a>
+        <button type="button" class="btn btn--small btn--fill-highlight1 btn--arrow">
+          Continuar botón pequeño pero largo
+        </button>
       </div>
       <div>
-        <a href="#" class="btn btn--xlarge btn--fill-highlight1">Reportá</a>
-        <button type="button" class="btn btn--xlarge btn--fill-highlight2">Conocé tus derechos</button>
+        <a href="#" class="btn btn--xlarge btn--fill-highlight1">
+          Reportá
+        </a>
+        <button type="button" class="btn btn--xlarge btn--fill-highlight2">
+          Conocé tus derechos
+        </button>
 
-        <a href="#" class="btn btn--large btn--border-highlight2">Conocé más</a>
-        <button type="button" class="btn btn--large btn--border-highlight3">Conocé más</button>
+        <a href="#" class="btn btn--large btn--border-highlight2">
+          Conocé más
+        </a>
+        <button type="button" class="btn btn--large btn--border-highlight3">
+          Conocé más
+        </button>
 
-        <a href="#" class="btn btn--border-highlight3">Descargar</a>
-        <button type="button" class="btn btn--border-highlight2">Descargar</button>
+        <a href="#" class="btn btn--border-highlight3">
+          Descargar
+        </a>
+        <button type="button" class="btn btn--border-highlight2">
+          Descargar
+        </button>
 
-        <a href="#" class="btn btn--small btn--border-highlight1">Continuar</a>
-        <button type="button" class="btn btn--small btn--border-highlight3">Continuar</button>
+        <a href="#" class="btn btn--small btn--border-highlight1">
+          Continuar
+        </a>
+        <button type="button" class="btn btn--small btn--border-highlight3">
+          Continuar
+        </button>
       </div>
     </section>
   </div>
@@ -131,21 +176,34 @@
 .color--background3:before {
   background-color: $background3;
 }
+
 .h1--styleguide, .h2--styleguide {
   color: $highlight1;
 }
+
 .h1--styleguide-title,
 .h1--styleguide-body {
   color: $text;
 }
+
 .h1--styleguide-body {
   color: $text;
   font-family: $opensans;
 }
+
 .p--content-block {
-    font-size: 1.8rem;
-    line-height: 1.5;
+  font-size: 1.8rem;
+  line-height: 1.5;
 }
+
+h1,h2,h3,p,section,ul {
+  margin: 30px 0;
+}
+
+ul {
+  padding-left: 30px;
+}
+
 .styleguide__buttons {
   div {
     margin-top: 30px;
