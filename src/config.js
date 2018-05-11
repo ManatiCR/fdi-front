@@ -3,7 +3,7 @@ const config = {
     apiUrl: 'http://test-fdi.pantheonsite.io/graphql',
   },
   production: {
-    apiUrl: 'http://live-fdi.pantheonsite.io/graphql',
+    apiUrl: 'https://live-fdi.pantheonsite.io/graphql',
   },
 };
 
