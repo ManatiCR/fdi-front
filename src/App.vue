@@ -273,7 +273,7 @@ li {
 
 .site-header-title {
   display: inline-block;
-  padding: 130px 15px 20px 15px;
+  padding: 85px 15px 20px 15px;
   text-shadow: 3px 3px 5px $text;
   margin: 0;
   color: #fff;

@@ -268,10 +268,17 @@ export default {
   position: fixed;
 }
 
+.spaces__suggest-space-message p {
+  background: url(.././assets/images/icons/lightbulb.png) no-repeat;
+}
+
+.spaces__no-more-message p {
+  background: url(.././assets/images/icons/warning.png) no-repeat;
+}
+
 .spaces__no-more-message,
 .spaces__suggest-space-message {
   p {
-    background: url(.././assets/images/icons/warning.png) no-repeat;
     background-size: 33px;
     background-position: left center;
     padding-left: 53px;
