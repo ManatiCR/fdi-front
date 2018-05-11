@@ -30,12 +30,12 @@ jobs:
             git config --global user.email "ci@estudiomanati.com"
             git config --global user.name "CI Bot"
             git config --global push.default simple
-            git clone https://github.com/fdicr-nmd/fdicr-nmd.github.io.git
+            git clone git@github.com:fdicr-nmd/fdicr-nmd.github.io.git
             rm -r fdicr-nmd.github.io/*
             npm run build
             cp -R dist/* fdicr-nmd.github.io/
             cd fdicr-nmd.github.io
-            git add -u
+            git add -A
             git commit -m "Update compiled site"
             git push
 workflows:
