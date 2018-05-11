@@ -453,7 +453,7 @@ export default {
     margin: 0 auto;
     max-width: 500px;
     background: #fff;
-    padding: 20px;
+    padding: 10px 20px;
     list-style: none;
     height: 300px;
     overflow: hidden;
@@ -462,6 +462,14 @@ export default {
     border: 1px solid #e0e0e0;
     @media (min-width: 1000px) {
       margin-left: 20px;
+    }
+  }
+  li {
+    padding: 10px;
+    border-bottom: 1px solid lightgray;
+    cursor: pointer;
+    &:last-child {
+      border: none;
     }
   }
   @media (min-width: 1000px) {
