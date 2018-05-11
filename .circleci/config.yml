@@ -29,6 +29,7 @@ jobs:
           command: |
             git config --global user.email "ci@estudiomanati.com"
             git config --global user.name "CI Bot"
+            git config --global push.default simple
             git clone https://github.com/fdicr-nmd/fdicr-nmd.github.io.git
             rm -r fdicr-nmd.github.io/*
             npm run build
