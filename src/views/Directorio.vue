@@ -1,7 +1,8 @@
 <template>
   <section class="view-directorio">
+    <content-block id="recursos"></content-block>
     <div class="directory-page">
-      <h3 class="directory-page__title">Directorio telefónico oficinas públicas</h3>
+      <h3 class="directory-page__title">Directorio telefónico</h3>
       <input
         type="text"
         placeholder="Buscar"
@@ -37,6 +38,7 @@
 
 <script>
 import gql from 'graphql-tag';
+import ContentBlock from '../components/ContentBlock.vue';
 
 const query = gql`query {
   nodeQuery(limit: 9999,
@@ -68,6 +70,9 @@ const query = gql`query {
 
 export default {
   name: 'directory-page',
+  components: {
+    ContentBlock,
+  },
   apollo: {
     nodeQuery() {
       return {
@@ -105,14 +110,11 @@ export default {
 <style lang="scss">
 @import "../assets/scss/variables";
 
-.view-directorio {
-  padding: 20px;
-  width: 100%;
-}
-
 .directory-page {
+  padding: 20px;
   max-width: 1000px;
   margin: 0 auto;
+  margin-bottom: 80px;
 }
 
 .directory-page__title {

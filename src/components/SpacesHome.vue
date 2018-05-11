@@ -5,6 +5,7 @@
         class="spaces-home__item"
         v-for="(entity, index) in nodeQuery.entities"
         :key="index"
+        target="_blank"
       >
         <a
           v-if="entity.fieldEnlace"
@@ -95,6 +96,9 @@ export default {
 <style lang="scss">
 @import "../assets/scss/variables";
 
+.spaces-home {
+  margin: auto;
+}
 .spaces-home__list {
   max-width: 700px;
   display: flex;

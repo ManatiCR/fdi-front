@@ -31,7 +31,7 @@
             class="resources__btn btn btn--small btn--fill-highlight3 btn--arrow"
             target="_blank"
           >
-            Descargar
+            Ver recurso
           </a>
         </div>
       </li>

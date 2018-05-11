@@ -1,5 +1,6 @@
   <template>
   <div class="view-recursos">
+    <content-block id="recursos"></content-block>
     <section class="resources-model-wrapper">
       <h3 class="resources__model-title">Machotes</h3>
       <router-link class="resources-model__see-all" :to="{ name: 'recursos machotes'}">
@@ -18,16 +19,17 @@
 import Directory from '../components/Directory.vue';
 import Model from '../components/Model.vue';
 import Resources from '../components/Resources.vue';
+import ContentBlock from '../components/ContentBlock.vue';
 
 export default {
   components: {
     Resources,
     Model,
     Directory,
+    ContentBlock,
   },
 };
 </script>
-
 
 <style lang="scss">
 @import "../assets/scss/variables";
@@ -54,7 +56,6 @@ export default {
     padding: 40px;
     justify-content: center;
   }
-
   .resources {
     margin-bottom: 20px;
     @media (min-width: 768px) {
@@ -62,7 +63,6 @@ export default {
       flex: 2;
     }
   }
-
   .directory {
     width: 100%;
     @media (min-width: 768px) {
@@ -70,5 +70,9 @@ export default {
       margin-left: 20px;
     }
   }
+}
+
+.content-block__recursos {
+  margin-bottom: 80px;
 }
 </style>
