@@ -1,9 +1,9 @@
 const config = {
   development: {
-    apiUrl: 'http://fdi.docker/graphql',
+    apiUrl: 'http://test-fdi.pantheonsite.io/graphql',
   },
   production: {
-    apiUrl: 'http://live-fdi.pantheonsite.io/graphql',
+    apiUrl: 'https://live-fdi.pantheonsite.io/graphql',
   },
 };
 

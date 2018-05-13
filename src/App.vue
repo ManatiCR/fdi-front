@@ -226,7 +226,7 @@ li {
   }
 }
 
-.btn--fill-highlight2 {
+.btn--border-highlight2 {
   border: 4px solid $highlight2;
   color: $text;
   &:hover {
@@ -235,7 +235,7 @@ li {
   }
 }
 
-.btn--border-highlight2 {
+.btn--fill-highlight2 {
   color: #fff;
   background: $highlight2;
   &:hover {
@@ -281,7 +281,7 @@ li {
 
 .site-header-title {
   display: inline-block;
-  padding: 130px 15px 20px 15px;
+  padding: 85px 15px 20px 15px;
   text-shadow: 3px 3px 5px $text;
   margin: 0;
   color: #fff;

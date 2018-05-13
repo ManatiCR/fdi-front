@@ -148,7 +148,7 @@
     <div v-else class="contacto-form__successful-message">
       <p>
         Tu mensaje ha sido enviado. Pronto serás contactado por un miembro del Frente por los
-        derechos igualitarios.
+        Derechos Igualitarios.
       </p>
       <router-link
         class="btn--small btn btn--fill-highlight3 btn--arrow resources__see-all"
@@ -164,13 +164,12 @@
     ></div>
     <div v-if="errorMessage" class="contacto-form__error-message">
       <p>
-        Se ha producido un error y el mensaje no pudo ser enviado. Por favor intenta de nuevo.
+        Se ha producido un error y el mensaje no pudo ser enviado. Por favor intentá de nuevo.
       </p>
       <button
         @click="errorMessage = !errorMessage"
         class="btn--small btn btn--fill-highlight3 btn--arrow contacto-form__btn"
-        type="submit"
-      >
+        type="submit">
         Aceptar
       </button>
     </div>

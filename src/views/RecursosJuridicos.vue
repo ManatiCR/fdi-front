@@ -1,5 +1,6 @@
 <template>
   <section class="view-resources-page">
+    <content-block id="recursos"></content-block>
     <div class="resources-page">
       <h3 class="resources-page__title">Recursos Jurídicos</h3>
       <ul class="resources-page__list">
@@ -36,7 +37,7 @@
               class="resources-page__btn btn btn--small btn--fill-highlight3 btn--arrow"
               target="_blank"
             >
-              Descargar
+              Ver recurso
             </a>
           </div>
         </li>
@@ -47,6 +48,7 @@
 
 <script>
 import gql from 'graphql-tag';
+import ContentBlock from '../components/ContentBlock.vue';
 
 const query = gql`query {
   nodeQuery(limit: 9999,
@@ -92,6 +94,9 @@ const query = gql`query {
 
 export default {
   name: 'resources-page',
+  components: {
+    ContentBlock,
+  },
   apollo: {
     nodeQuery() {
       return {
