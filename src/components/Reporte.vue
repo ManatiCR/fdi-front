@@ -47,6 +47,13 @@
           </button>
         </div>
         <div v-if="formStep === 2" class="create-report__step create-report__step-2">
+          <div class="create-report__step-2-search">
+            <input type="text" placeholder="Buscar un lugar" v-model="searchText">
+            <button class="btn btn--small btn--fill-highlight1" @click="searchPlace()">
+              Buscar
+            </button>
+            <p v-if="noSearchResults">No se encontraron resultados</p>
+          </div>
           <div class="create-report__step-2-content">
             <gmap-map
             ref="map"
@@ -62,11 +69,14 @@
               ></gmap-marker>
             </gmap-map>
             <ul>
-              <li @click="goToCurrentLocation()">Ubicación Actual</li>
+              <li @click="goToCurrentLocation()" :class="{active: selectedPlace === 0}">
+                {{ currentLocationText }}
+              </li>
               <li
                 v-for="(place, index) in places"
                 :key="index"
-                @click="goToPlace(place)"
+                @click="goToPlace(place, index)"
+                :class="{active: selectedPlace === index + 1}"
               >
                 {{ place.name }}
               </li>
@@ -99,10 +109,13 @@
               Sí quiero
             </button>
             <button
-              @click="gotoStep(6)"
+              @click="gotoStep(6, false)"
               class="btn create-report__btn-end btn--fill-background3">
               No, finalizar
             </button>
+            <p v-if="submittingReport" class="create-report__submitting">
+              Enviando reporte...
+            </p>
           </div>
         </div>
         <div v-if="formStep === 5" class="create-report__step create-report__step-5">
@@ -113,10 +126,19 @@
           <input type="text" placeholder="Nombre" v-model="personName">
           <input type="email" placeholder="Correo electrónico" v-model="personEmail">
           <input type="text" placeholder="Teléfono" v-model="personPhone">
-          <button @click="gotoStep(6)" class="btn btn--fill-highlight1">Enviar</button>
+          <div>
+            <button @click="gotoStep(6, true)" class="btn btn--fill-highlight1">Enviar</button>
+            <p v-if="submittingReport" class="create-report__submitting">
+              Enviando reporte...
+            </p>
+          </div>
+          <a href="#" @click.prevent="gotoStep(6, false)">No quiero</a>
         </div>
         <div v-if="formStep === 6" class="create-report__step create-report__step-6">
           <p>Guarda el siguiente código, en caso de que cambies de opinión:</p>
+          <p class="create-report__follow-up">
+            {{ followUpCode }}
+          </p>
           <router-link
             :to="{ name: 'home'}"
             class="btn btn--fill-highlight1">
@@ -229,7 +251,13 @@ export default {
       markerDraggable: false,
       placeName: '',
       locationStatus: 'unset',
+      currentLocationText: 'Obteniendo ubicación...',
+      submittingReport: false,
+      followUpCode: '',
+      selectedPlace: 0,
+      searchText: '',
       zoom: 7,
+      noSearchResults: false,
     };
   },
   apollo: {
@@ -243,42 +271,67 @@ export default {
     },
   },
   methods: {
-    gotoStep(step) {
-      if (step >= 0 && step <= 7) {
-        this.formStep = step;
-      }
-      if (step === 2) {
-        Vue.nextTick(() => {
-          this.$refs.map.$mapCreated.then(() => {
-            this.goToCurrentLocation(true);
+    gotoStep(step, args) {
+      switch (step) {
+        case 1:
+        case 3:
+        case 4:
+        case 5: {
+          this.formStep = step;
+          break;
+        }
+        case 2: {
+          this.formStep = step;
+          Vue.nextTick(() => {
+            this.$refs.map.$mapCreated.then(() => {
+              this.goToCurrentLocation(true);
+            });
           });
-        });
-      } else if (step === 6) {
-        console.log('Submit form');
-        const report = {
-          title: this.personName ? this.personName : 'Anónimo',
-          field_correo: this.personEmail,
-          body: this.reportText,
-          field_subcategoria_reporte: this.subcategories.map(item => parseInt(item.entityId, 10)),
-          field_categoria_reporte: this.categories.map(item => parseInt(item.entityId, 10)),
-          field_ubicacion: [this.latitude, this.longitude],
-          field_solicita_asesoria_o_apoyo: 'si', // TODO: Fix this.
-          field_lugar: this.placeName,
-        };
-        console.log(report);
-        this.$apollo.mutate({
-          mutation: reportMutation,
-          variables: {
-            input: report,
-          },
-        }).then((data) => {
-          console.log(data);
-        }).catch((error) => {
-          console.log(error);
-        });
+          break;
+        }
+        case 6: {
+          const asksSupport = args ? 'si' : 'no';
+          this.submittingReport = true;
+          const report = {
+            title: this.personName ? this.personName : 'Anónimo',
+            field_correo: this.personEmail,
+            body: this.reportText,
+            field_subcategoria_reporte: this.subcategories.map(item => parseInt(item.entityId, 10)),
+            field_categoria_reporte: this.categories.map(item => parseInt(item.entityId, 10)),
+            field_ubicacion: [this.latitude, this.longitude],
+            field_solicita_asesoria_o_apoyo: asksSupport,
+            field_lugar: this.placeName,
+          };
+          console.log(report);
+          this.$apollo.mutate({
+            mutation: reportMutation,
+            variables: {
+              input: report,
+            },
+          }).then((data) => {
+            console.log(data);
+            this.followUpCode = data.data.createReporte.entity.fieldCodigoDeSeguimient;
+            console.log(this.followUpCode);
+            if (!this.followUpCode) {
+              this.reportError = true;
+            }
+            this.submittingReport = false;
+            this.formStep = step;
+          }).catch((error) => {
+            console.log(error);
+            this.reportError = true;
+            this.submittingReport = false;
+          });
+          break;
+        }
+        default:
+          break;
       }
     },
-    goToCurrentLocation(getPlaces = false) {
+    goToCurrentLocation() {
+      this.selectedPlace = 0;
+      this.currentLocationText = 'Obteniendo ubicación...';
+      this.places = [];
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
           this.center = {
@@ -290,29 +343,35 @@ export default {
           this.locationStatus = 'acquired';
           this.markerDraggable = true;
           this.placeName = '';
-          if (getPlaces) {
-            /* global google */
-            const service = new google.maps.places.PlacesService(this.$refs.map.$mapObject);
-            service.nearbySearch({
-              location: this.center,
-              radius: 500,
-            }, (results, status) => {
-              console.log(status); // TODO: Use this to add extra error checking.
+          this.currentLocationText = 'Ubicación actual';
+          /* global google */
+          const service = new google.maps.places.PlacesService(this.$refs.map.$mapObject);
+          service.nearbySearch({
+            location: this.center,
+            radius: 500,
+          }, (results, status) => {
+            console.log(status); // TODO: Use this to add extra error checking.
+            if (results.length > 10) {
+              this.places = results.slice(0, 10);
+            } else {
               this.places = results;
-            });
-          }
+            }
+          });
         }, () => {
+          this.currentLocationText = 'No se puede obtener la ubicación actual';
           this.locationStatus = 'unavailable';
           this.center = defaultLocation;
           this.markerPosition = defaultLocation;
         });
       } else {
+        this.currentLocationText = 'No se puede obtener la ubicación actual';
         this.locationStatus = 'unavailable';
         this.center = defaultLocation;
         this.markerPosition = defaultLocation;
       }
     },
-    goToPlace(place) {
+    goToPlace(place, index) {
+      this.selectedPlace = index + 1;
       this.markerPosition = {
         lat: place.geometry.location.lat(),
         lng: place.geometry.location.lng(),
@@ -327,6 +386,33 @@ export default {
         lat: event.latLng.lat(),
         lng: event.latLng.lng(),
       };
+    },
+    searchPlace() {
+      if (this.searchText) {
+        /* global google */
+        const service = new google.maps.places.PlacesService(this.$refs.map.$mapObject);
+        const bounds = new google.maps.LatLngBounds(
+          new google.maps.LatLng(8, -86),
+          new google.maps.LatLng(11.25, -82.5),
+        );
+        const request = {
+          query: this.searchText,
+          bounds,
+        };
+        service.textSearch(request, (results, status) => {
+          if (status === 'OK') {
+            this.noSearchResults = false;
+            if (results.length > 10) {
+              this.places = results.slice(0, 10);
+            } else {
+              this.places = results;
+            }
+          }
+          if (status === 'ZERO_RESULTS') {
+            this.noSearchResults = true;
+          }
+        });
+      }
     },
   },
 };
@@ -441,6 +527,18 @@ export default {
   }
 }
 
+.create-report__step-2-search {
+  margin-bottom: 20px;
+  input[type="text"] {
+    font-size: 1.4rem;
+    margin-right: 5px;
+    padding: 8px;
+  }
+  p {
+    display: inline-block;
+    margin-left: 20px;
+  }
+}
 .create-report__step-2-content {
   margin-bottom: 20px;
   .vue-map-container {
@@ -448,12 +546,15 @@ export default {
     max-width: 100%;
     height: auto;
     width: 800px;
+    @media (min-width: 1000px) {
+      flex: 0 0 500px;
+    }
   }
   ul {
     margin: 0 auto;
     max-width: 500px;
     background: #fff;
-    padding: 10px 20px;
+    padding: 0;
     list-style: none;
     height: 300px;
     overflow: hidden;
@@ -462,14 +563,20 @@ export default {
     border: 1px solid #e0e0e0;
     @media (min-width: 1000px) {
       margin-left: 20px;
+      flex: 1 1 auto;
     }
   }
   li {
-    padding: 10px;
+    padding: 12px 15px;
     border-bottom: 1px solid lightgray;
+    margin: 0;
     cursor: pointer;
     &:last-child {
       border: none;
+    }
+    &.active {
+      background-color: $highlight3;
+      color: #fff;
     }
   }
   @media (min-width: 1000px) {
@@ -497,6 +604,14 @@ export default {
     margin: 0 0 20px 0;
     line-height: 1.5;
     font-size: 1.6rem;
+  }
+}
+
+.create-report__step-4,
+.create-report__step-5 {
+  .create-report__submitting {
+    display: inline-block;
+    margin-left: 20px;
   }
 }
 
@@ -532,7 +647,19 @@ export default {
     }
   }
   .btn {
+    display: inline-block;
     max-width: 180px;
+  }
+}
+
+.create-report__step-6 {
+  .create-report__follow-up {
+    background-color: #fff;
+    border: 1px solid lightgray;
+    font-size: 4rem;
+    max-width: 300px;
+    padding: 30px 0;
+    text-align: center;
   }
 }
 
