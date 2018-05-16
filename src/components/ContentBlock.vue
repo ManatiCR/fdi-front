@@ -225,7 +225,7 @@ export default {
         },
         {
           componentId: 'recursos_juridicos',
-          classes: 'btn--large btn--border-highlight1',
+          classes: 'btn--large btn--arrow btn--fill-highlight1',
           label: 'Compendio Jurídico sobre DDHH',
           url: 'http://biblioteca.fdi.cr',
           external: true,
@@ -592,31 +592,31 @@ export default {
 // Component recursos_juridicos
 .content-block__recursos-juridicos {
   margin-bottom: 20px;
-  padding: 20px;
+  padding: 40px;
   background-color: #fff;
-  text-align: center;
   @media (min-width: 768px) {
     max-width: 885px;
     margin-bottom: 0;
   }
   h1 {
     font-size: 2rem;
-    text-align: left;
     margin: 0 0 40px 0;
   }
   .content-block__body {
     margin-bottom: 40px;
-    padding: 0 20px;
     p {
       padding: 0;
       line-height: 1.5;
-      text-align: left;
       margin: 0 0 10px 0;
       font-size: 1.4rem;
     }
   }
   .content-block__btn {
     margin: 0 0 20px 0;
+    padding: 15px 20px;
+    &:after {
+      padding: 5px;
+    }
   }
 }
 
