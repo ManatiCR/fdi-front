@@ -9,7 +9,7 @@
       <model :limit="2"></model>
     </section>
     <section class="resources-directory-wrapper">
-      <resources></resources>
+      <content-block id="recursos_juridicos"></content-block>
       <directory></directory>
     </section>
   </div>
@@ -18,12 +18,10 @@
 <script>
 import Directory from '../components/Directory.vue';
 import Model from '../components/Model.vue';
-import Resources from '../components/Resources.vue';
 import ContentBlock from '../components/ContentBlock.vue';
 
 export default {
   components: {
-    Resources,
     Model,
     Directory,
     ContentBlock,
@@ -56,10 +54,8 @@ export default {
     padding: 40px;
     justify-content: center;
   }
-  .resources {
-    margin-bottom: 20px;
+  .content-block__recursos-juridicos {
     @media (min-width: 768px) {
-      margin-bottom: 0;
       flex: 2;
     }
   }
