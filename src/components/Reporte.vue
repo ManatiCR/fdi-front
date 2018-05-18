@@ -521,24 +521,6 @@ export default {
 <style lang="scss">
 @import "../assets/scss/variables";
 
-// TODO: Move this code (reporte rule) to ContentBlock component.
-.reporte {
-  text-align: left;
-  margin-bottom: 40px;
-  h1 {
-    font-size: 2.4rem;
-    display: inline-block;
-    margin: 0 0 40px 0;
-    padding-right: 50px;
-    border-right: solid 5px $highlight2;
-    color: $highlight1;
-   }
-   p {
-     font-size: 1.8rem;
-   }
-}
-///////////////////
-
 .create-report {
   padding: 80px 20px;
   .btn {
