@@ -588,7 +588,6 @@ export default {
   }
 }
 // Component home espacios -- end
-
 // Component recursos_juridicos
 .content-block__recursos-juridicos {
   margin-bottom: 20px;
@@ -625,4 +624,21 @@ export default {
 }
 // Component recursos_juridicos -- end
 
+// Component reporte
+.content-block__reporte {
+  text-align: left;
+  margin-bottom: 40px;
+  h1 {
+    font-size: 2.4rem;
+    display: inline-block;
+    margin: 0 0 40px 0;
+    padding-right: 50px;
+    border-right: solid 5px $highlight2;
+    color: $highlight1;
+   }
+   p {
+     font-size: 1.8rem;
+   }
+}
+// Component reporte -- end
 </style>
