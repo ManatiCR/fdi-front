@@ -15,31 +15,35 @@
           </button>
         </div>
         <div v-if="formStep === 1" class="create-report__step create-report__step-1">
-          <multiselect
-          placeholder="Seleccione una categoría"
-          select-label="Agregar"
-          deselectLabel="Eliminar"
-          selectedLabel="Seleccionada"
-          v-model="categories"
-          :options="availableCategories.categories.entities"
-          track-by="entityId"
-          label="entityLabel"
-          :multiple="true"
-          :searchable="true"
-          ></multiselect>
-          <multiselect
-          placeholder="Seleccione una subcategoría"
-          select-label="Agregar"
-          deselectLabel="Eliminar"
-          selectedLabel="Seleccionada"
-          v-if="categories.length"
-          v-model="subcategories"
-          :options="availableCategories.subcategories.entities"
-          track-by="entityId"
-          label="entityLabel"
-          :multiple="true"
-          :searchable="true"
-          ></multiselect>
+          <div @click="categoryError = false">
+            <multiselect
+            placeholder="Seleccione una categoría"
+            select-label="Agregar"
+            deselectLabel="Eliminar"
+            selectedLabel="Seleccionada"
+            v-model="categories"
+            :options="availableCategories.categories.entities"
+            track-by="entityId"
+            label="entityLabel"
+            :multiple="true"
+            :searchable="true"
+            ></multiselect>
+            <p class="errorValidate" v-if="categoryError">{{completeFieldMessage}}</p>
+            <multiselect
+            class="create-report__step-1-subcategory-select"
+            placeholder="Seleccione una subcategoría"
+            select-label="Agregar"
+            deselectLabel="Eliminar"
+            selectedLabel="Seleccionada"
+            v-if="categories.length"
+            v-model="subcategories"
+            :options="availableCategories.subcategories.entities"
+            track-by="entityId"
+            label="entityLabel"
+            :multiple="true"
+            :searchable="true"
+            ></multiselect>
+          </div>
           <button
             @click="gotoStep(2)"
             class="btn btn--fill-highlight1 btn--arrow">
@@ -48,7 +52,11 @@
         </div>
         <div v-if="formStep === 2" class="create-report__step create-report__step-2">
           <div class="create-report__step-2-search">
-            <input type="text" placeholder="Buscar un lugar" v-model="searchText">
+            <input
+              class="create-report__step-2-search-input"
+              type="text" placeholder="Buscar un lugar"
+              v-model="searchText"
+            >
             <button class="btn btn--small btn--fill-highlight1" @click="searchPlace()">
               Buscar
             </button>
@@ -90,7 +98,12 @@
           </button>
         </div>
         <div v-if="formStep === 3" class="create-report__step create-report__step-3">
-          <textarea v-model="reportText"></textarea>
+          <textarea
+          v-bind:class="{ reportTextError: reportTextError }"
+            @click="reportTextError = false"
+            v-model="reportText">
+          </textarea>
+          <p class="errorValidate" v-if="reportTextError">{{completeFieldMessage}}</p>
           <button
             @click="gotoStep(4)"
             class="btn btn--fill-highlight1 btn--arrow">
@@ -114,7 +127,7 @@
               No, finalizar
             </button>
             <p v-if="submittingReport" class="create-report__submitting">
-              Enviando reporte...
+              Enviando reporte
             </p>
           </div>
         </div>
@@ -123,19 +136,31 @@
             El FDI te puede brindar el apoyo y asesoría necesaria para realizar una denuncia formal.
             Este acompañamiento sería durante todo el proceso, en caso de que decidás continuar.
           </p>
-          <input type="text" placeholder="Nombre" v-model="personName">
-          <input type="email" placeholder="Correo electrónico" v-model="personEmail">
-          <input type="text" placeholder="Teléfono" v-model="personPhone">
+          <input @click="personNameError = false"
+           v-bind:class="{ personNameError: personNameError }"
+           type="text" placeholder="Nombre" v-model="personName">
+           <p class="errorValidate" v-if="personNameError">{{completeFieldMessage}}</p>
+
+          <input @click="personEmailError = false, personInvalidEmail = false"
+          v-bind:class="{ personEmailError: personEmailError }"
+          type="email" placeholder="Correo electrónico" v-model="personEmail">
+          <p class="errorValidate" v-if="personEmailError">{{completeFieldMessage}}</p>
+          <p class="errorValidate" v-if="personInvalidEmail">Ingresá un correo válido</p>
+
+          <input  type="text" placeholder="Teléfono" v-model="personPhone">
+
+          <button @click="gotoStep(6, true)" class="btn btn--fill-highlight1">Enviar</button>
           <div>
-            <button @click="gotoStep(6, true)" class="btn btn--fill-highlight1">Enviar</button>
             <p v-if="submittingReport" class="create-report__submitting">
-              Enviando reporte...
+              Enviando reporte
             </p>
           </div>
           <a href="#" @click.prevent="gotoStep(6, false)">No quiero</a>
         </div>
         <div v-if="formStep === 6" class="create-report__step create-report__step-6">
-          <p>Guarda el siguiente código, en caso de que cambies de opinión:</p>
+          <p>
+            Guardá este código, es el número de identificación de tu reporte.
+            Lo necesitarás en caso de que necesités contactarnos.</p>
           <p class="create-report__follow-up">
             {{ followUpCode }}
           </p>
@@ -146,6 +171,22 @@
           </router-link>
         </div>
       </div>
+    </div>
+    <div
+      @click="errorMessage = !errorMessage"
+      v-if="errorMessage"
+      class="contacto-form__error-message-overlay">
+    </div>
+    <div v-if="errorMessage" class="contacto-form__error-message">
+      <p>
+        Se ha producido un error y el reporte no pudo ser enviado. Por favor intentá de nuevo.
+      </p>
+      <button
+        @click="errorMessage = !errorMessage"
+        class="btn--small btn btn--fill-highlight3 btn--arrow contacto-form__btn"
+        type="submit">
+        Aceptar
+      </button>
     </div>
   </div>
 </template>
@@ -258,6 +299,13 @@ export default {
       searchText: '',
       zoom: 7,
       noSearchResults: false,
+      completeFieldMessage: 'Completá este campo para continuar.',
+      errorMessage: false,
+      categoryError: false,
+      reportTextError: false,
+      personEmailError: false,
+      personInvalidEmail: false,
+      personNameError: false,
     };
   },
   apollo: {
@@ -271,57 +319,110 @@ export default {
     },
   },
   methods: {
+    validateFields(step) {
+      switch (step) {
+        case 2: {
+          if (this.categories.length) {
+            return true;
+          }
+          this.categoryError = true;
+          return false;
+        }
+        case 4: {
+          if (this.reportText === '') {
+            this.reportTextError = true;
+            return false;
+          }
+          return true;
+        }
+        case 6: {
+          if (this.personName === '' || this.personEmail === '') {
+            if (this.personName === '') {
+              this.personNameError = true;
+            }
+            if (this.personEmail === '') {
+              this.personEmailError = true;
+            }
+            return false;
+          } else if (
+            this.personEmail.match(/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/)) {
+            return true;
+          }
+          this.personInvalidEmail = true;
+          return false;
+        }
+        default:
+          break;
+      }
+      return false;
+    },
     gotoStep(step, args) {
       switch (step) {
         case 1:
         case 3:
-        case 4:
         case 5: {
           this.formStep = step;
           break;
         }
         case 2: {
-          this.formStep = step;
-          Vue.nextTick(() => {
-            this.$refs.map.$mapCreated.then(() => {
-              this.goToCurrentLocation(true);
+          if (this.validateFields(step)) {
+            this.formStep = step;
+            Vue.nextTick(() => {
+              this.$refs.map.$mapCreated.then(() => {
+                this.goToCurrentLocation(true);
+              });
             });
-          });
+          }
+          break;
+        }
+        case 4: {
+          if (this.validateFields(step)) {
+            this.formStep = step;
+          }
           break;
         }
         case 6: {
-          const asksSupport = args ? 'si' : 'no';
-          this.submittingReport = true;
-          const report = {
-            title: this.personName ? this.personName : 'Anónimo',
-            field_correo: this.personEmail,
-            body: this.reportText,
-            field_subcategoria_reporte: this.subcategories.map(item => parseInt(item.entityId, 10)),
-            field_categoria_reporte: this.categories.map(item => parseInt(item.entityId, 10)),
-            field_ubicacion: [this.latitude, this.longitude],
-            field_solicita_asesoria_o_apoyo: asksSupport,
-            field_lugar: this.placeName,
-          };
-          console.log(report);
-          this.$apollo.mutate({
-            mutation: reportMutation,
-            variables: {
-              input: report,
-            },
-          }).then((data) => {
-            console.log(data);
-            this.followUpCode = data.data.createReporte.entity.fieldCodigoDeSeguimient;
-            console.log(this.followUpCode);
-            if (!this.followUpCode) {
+          let sendReport = true;
+          if (args) {
+            sendReport = this.validateFields(step);
+          }
+
+          if (sendReport) {
+            const asksSupport = args ? 'si' : 'no';
+            this.submittingReport = true;
+            const report = {
+              title: this.personName ? this.personName : 'Anónimo',
+              field_correo: this.personEmail,
+              body: this.reportText,
+              field_subcategoria_reporte:
+                this.subcategories.map(item => parseInt(item.entityId, 10)),
+              field_categoria_reporte: this.categories.map(item => parseInt(item.entityId, 10)),
+              field_ubicacion: [this.markerPosition.lat, this.markerPosition.lng],
+              field_solicita_asesoria_o_apoyo: asksSupport,
+              field_lugar: this.placeName,
+            };
+            console.log(report);
+            this.$apollo.mutate({
+              mutation: reportMutation,
+              variables: {
+                input: report,
+              },
+            }).then((data) => {
+              console.log(data);
+              this.followUpCode = data.data.createReporte.entity.fieldCodigoDeSeguimient;
+              console.log(this.followUpCode);
+              if (!this.followUpCode) {
+                this.reportError = true;
+              }
+              this.submittingReport = false;
+              this.formStep = step;
+            }).catch((error) => {
+              this.errorMessage = true;
+              console.log(error);
               this.reportError = true;
-            }
-            this.submittingReport = false;
-            this.formStep = step;
-          }).catch((error) => {
-            console.log(error);
-            this.reportError = true;
-            this.submittingReport = false;
-          });
+              this.submittingReport = false;
+            });
+          }
           break;
         }
         default:
@@ -421,24 +522,6 @@ export default {
 <style lang="scss">
 @import "../assets/scss/variables";
 
-// TODO: Move this code (reporte rule) to ContentBlock component.
-.reporte {
-  text-align: left;
-  margin-bottom: 40px;
-  h1 {
-    font-size: 2.4rem;
-    display: inline-block;
-    margin: 0 0 40px 0;
-    padding-right: 50px;
-    border-right: solid 5px $highlight2;
-    color: $highlight1;
-   }
-   p {
-     font-size: 1.8rem;
-   }
-}
-///////////////////
-
 .create-report {
   padding: 80px 20px;
   .btn {
@@ -494,16 +577,25 @@ export default {
 .multiselect {
   max-width: 320px;
   width: 100%;
-  margin-bottom: 40px;
+  border: solid 1px #e0e0e0;
   @media (min-width: 1000px) {
     width: 300px;
   }
+}
+
+.create-report__step-1-subcategory-select {
+  margin-top: 40px;
 }
 
 .multiselect__tag,
 .multiselect__tag-icon {
   background: $highlight3;
   border-radius: 2px;
+}
+
+.multiselect__tags {
+  border-radius: 0;
+  border: none;
 }
 
 .multiselect__tag-icon:focus,
@@ -517,7 +609,12 @@ export default {
     background: $highlight3;
   }
 }
+
 // Multiselect --end
+
+.create-report__step-1 .btn {
+  margin-top: 40px;
+}
 
 .create-report__step-0 {
   text-align: center;
@@ -539,6 +636,15 @@ export default {
     margin-left: 20px;
   }
 }
+
+.create-report__step-2-search-input {
+  border: solid 1px #e0e0e0;
+  &::placeholder {
+    font-style: italic;
+    color: darken(#e0e0e0, 20%);
+  }
+}
+
 .create-report__step-2-content {
   margin-bottom: 20px;
   .vue-map-container {
@@ -586,14 +692,17 @@ export default {
 
 .create-report__step-3 {
   textarea {
+    border: 1px solid #e8e8e8;
     max-width: 100%;
     width: 100%;
     min-height: 200px;
-    margin-bottom: 20px;
     color: $text;
     font-family: $opensans;
     line-height: 1.5;
     font-size: 1.6rem;
+  }
+  .btn {
+    margin-top: 40px;
   }
 }
 
@@ -611,8 +720,14 @@ export default {
 .create-report__step-5 {
   .create-report__submitting {
     display: inline-block;
-    margin-left: 20px;
   }
+}
+
+.create-report__submitting {
+  background: url(.././assets/images/loading.gif) no-repeat;
+  background-size: 50px;
+  padding-right: 50px;
+  background-position: right -15px;
 }
 
 .create-report__step-4-btn-wrapper {
@@ -641,14 +756,15 @@ export default {
     display: block;
     max-width: 360px;
     width: 100%;
-    margin: 0 auto 20px auto;
+    margin: 20px auto 0 auto;
     @media (min-width: 500px) {
-      margin: 0 0 20px 0;
+      margin: 30px 0 0 0;
     }
   }
   .btn {
     display: inline-block;
     max-width: 180px;
+    margin-bottom: 20px;
   }
 }
 
@@ -661,6 +777,22 @@ export default {
     padding: 30px 0;
     text-align: center;
   }
+}
+
+.categoryError,
+textarea.reportTextError,
+.personEmailError,
+input.personNameError {
+  border: 1px solid $highlight1;
+  box-shadow: 0 0 1px $highlight1;
+}
+
+p.errorValidate {
+  color: $highlight1;
+  position: absolute;
+  font-size: 1.4rem;
+  margin: 0;
+  padding: 0;
 }
 
 </style>
