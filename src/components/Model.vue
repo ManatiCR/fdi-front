@@ -24,14 +24,11 @@
           <div
             v-if="entity.body" class="model__body" v-html="entity.body.value"></div>
         </div>
-        <a
-          v-if="entity.fieldMachote"
-          :href="entity.fieldMachote.entity.url"
-          download
+        <router-link
           class="model__btn btn btn--fill-highlight3 btn--arrow"
-        >
-          Descargar
-        </a>
+          :to="'/recursos/machote/' + entity.entityId">
+          Ver más
+        </router-link>
       </li>
     </ul>
   </section>
@@ -59,6 +56,7 @@ const query = gql`query($limit: Int!) {
       ]
     }) {
     entities {
+      entityId
       entityLabel
       entityChanged
       ... on NodeMachote {
