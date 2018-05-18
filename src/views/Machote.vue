@@ -1,7 +1,11 @@
 <template>
   <section class="machote">
     <div class="machote__go-back-btn-wrapper">
-      <a class="machote__go-back-btn" @click="$router.go(-1)">Volver</a>
+      <router-link
+        class="machote__go-back-btn"
+        :to="{ name: 'recursos machotes'}">
+        Volver
+      </router-link>
     </div>
     <div class="machote__content-wrapper">
       <div class="machote__content-left-column">
@@ -244,6 +248,8 @@ export default {
   display: block;
   padding: 10px;
   margin: 0 auto;
+  text-decoration: none;
+  font-size: 1.6rem;
   &:before {
     content: "";
     margin-left: 10px;
