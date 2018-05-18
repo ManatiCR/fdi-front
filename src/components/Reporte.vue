@@ -99,6 +99,7 @@
         </div>
         <div v-if="formStep === 3" class="create-report__step create-report__step-3">
           <textarea
+          v-bind:class="{ reportTextError: reportTextError }"
             @click="reportTextError = false"
             v-model="reportText">
           </textarea>
