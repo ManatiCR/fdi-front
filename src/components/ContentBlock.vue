@@ -18,7 +18,8 @@
         <a
           v-if="renderLink"
           :class="'btn content-block__btn ' +  blockLink.classes"
-          :href="blockLink.url">
+          :href="blockLink.url"
+          target="_blank">
           {{ blockLink.label }}
         </a>
         <router-link v-if="renderRouterLink"
@@ -29,6 +30,9 @@
           class="btn content-block__btn btn--large btn--fill-highlight2"
           :to="{ name: 'contacto', query: { reason: 'recomendar_espacio' }}">Recomendar lugar
         </router-link>
+        <p v-if="renderHelpText" class="content-block__help-text">
+          (Este enlace te llevará a la página del Frente por los Derechos Igualitarios)
+        </p>
       </div>
     </div>
   </section>
@@ -151,6 +155,10 @@ export default {
           if (this.id === 'espacios') {
             this.renderLinkSuggestSpace = true;
           }
+
+          if (this.id === 'recursos_juridicos') {
+            this.renderHelpText = true;
+          }
         },
       };
     },
@@ -215,6 +223,13 @@ export default {
           url: 'espacios',
           external: false,
         },
+        {
+          componentId: 'recursos_juridicos',
+          classes: 'btn--large btn--arrow btn--fill-highlight1',
+          label: 'Compendio Jurídico sobre DDHH',
+          url: 'http://biblioteca.fdi.cr',
+          external: true,
+        },
       ],
       componentTitle: [
         {
@@ -242,6 +257,10 @@ export default {
           position: 'body',
         },
         {
+          componentId: 'recursos_juridicos',
+          position: 'body',
+        },
+        {
           componentId: 'contacto',
           position: 'body',
         },
@@ -251,6 +270,7 @@ export default {
         },
       ],
       renderLinkSuggestSpace: false,
+      renderHelpText: false,
       blockLink: '',
       imageSmall: '',
       imageLarge: '',
@@ -568,6 +588,41 @@ export default {
   }
 }
 // Component home espacios -- end
+// Component recursos_juridicos
+.content-block__recursos-juridicos {
+  margin-bottom: 20px;
+  padding: 40px;
+  background-color: #fff;
+  @media (min-width: 768px) {
+    max-width: 885px;
+    margin-bottom: 0;
+  }
+  h1 {
+    font-size: 2rem;
+    margin: 0 0 40px 0;
+  }
+  .content-block__body {
+    margin-bottom: 40px;
+    p {
+      padding: 0;
+      line-height: 1.5;
+      margin: 0 0 10px 0;
+      font-size: 1.4rem;
+    }
+  }
+  .content-block__btn {
+    margin: 0 0 20px 0;
+    padding: 15px 20px;
+    &:after {
+      padding: 5px;
+    }
+  }
+}
+
+.content-block__help-text {
+  margin: 0;
+}
+// Component recursos_juridicos -- end
 
 // Component reporte
 .content-block__reporte {
