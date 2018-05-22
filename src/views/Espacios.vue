@@ -4,7 +4,11 @@
     <div class="spaces-wrapper">
       <ul class="spaces__list">
         <li class="spaces__item" v-for="space in spaces" :key="space.entityLabel">
-          <a v-if="space.fieldEnlace" class="spaces__link" :href='space.fieldEnlace.url.path'>
+          <a
+            v-if="space.fieldEnlace"
+            class="spaces__link"
+            target="_blank"
+            :href='space.fieldEnlace.url.path'>
             <img
               v-if="space.fieldImagen"
               :width="(space.fieldImagen.derivative.width/2)"

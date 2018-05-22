@@ -10,6 +10,7 @@
         <a
           v-if="entity.fieldEnlace"
           class="spaces-home__link"
+          target="_blank"
           :href='entity.fieldEnlace.url.path'
         >
           <img
