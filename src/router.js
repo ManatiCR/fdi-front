@@ -47,12 +47,12 @@ export default new Router({
       component: Recursos,
     },
     {
-      path: '/recursos/machotes',
+      path: '/recursos/recursos-de-denuncia',
       name: 'recursos machotes',
       component: Machotes,
     },
     {
-      path: '/recursos/machote/:id',
+      path: '/recursos/recursos-de-denuncia/:id',
       name: 'machote',
       component: Machote,
     },
