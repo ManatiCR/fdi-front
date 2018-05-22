@@ -13,6 +13,14 @@ import store from './store';
 import config from './config';
 import './registerServiceWorker';
 
+
+/* eslint no-restricted-globals: 0 */
+const { redirect } = sessionStorage;
+delete sessionStorage.redirect;
+if (redirect && redirect !== location.href) {
+  history.replaceState(null, null, redirect);
+}
+
 Vue.config.productionTip = false;
 
 const batchHttpLink = new BatchHttpLink({
