@@ -26,7 +26,7 @@
         </div>
         <router-link
           class="model__btn btn btn--fill-highlight3 btn--arrow"
-          :to="'/recursos/machote/' + entity.entityId">
+          :to="'/recursos/recursos-de-denuncia/' + entity.entityId">
           Ver más
         </router-link>
       </li>

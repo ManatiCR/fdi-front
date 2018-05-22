@@ -2,7 +2,7 @@
   <div class="view-recursos">
     <content-block id="recursos"></content-block>
     <section class="resources-model-wrapper">
-      <h3 class="resources__model-title">Machotes</h3>
+      <h3 class="resources__model-title">Recursos de denuncia</h3>
       <router-link class="resources-model__see-all" :to="{ name: 'recursos machotes'}">
         Ver todos
       </router-link>
