@@ -9,7 +9,7 @@
         <div v-if="formStep === 0" class="create-report__step-0">
           <content-block class="reporte" id="reporte"></content-block>
           <button
-            @click="gotoStep(1), showStepsIndicator = true"
+            @click="gotoStep(1)"
             class="btn create-report__btn btn--xlarge btn--border-highlight1">
             Reportá
           </button>
@@ -179,50 +179,75 @@
           'create-report__indicator-item-visited': stepsDone[1]}"
           class="create-report__indicator-item">
           <button
+            v-if="formStep > 1 "
             @click="gotoStep(1)"
             class="create-report__indicator-btn">
             1
           </button>
+          <span v-if="formStep <= 1"
+            class="create-report__indicator-btn create-report__indicator-span">
+            1
+          </span>
         </li>
         <li
           :class="{'create-report__indicator-item-active': indicatorActive === 2,
           'create-report__indicator-item-visited': stepsDone[2]}"
           class="create-report__indicator-item">
           <button
+            v-if="formStep > 2 "
             @click="gotoStep(2)"
             class="create-report__indicator-btn">
             2
           </button>
+          <span v-if="formStep <= 2"
+            class="create-report__indicator-btn create-report__indicator-span">
+            2
+          </span>
         </li>
         <li
           :class="{'create-report__indicator-item-active': indicatorActive === 3,
           'create-report__indicator-item-visited': stepsDone[3]}"
           class="create-report__indicator-item">
           <button
+            v-if="formStep > 3 "
             @click="gotoStep(3)"
             class="create-report__indicator-btn">
             3
           </button>
+          <span v-if="formStep <= 3"
+            class="create-report__indicator-btn create-report__indicator-span">
+            3
+          </span>
         </li>
         <li
           :class="{'create-report__indicator-item-active': indicatorActive === 4,
           'create-report__indicator-item-visited': stepsDone[4]}"
           class="create-report__indicator-item">
           <button
+            v-if="formStep > 4 "
             @click="gotoStep(4)"
             class="create-report__indicator-btn">
             4
           </button>
+          <span v-if="formStep <= 4"
+            class="create-report__indicator-btn create-report__indicator-span">
+            4
+          </span>
         </li>
         <li
           :class="{'create-report__indicator-item-active': indicatorActive === 5,
           'create-report__indicator-item-visited': stepsDone[5]}"
           class="create-report__indicator-item">
           <button
+            v-if="formStep > 5 "
             @click="gotoStep(5)"
             class="create-report__indicator-btn">
             5
           </button>
+          <span v-if="formStep <= 5"
+            class="create-report__indicator-btn create-report__indicator-span">
+            5
+          </span>
         </li>
       </ul>
     </div>
@@ -420,6 +445,7 @@ export default {
       return false;
     },
     gotoStep(step, args) {
+      this.showStepsIndicator = true;
       switch (step) {
         case 1:
         case 3:
@@ -901,6 +927,12 @@ p.errorValidate {
   @media (min-width: 1000px) {
     margin-right: 20px;
   }
+}
+
+.create-report__indicator-span {
+  text-align: center;
+  display: block;
+  padding-top: 9px;
 }
 
 .create-report__indicator-btn {
