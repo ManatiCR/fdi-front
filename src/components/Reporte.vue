@@ -172,6 +172,85 @@
         </div>
       </div>
     </div>
+    <div v-if="showStepsIndicator" class="create-report__indicator-wrapper">
+      <ul class="create-report__indicator-list">
+        <li
+          :class="{'create-report__indicator-item-active': indicatorActive === 1,
+          'create-report__indicator-item-visited': stepsDone[1]}"
+          class="create-report__indicator-item">
+          <button
+            v-if="formStep > 1 "
+            @click="gotoStep(1)"
+            class="create-report__indicator-btn">
+            1
+          </button>
+          <span v-if="formStep <= 1"
+            class="create-report__indicator-btn create-report__indicator-span">
+            1
+          </span>
+        </li>
+        <li
+          :class="{'create-report__indicator-item-active': indicatorActive === 2,
+          'create-report__indicator-item-visited': stepsDone[2]}"
+          class="create-report__indicator-item">
+          <button
+            v-if="formStep > 2 "
+            @click="gotoStep(2)"
+            class="create-report__indicator-btn">
+            2
+          </button>
+          <span v-if="formStep <= 2"
+            class="create-report__indicator-btn create-report__indicator-span">
+            2
+          </span>
+        </li>
+        <li
+          :class="{'create-report__indicator-item-active': indicatorActive === 3,
+          'create-report__indicator-item-visited': stepsDone[3]}"
+          class="create-report__indicator-item">
+          <button
+            v-if="formStep > 3 "
+            @click="gotoStep(3)"
+            class="create-report__indicator-btn">
+            3
+          </button>
+          <span v-if="formStep <= 3"
+            class="create-report__indicator-btn create-report__indicator-span">
+            3
+          </span>
+        </li>
+        <li
+          :class="{'create-report__indicator-item-active': indicatorActive === 4,
+          'create-report__indicator-item-visited': stepsDone[4]}"
+          class="create-report__indicator-item">
+          <button
+            v-if="formStep > 4 "
+            @click="gotoStep(4)"
+            class="create-report__indicator-btn">
+            4
+          </button>
+          <span v-if="formStep <= 4"
+            class="create-report__indicator-btn create-report__indicator-span">
+            4
+          </span>
+        </li>
+        <li
+          :class="{'create-report__indicator-item-active': indicatorActive === 5,
+          'create-report__indicator-item-visited': stepsDone[5]}"
+          class="create-report__indicator-item">
+          <button
+            v-if="formStep > 5 "
+            @click="gotoStep(5)"
+            class="create-report__indicator-btn">
+            5
+          </button>
+          <span v-if="formStep <= 5"
+            class="create-report__indicator-btn create-report__indicator-span">
+            5
+          </span>
+        </li>
+      </ul>
+    </div>
     <div
       @click="errorMessage = !errorMessage"
       v-if="errorMessage"
@@ -306,6 +385,15 @@ export default {
       personEmailError: false,
       personInvalidEmail: false,
       personNameError: false,
+      showStepsIndicator: false,
+      indicatorActive: 1,
+      stepsDone: {
+        1: false,
+        2: false,
+        3: false,
+        4: false,
+        5: false,
+      },
     };
   },
   apollo: {
@@ -357,15 +445,20 @@ export default {
       return false;
     },
     gotoStep(step, args) {
+      this.showStepsIndicator = true;
       switch (step) {
         case 1:
         case 3:
         case 5: {
+          this.indicatorActive = step;
+          this.stepsDone[step - 1] = true;
           this.formStep = step;
           break;
         }
         case 2: {
           if (this.validateFields(step)) {
+            this.indicatorActive = step;
+            this.stepsDone[step - 1] = true;
             this.formStep = step;
             Vue.nextTick(() => {
               this.$refs.map.$mapCreated.then(() => {
@@ -377,6 +470,8 @@ export default {
         }
         case 4: {
           if (this.validateFields(step)) {
+            this.indicatorActive = step;
+            this.stepsDone[step - 1] = true;
             this.formStep = step;
           }
           break;
@@ -388,6 +483,8 @@ export default {
           }
 
           if (sendReport) {
+            this.indicatorActive = step - 1;
+            this.stepsDone[step - 2] = true;
             const asksSupport = args ? 'si' : 'no';
             this.submittingReport = true;
             const report = {
@@ -793,6 +890,76 @@ p.errorValidate {
   font-size: 1.4rem;
   margin: 0;
   padding: 0;
+}
+
+.create-report__indicator-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #b1cde5;
+  padding: 10px 0;
+  @media (min-width: 1000px) {
+    padding-left: 275px;
+  }
+}
+
+.create-report__indicator-list {
+  list-style: none;
+  margin: 0 auto;
+  display: flex;
+  padding: 0 20px;
+  justify-content: space-between;
+  max-width: 500px;
+  @media (min-width: 1000px) {
+    justify-content: flex-start;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.create-report__indicator-item {
+  cursor: pointer;
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: all 0.5s ease;
+  @media (min-width: 1000px) {
+    margin-right: 20px;
+  }
+}
+
+.create-report__indicator-span {
+  text-align: center;
+  display: block;
+  padding-top: 9px;
+}
+
+.create-report__indicator-btn {
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  color: #315b71;
+  font-weight: 700;
+  font-size: 1.6rem;
+  background: none;
+  border: none;
+}
+
+.create-report__indicator-item-visited {
+  background-color: #1b2e38;
+  .create-report__indicator-btn {
+    color: #fff;
+  }
+}
+
+.create-report__indicator-item-active {
+  background-color: #1b2e38;
+  transition: all 0.5s ease;
+  .create-report__indicator-btn {
+    color: $highlight2;
+    transition: all 0.5s ease;
+  }
 }
 
 </style>
