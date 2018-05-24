@@ -95,7 +95,7 @@ export default {
   max-width: 400px;
   padding: 5px;
   list-style: none;
-  margin-bottom: 20px;
+  margin-bottom: 60px;
   display: block;
   text-align: center;
   @media (min-width: 480px) {

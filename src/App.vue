@@ -7,7 +7,9 @@
       <nav class="site-header__nav">
         <div class="site-header__logo-wrapper">
           <p>Una plataforma de:</p>
-          <img class="site-header__logo" src="./assets/images/logo-color.svg" alt="logo">
+          <a class="site-header__img-link" href="https://www.fdi.cr">
+            <img class="site-header__logo" src="./assets/images/logo-color.svg" alt="logo">
+          </a>
         </div>
         <h3
           @click="siteHeaderMenuToggle = !siteHeaderMenuToggle"
@@ -319,6 +321,10 @@ li {
   margin: 0;
   display: flex;
   justify-content: flex-start;
+}
+
+.site-header__img-link {
+  margin: auto 0;
 }
 
 .site-header__logo {
