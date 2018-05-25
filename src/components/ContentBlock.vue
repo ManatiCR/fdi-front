@@ -315,7 +315,7 @@ export default {
     max-width: 1000px;
     margin: 0 auto;
     text-align: center;
-    padding: 100px 0 20px 0;
+    padding: 40px 0 20px 0;
     display: block;
     @media (min-width: 768px) {
       padding: 100px 0 150px 0;
