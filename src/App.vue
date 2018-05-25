@@ -414,8 +414,15 @@ li {
   text-decoration: none;
   color: $text;
   line-height: 1.5;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
   &:hover {
     color: #262e3b;
+  }
+  @media (min-width: $bp-medium) {
+    width: inherit;
+    height: inherit;
   }
 }
 
