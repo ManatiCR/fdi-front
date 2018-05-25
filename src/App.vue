@@ -60,7 +60,9 @@
         </ul>
       </nav>
     </header>
-    <router-view/>
+    <div class="site-min-height">
+      <router-view/>
+    </div>
     <footer class="site-footer">
       <img class="site-footer__logo" src="./assets/images/logo.svg" alt="logo">
       <nav class="site-footer__social">
@@ -268,6 +270,11 @@ li {
   &:hover {
     background: darken($background3, 10%);
   }
+}
+
+// Min height to separate footer from header when the content is loading.
+.site-min-height {
+  min-height: 600px;
 }
 
 // Header Styles
