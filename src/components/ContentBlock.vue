@@ -110,6 +110,15 @@ export default {
             imageStyleMedium: this.imageStyleMedium,
           };
         },
+        error(error) {
+          // This is a hack. We need to use cached data if network is unavailable.
+          if (error.networkError) {
+            this.$apollo.skipAllQueries = true;
+            setTimeout(() => {
+              this.$apollo.skipAllQueries = false;
+            }, 1000);
+          }
+        },
         update(data) {
           if (Object.prototype.hasOwnProperty.call(data, 'nodeQuery') &&
           Object.prototype.hasOwnProperty.call(data.nodeQuery, 'entities') &&
