@@ -2,6 +2,7 @@ import Vue from 'vue';
 import { ApolloClient } from 'apollo-client';
 import { BatchHttpLink } from 'apollo-link-batch-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
+import { persistCache } from 'apollo-cache-persist';
 import VueApollo from 'vue-apollo';
 import moment from 'moment';
 import 'moment/locale/es';
@@ -23,14 +24,21 @@ if (redirect && redirect !== location.href) {
 
 Vue.config.productionTip = false;
 
-const batchHttpLink = new BatchHttpLink({
+const link = new BatchHttpLink({
   uri: config.apiUrl,
+});
+
+const cache = new InMemoryCache();
+
+persistCache({
+  cache,
+  storage: window.localStorage,
 });
 
 // Create the apollo client.
 const apolloClient = new ApolloClient({
-  link: batchHttpLink,
-  cache: new InMemoryCache(),
+  link,
+  cache,
   connectToDevTools: true,
 });
 
