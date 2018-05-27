@@ -4,6 +4,7 @@ import { BatchHttpLink } from 'apollo-link-batch-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { persistCache } from 'apollo-cache-persist';
 import VueApollo from 'vue-apollo';
+import VueAnalytics from 'vue-analytics';
 import moment from 'moment';
 import 'moment/locale/es';
 import vueMoment from 'vue-moment';
@@ -53,6 +54,14 @@ Vue.use(vueMoment, {
 const apolloProvider = new VueApollo({
   defaultClient: apolloClient,
 });
+
+// Google Analytics configuration.
+if (config.ga) {
+  Vue.use(VueAnalytics, {
+    id: config.ga,
+    router,
+  });
+}
 
 new Vue({
   router,
