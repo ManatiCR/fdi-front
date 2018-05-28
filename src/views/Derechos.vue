@@ -20,18 +20,18 @@ export default {
   data() {
     return {
       pageTitle: 'Derechos humanos fundamentales',
-    }
+    };
   },
   metaInfo() {
     return {
       title: this.pageTitle,
       meta: [
-        {property: 'og:title', content: `${this.pageTitle} - ${config.siteName}`},
-        {property: 'og:url', content: `${config.baseUrl}${this.$router.currentRoute.path}`},
-        {name: 'twitter:title', content: `${this.pageTitle} - ${config.siteName}`},
-      ]
-    }
-  }
+        { property: 'og:title', content: `${this.pageTitle} - ${config.siteName}` },
+        { property: 'og:url', content: `${config.baseUrl}${this.$router.currentRoute.path}` },
+        { name: 'twitter:title', content: `${this.pageTitle} - ${config.siteName}` },
+      ],
+    };
+  },
 };
 </script>
 

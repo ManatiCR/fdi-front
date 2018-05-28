@@ -38,6 +38,7 @@
 
 <script>
 import gql from 'graphql-tag';
+import config from '../config';
 import ContentBlock from '../components/ContentBlock.vue';
 
 const query = gql`query {
@@ -118,11 +119,11 @@ export default {
     return {
       title: this.pageTitle,
       meta: [
-        {property: 'og:title', content: `${this.pageTitle} - ${config.siteName}`},
-        {property: 'og:url', content: `${config.baseUrl}${this.$router.currentRoute.path}`},
-        {name: 'twitter:title', content: `${this.pageTitle} - ${config.siteName}`},
-      ]
-    }
+        { property: 'og:title', content: `${this.pageTitle} - ${config.siteName}` },
+        { property: 'og:url', content: `${config.baseUrl}${this.$router.currentRoute.path}` },
+        { name: 'twitter:title', content: `${this.pageTitle} - ${config.siteName}` },
+      ],
+    };
   },
 };
 </script>

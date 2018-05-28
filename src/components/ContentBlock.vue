@@ -192,7 +192,7 @@ export default {
       }
     },
     stripHtml(html) {
-      var doc = new DOMParser().parseFromString(html, 'text/html');
+      const doc = new DOMParser().parseFromString(html, 'text/html');
       return doc.body.textContent || '';
     },
   },
@@ -301,25 +301,27 @@ export default {
       case 'derechos_header':
       case 'recursos':
       case 'contacto':
-      case 'espacios':
+      case 'espacios': {
         description = this.stripHtml(this.nodeQuery.body);
         description = description.slice(0, description.indexOf('\n'));
-        var re = new RegExp(String.fromCharCode(160), 'g');
+        const re = new RegExp(String.fromCharCode(160), 'g');
         description = description.replace(re, ' ');
         break;
-      default:
+      }
+      default: {
         break;
+      }
     }
     if (description) {
       return {
         meta: [
-          {property: 'og:description', content: description},
-          {property: 'twitter:description', content: description},
+          { property: 'og:description', content: description },
+          { property: 'twitter:description', content: description },
         ],
       };
-    } else {
-      return {};
     }
+    // Return empty object if not one of selected ids.
+    return {};
   },
 };
 </script>

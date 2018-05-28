@@ -19,17 +19,17 @@ export default {
   data() {
     return {
       pageTitle: 'Recursos de denuncia',
-    }
+    };
   },
   metaInfo() {
     return {
       title: this.pageTitle,
       meta: [
-        {property: 'og:title', content: `${this.pageTitle} - ${config.siteName}`},
-        {property: 'og:url', content: `${config.baseUrl}${this.$router.currentRoute.path}`},
-        {name: 'twitter:title', content: `${this.pageTitle} - ${config.siteName}`},
-      ]
-    }
+        { property: 'og:title', content: `${this.pageTitle} - ${config.siteName}` },
+        { property: 'og:url', content: `${config.baseUrl}${this.$router.currentRoute.path}` },
+        { name: 'twitter:title', content: `${this.pageTitle} - ${config.siteName}` },
+      ],
+    };
   },
 };
 </script>
