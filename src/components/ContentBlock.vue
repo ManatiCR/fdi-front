@@ -324,7 +324,7 @@ export default {
     max-width: 1000px;
     margin: 0 auto;
     text-align: center;
-    padding: 40px 0 20px 0;
+    padding: 40px 0 60px 0;
     display: block;
     @media (min-width: 768px) {
       padding: 100px 0 150px 0;
@@ -536,11 +536,9 @@ export default {
 }
 // Component home FDI -- end
 
-
 // Component home espacios
 .content-block__home-espacios,
 .content-block__contacto {
-  margin-bottom: 80px;
   margin: auto;
   .content-block__body-button-wrapper {
     text-align: center;
@@ -600,11 +598,12 @@ export default {
 // Component recursos_juridicos
 .content-block__recursos-juridicos {
   margin-bottom: 20px;
-  padding: 40px;
+  padding: 20px;
   background-color: #fff;
   @media (min-width: 768px) {
     max-width: 885px;
     margin-bottom: 0;
+    padding: 40px;
   }
   h1 {
     font-size: 2rem;
