@@ -151,7 +151,7 @@ export default {
   width: 100%;
   margin-bottom: 20px;
   color: $text;
-  background: url(.././assets/images/icons/search-icon.png) no-repeat;
+  background: url(.././assets/images/search-icon.png) no-repeat;
   background-size: 20px;
   background-position: right 10px center;
   padding-left: 10px;

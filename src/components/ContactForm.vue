@@ -337,7 +337,7 @@ export default {
 }
 
 .contacto-form__error-message p {
-  background: url(.././assets/images/icons/warning.png) no-repeat;
+  background: url(.././assets/images/warning.png) no-repeat;
   background-size: 33px;
   background-position: left center;
   padding-left: 53px;
