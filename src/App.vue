@@ -60,7 +60,9 @@
         </ul>
       </nav>
     </header>
-    <router-view/>
+    <main class="site-content">
+      <router-view/>
+    </main>
     <footer class="site-footer">
       <img class="site-footer__logo" src="./assets/images/logo.svg" alt="logo">
       <nav class="site-footer__social">
@@ -270,6 +272,11 @@ li {
   }
 }
 
+// Min height to separate footer from header when the content is loading.
+.site-content {
+  min-height: 600px;
+}
+
 // Header Styles
 .site-header {
   background: url('./assets/images/background-header-mobile.jpg');
@@ -407,8 +414,15 @@ li {
   text-decoration: none;
   color: $text;
   line-height: 1.5;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
   &:hover {
     color: #262e3b;
+  }
+  @media (min-width: $bp-medium) {
+    width: inherit;
+    height: inherit;
   }
 }
 
