@@ -274,7 +274,7 @@ li {
 
 // Min height to separate footer from header when the content is loading.
 .site-content {
-  min-height: 600px;
+  min-height: 475px;
 }
 
 // Header Styles
