@@ -298,7 +298,7 @@ li {
 
 // Min height to separate footer from header when the content is loading.
 .site-content {
-  min-height: 600px;
+  min-height: 475px;
 }
 
 // Header Styles
@@ -508,7 +508,7 @@ li {
   text-indent: 100%;
   white-space: nowrap;
   overflow: hidden;
-  background: url('./assets/images/icons/social-icons.svg') no-repeat 0px 0px #fff;
+  background: url('./assets/images/social-icons.svg') no-repeat 0px 0px #fff;
   border-radius: 50%;
   width: 50px;
   height: 50px;

@@ -358,7 +358,7 @@ export default {
     max-width: 1000px;
     margin: 0 auto;
     text-align: center;
-    padding: 40px 0 20px 0;
+    padding: 40px 0 60px 0;
     display: block;
     @media (min-width: 768px) {
       padding: 100px 0 150px 0;
@@ -461,12 +461,10 @@ export default {
     max-width: 600px;
     position: absolute;
     margin: 0 auto;
-    top: calc(50% - 160px);
+    top: 50%;
+    transform: translateY(-50%);
     left: 0;
     right: 0;
-    @media (min-width: 425px) {
-      top: calc(50% - 135px);
-    }
   }
 }
 // Component Home derechos and derechos header -- end
@@ -498,13 +496,13 @@ export default {
   .content-block__body-button-wrapper {
     width: calc(100% - 20px);
     padding: 15px;
-    top: calc(50% - 165px);
+    top: 50%;
+    transform: translateY(-50%);
     @media (min-width: 360px) {
       padding: 20px;
     }
     @media (min-width: 1000px) {
       padding: 40px;
-      top: calc(50% - 135px);
       margin: 0;
       left: inherit;
       right: 5%;
@@ -570,11 +568,9 @@ export default {
 }
 // Component home FDI -- end
 
-
 // Component home espacios
 .content-block__home-espacios,
 .content-block__contacto {
-  margin-bottom: 80px;
   margin: auto;
   .content-block__body-button-wrapper {
     text-align: center;
@@ -634,11 +630,12 @@ export default {
 // Component recursos_juridicos
 .content-block__recursos-juridicos {
   margin-bottom: 20px;
-  padding: 40px;
+  padding: 20px;
   background-color: #fff;
   @media (min-width: 768px) {
     max-width: 885px;
     margin-bottom: 0;
+    padding: 40px;
   }
   h1 {
     font-size: 2rem;
