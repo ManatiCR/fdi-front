@@ -60,7 +60,9 @@
         </ul>
       </nav>
     </header>
-    <router-view/>
+    <main class="site-content">
+      <router-view/>
+    </main>
     <footer class="site-footer">
       <img class="site-footer__logo" src="./assets/images/logo.svg" alt="logo">
       <nav class="site-footer__social">
@@ -91,11 +93,35 @@
 </template>
 
 <script>
+import config from './config';
+
 export default {
   name: 'simple-counter',
   data() {
     return {
       siteHeaderMenuToggle: true,
+    };
+  },
+  metaInfo() {
+    return {
+      base: { href: '/' },
+      titleTemplate: titleChunk => (titleChunk ? `${titleChunk} - ${config.siteName}` : config.siteName),
+      meta: [
+        // OpenGraph data.
+        { property: 'og:site_name', content: config.siteName },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:locale', content: 'es_CR' },
+        { property: 'og:url', content: `${config.baseUrl}${this.$router.currentRoute.path}` },
+        { property: 'og:image', content: `${config.baseUrl}${config.ogImage}` },
+        // Twitter card.
+        { name: 'twitter:card', content: 'summary' },
+        { name: 'twitter:site', content: `${config.baseUrl}${this.$router.currentRoute.path}` },
+        { name: 'twitter:creator', content: '@FDIcr' },
+        { name: 'twitter:image:src', content: `${config.baseUrl}${config.ogImage}` },
+        // Google / Schema.org markup:
+        { itemprop: 'name', content: config.siteName },
+        { itemprop: 'image', content: `${config.baseUrl}${config.ogImage}` },
+      ],
     };
   },
 };
@@ -270,6 +296,11 @@ li {
   }
 }
 
+// Min height to separate footer from header when the content is loading.
+.site-content {
+  min-height: 600px;
+}
+
 // Header Styles
 .site-header {
   background: url('./assets/images/background-header-mobile.jpg');
@@ -407,8 +438,15 @@ li {
   text-decoration: none;
   color: $text;
   line-height: 1.5;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
   &:hover {
     color: #262e3b;
+  }
+  @media (min-width: $bp-medium) {
+    width: inherit;
+    height: inherit;
   }
 }
 

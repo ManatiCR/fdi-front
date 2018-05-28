@@ -2,7 +2,7 @@
   <section class="view-directorio">
     <content-block id="recursos"></content-block>
     <div class="directory-page">
-      <h3 class="directory-page__title">Directorio telefónico</h3>
+      <h3 class="directory-page__title">{{ this.pageTitle }}</h3>
       <input
         type="text"
         placeholder="Buscar"
@@ -38,6 +38,7 @@
 
 <script>
 import gql from 'graphql-tag';
+import config from '../config';
 import ContentBlock from '../components/ContentBlock.vue';
 
 const query = gql`query {
@@ -104,6 +105,7 @@ export default {
       search: '',
       entities: {},
       entitiesfiltered: {},
+      pageTitle: 'Contactos de oficinas públicas',
     };
   },
   methods: {
@@ -112,6 +114,16 @@ export default {
         entity.entityLabel.toLowerCase().indexOf(this.search.toLowerCase()) > -1
       ));
     },
+  },
+  metaInfo() {
+    return {
+      title: this.pageTitle,
+      meta: [
+        { property: 'og:title', content: `${this.pageTitle} - ${config.siteName}` },
+        { property: 'og:url', content: `${config.baseUrl}${this.$router.currentRoute.path}` },
+        { name: 'twitter:title', content: `${this.pageTitle} - ${config.siteName}` },
+      ],
+    };
   },
 };
 </script>

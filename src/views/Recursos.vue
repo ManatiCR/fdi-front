@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import config from '../config';
 import Directory from '../components/Directory.vue';
 import Model from '../components/Model.vue';
 import ContentBlock from '../components/ContentBlock.vue';
@@ -25,6 +26,21 @@ export default {
     Model,
     Directory,
     ContentBlock,
+  },
+  data() {
+    return {
+      pageTitle: 'Recursos',
+    };
+  },
+  metaInfo() {
+    return {
+      title: this.pageTitle,
+      meta: [
+        { property: 'og:title', content: `${this.pageTitle} - ${config.siteName}` },
+        { property: 'og:url', content: `${config.baseUrl}${this.$router.currentRoute.path}` },
+        { name: 'twitter:title', content: `${this.pageTitle} - ${config.siteName}` },
+      ],
+    };
   },
 };
 </script>

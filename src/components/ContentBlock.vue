@@ -191,6 +191,10 @@ export default {
         this.imageStyleMedium = 'medium';
       }
     },
+    stripHtml(html) {
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      return doc.body.textContent || '';
+    },
   },
   data() {
     return {
@@ -289,6 +293,36 @@ export default {
       imageStyleMedium: '',
     };
   },
+  metaInfo() {
+    let description = '';
+    switch (this.id) {
+      case 'home_reporte':
+      case 'reporte':
+      case 'derechos_header':
+      case 'recursos':
+      case 'contacto':
+      case 'espacios': {
+        description = this.stripHtml(this.nodeQuery.body);
+        description = description.slice(0, description.indexOf('\n'));
+        const re = new RegExp(String.fromCharCode(160), 'g');
+        description = description.replace(re, ' ');
+        break;
+      }
+      default: {
+        break;
+      }
+    }
+    if (description) {
+      return {
+        meta: [
+          { property: 'og:description', content: description },
+          { property: 'twitter:description', content: description },
+        ],
+      };
+    }
+    // Return empty object if not one of selected ids.
+    return {};
+  },
 };
 </script>
 
@@ -324,7 +358,7 @@ export default {
     max-width: 1000px;
     margin: 0 auto;
     text-align: center;
-    padding: 100px 0 20px 0;
+    padding: 40px 0 20px 0;
     display: block;
     @media (min-width: 768px) {
       padding: 100px 0 150px 0;
