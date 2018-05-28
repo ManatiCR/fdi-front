@@ -282,11 +282,11 @@ export default {
 }
 
 .spaces__suggest-space-message p {
-  background: url(.././assets/images/icons/lightbulb.png) no-repeat;
+  background: url(.././assets/images/lightbulb.png) no-repeat;
 }
 
 .spaces__no-more-message p {
-  background: url(.././assets/images/icons/warning.png) no-repeat;
+  background: url(.././assets/images/warning.png) no-repeat;
 }
 
 .spaces__no-more-message,
