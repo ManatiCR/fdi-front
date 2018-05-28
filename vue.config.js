@@ -1,3 +1,8 @@
+const path = require('path');
+const PrerenderSPAPlugin = require('prerender-spa-plugin');
+
+const Renderer = PrerenderSPAPlugin.PuppeteerRenderer;
+
 module.exports = {
   lintOnSave: false,
   pwa: {
@@ -20,5 +25,30 @@ module.exports = {
         /404\.html$/,
       ],
     },
+  },
+  configureWebpack: () => {
+    if (process.env.NODE_ENV === 'production') {
+      return {
+        plugins: [
+          new PrerenderSPAPlugin({
+            staticDir: path.join(__dirname, 'dist'),
+            routes: [
+              '/',
+              '/reporte',
+              '/derechos',
+              '/recursos',
+              '/contacto',
+              '/espacios',
+              '/recursos/recursos-de-denuncia',
+              '/recursos/directorio',
+            ],
+            renderer: new Renderer({
+              renderAfterTime: 5000,
+            }),
+          }),
+        ],
+      };
+    }
+    return {};
   },
 };
