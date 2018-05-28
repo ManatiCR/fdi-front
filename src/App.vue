@@ -93,11 +93,35 @@
 </template>
 
 <script>
+import config from './config';
+
 export default {
   name: 'simple-counter',
   data() {
     return {
       siteHeaderMenuToggle: true,
+    };
+  },
+  metaInfo() {
+    return {
+      base: { href: '/' },
+      titleTemplate: titleChunk => (titleChunk ? `${titleChunk} - ${config.siteName}` : config.siteName),
+      meta: [
+        // OpenGraph data.
+        { property: 'og:site_name', content: config.siteName },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:locale', content: 'es_CR' },
+        { property: 'og:url', content: `${config.baseUrl}${this.$router.currentRoute.path}` },
+        { property: 'og:image', content: `${config.baseUrl}${config.ogImage}` },
+        // Twitter card.
+        { name: 'twitter:card', content: 'summary' },
+        { name: 'twitter:site', content: `${config.baseUrl}${this.$router.currentRoute.path}` },
+        { name: 'twitter:creator', content: '@FDIcr' },
+        { name: 'twitter:image:src', content: `${config.baseUrl}${config.ogImage}` },
+        // Google / Schema.org markup:
+        { itemprop: 'name', content: config.siteName },
+        { itemprop: 'image', content: `${config.baseUrl}${config.ogImage}` },
+      ],
     };
   },
 };

@@ -54,6 +54,7 @@
 
 <script>
 import gql from 'graphql-tag';
+import config from '../config';
 
 const query = gql`query($id: String!){
   nodeQuery(
@@ -143,6 +144,17 @@ export default {
   data() {
     return {
       nodeQuery: {},
+      pageTitle: 'Recursos de denuncia',
+    };
+  },
+  metaInfo() {
+    return {
+      title: this.pageTitle,
+      meta: [
+        { property: 'og:title', content: `${this.pageTitle} - ${config.siteName}` },
+        { property: 'og:url', content: `${config.baseUrl}${this.$router.currentRoute.path}` },
+        { name: 'twitter:title', content: `${this.pageTitle} - ${config.siteName}` },
+      ],
     };
   },
 };

@@ -1,7 +1,7 @@
 module.exports = {
   lintOnSave: false,
   pwa: {
-    name: 'FDI No más discriminación',
+    name: 'FDI Vigilancia Ciudadana',
     themeColor: '#ffc233',
     msTileColor: '#000000',
     appleMobileWebAppCapable: 'yes',

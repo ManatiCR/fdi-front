@@ -1,6 +1,6 @@
 <template>
   <section class="directory">
-    <h3 class="directory__title">Directorio telefónico</h3>
+    <h3 class="directory__title">Contactos de oficinas públicas</h3>
     <ul class="directory__list">
       <li
         class="directory__item"
