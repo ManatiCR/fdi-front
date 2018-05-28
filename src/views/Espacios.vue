@@ -79,6 +79,7 @@
 </template>
 
 <script>
+import config from '../config';
 import gql from 'graphql-tag';
 import ContentBlock from '../components/ContentBlock.vue';
 
@@ -192,10 +193,21 @@ export default {
       spaces: {},
       limit: 20,
       noMoreMessage: false,
+      pageTitle: 'Espacios libres de discriminación',
       suggestSpaceMessage: false,
       suggestSpace: false,
     };
   },
+  metaInfo() {
+    return {
+      title: this.pageTitle,
+      meta: [
+        {property: 'og:title', content: `${this.pageTitle} - ${config.siteName}`},
+        {property: 'og:url', content: `${config.baseUrl}${this.$router.currentRoute.path}`},
+        {name: 'twitter:title', content: `${this.pageTitle} - ${config.siteName}`},
+      ]
+    }
+  }
 };
 </script>
 
