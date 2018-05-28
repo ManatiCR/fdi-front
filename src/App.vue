@@ -110,6 +110,7 @@ export default {
         // OpenGraph data.
         {property: 'og:site_name', content: config.siteName},
         {property: 'og:type', content: 'website'},
+        {property: 'og:locale', content: 'es_CR'},
         {property: 'og:url', content: `${config.baseUrl}${this.$router.currentRoute.path}`},
         {property: 'og:image', content: `${config.baseUrl}${config.ogImage}`},
         // Twitter card.
