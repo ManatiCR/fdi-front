@@ -4,7 +4,7 @@
       <router-link
         class="machote__go-back-btn"
         :to="{ name: 'recursos machotes'}">
-        Volver
+        Todos los recursos de denuncia
       </router-link>
     </div>
     <div class="machote__content-wrapper">
