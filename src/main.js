@@ -8,6 +8,7 @@ import VueAnalytics from 'vue-analytics';
 import moment from 'moment';
 import 'moment/locale/es';
 import vueMoment from 'vue-moment';
+import Meta from 'vue-meta';
 
 import App from './App.vue';
 import router from './router';
@@ -62,6 +63,9 @@ if (config.ga) {
     router,
   });
 }
+
+// vue-meta.
+Vue.use(Meta);
 
 new Vue({
   router,
