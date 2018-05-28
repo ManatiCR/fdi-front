@@ -629,7 +629,7 @@ export default {
 @import "../assets/scss/variables";
 
 .create-report {
-  padding: 80px 20px;
+  padding: 40px 20px;
   .btn {
     display: block;
     margin: 0 auto;
@@ -637,6 +637,9 @@ export default {
       margin: 0;
       display: inline-block;
     }
+  }
+  @media (min-width: 1000px) {
+    padding: 80px;
   }
 }
 
@@ -731,15 +734,35 @@ export default {
 }
 
 .create-report__step-2-search {
-  margin-bottom: 20px;
+  max-width: 500px;
+  margin: 0 auto 20px auto;
+  @media (min-width: 425px) {
+    display: flex;
+    align-items: flex-start;
+  }
+  @media (min-width: 1000px) {
+    margin: 0 0 20px 0;
+  }
   input[type="text"] {
     font-size: 1.4rem;
     margin-right: 5px;
     padding: 8px;
+    width: 100%;
+    flex: 3;
+    color: $text;
   }
   p {
     display: inline-block;
     margin-left: 20px;
+  }
+  .btn {
+    flex: 1;
+    width: 100%;
+    margin-top: 20px;
+    @media (min-width: 425px) {
+      margin-top: 0;
+      margin-left: 15px;
+    }
   }
 }
 
