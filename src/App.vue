@@ -60,9 +60,9 @@
         </ul>
       </nav>
     </header>
-    <div class="site-min-height">
+    <main class="site-content">
       <router-view/>
-    </div>
+    </main>
     <footer class="site-footer">
       <img class="site-footer__logo" src="./assets/images/logo.svg" alt="logo">
       <nav class="site-footer__social">
@@ -273,7 +273,7 @@ li {
 }
 
 // Min height to separate footer from header when the content is loading.
-.site-min-height {
+.site-content {
   min-height: 600px;
 }
 
