@@ -274,7 +274,7 @@
 import 'vue-multiselect/dist/vue-multiselect.min.css';
 import Vue from 'vue';
 import gql from 'graphql-tag';
-import { load, loaded, Map, Marker } from 'vue2-google-maps';
+import { load, Map, Marker } from 'vue2-google-maps';
 import Multiselect from 'vue-multiselect';
 import ContentBlock from './ContentBlock.vue';
 
