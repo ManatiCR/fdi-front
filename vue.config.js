@@ -1,5 +1,7 @@
+/* eslint import/no-extraneous-dependencies: ["error", {"devDependencies": true}] */
 const path = require('path');
 const PrerenderSPAPlugin = require('prerender-spa-plugin');
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
 
 const Renderer = PrerenderSPAPlugin.PuppeteerRenderer;
 
@@ -46,6 +48,7 @@ module.exports = {
               renderAfterTime: 5000,
             }),
           }),
+          new ImageminPlugin({ test: /\.(jpe?g|png|gif|svg)$/i }),
         ],
       };
     }
