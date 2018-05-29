@@ -274,18 +274,9 @@
 import 'vue-multiselect/dist/vue-multiselect.min.css';
 import Vue from 'vue';
 import gql from 'graphql-tag';
-import * as VueGoogleMaps from 'vue2-google-maps';
+import { load, loaded, Map, Marker } from 'vue2-google-maps';
 import Multiselect from 'vue-multiselect';
 import ContentBlock from './ContentBlock.vue';
-
-// Google Maps plugin.
-Vue.use(VueGoogleMaps, {
-  load: {
-    key: 'AIzaSyDZCo_SRzzlgUp03A1zNCLTzFM9x4eqnhk',
-    libraries: 'places',
-  },
-});
-
 
 const categoryQuery = gql`query {
   categories: taxonomyTermQuery(
@@ -345,6 +336,8 @@ export default {
   components: {
     Multiselect,
     ContentBlock,
+    'gmap-map': Map,
+    'gmap-marker': Marker,
   },
   data() {
     return {
@@ -414,6 +407,15 @@ export default {
         },
       };
     },
+  },
+  mounted() {
+    // Loads Google Maps plugin if not loaded yet.
+    if (typeof google === 'undefined') {
+      load({
+        key: 'AIzaSyDZCo_SRzzlgUp03A1zNCLTzFM9x4eqnhk',
+        libraries: 'places',
+      });
+    }
   },
   methods: {
     validateFields(step) {
