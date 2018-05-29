@@ -11,6 +11,7 @@
 </template>
 
 <script>
+import config from '../config';
 import ContentBlock from '../components/ContentBlock.vue';
 import SpacesHome from '../components/SpacesHome.vue';
 
@@ -18,6 +19,15 @@ export default {
   components: {
     ContentBlock,
     SpacesHome,
+  },
+  metaInfo() {
+    return {
+      meta: [
+        { property: 'og:title', content: `${config.siteName}` },
+        { property: 'og:url', content: `${config.baseUrl}${this.$router.currentRoute.path}` },
+        { name: 'twitter:title', content: `${config.siteName}` },
+      ],
+    };
   },
 };
 </script>
