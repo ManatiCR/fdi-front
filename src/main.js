@@ -70,6 +70,6 @@ Vue.use(Meta);
 new Vue({
   router,
   store,
-  provide: apolloProvider.provide(),
+  apolloProvider,
   render: h => h(App),
 }).$mount('#app');
