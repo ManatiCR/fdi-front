@@ -182,7 +182,7 @@ a {
   font-family: $opensans;
   font-size: 1.4rem;
   font-weight: 700;
-  color: #2dbcdb;
+  color: #1c73a6;
 }
 
 li {
