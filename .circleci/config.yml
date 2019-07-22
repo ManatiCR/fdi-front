@@ -21,7 +21,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "00:e0:7a:72:c7:e3:5b:0d:61:3f:35:e5:f5:d1:b7:db"
+            - "2a:cc:22:5b:bc:8f:2b:60:5f:7a:ec:fa:e3:66:aa:89"
       - checkout
       - run:
           name: Install Google Chrome
