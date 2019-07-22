@@ -3,7 +3,9 @@
     <content-block id="recursos"></content-block>
     <div class="directory-page">
       <h3 class="directory-page__title">{{ this.pageTitle }}</h3>
+      <label for="directory-search" class="visually-hidden">Buscar</label>
       <input
+        id="directory-search"
         type="text"
         placeholder="Buscar"
         class="directory-page-input"

@@ -16,7 +16,11 @@
         </div>
         <div v-if="formStep === 1" class="create-report__step create-report__step-1">
           <div @click="categoryError = false">
+            <label for="report-category" class="visually-hidden">
+              Seleccione una categoría
+            </label>
             <multiselect
+            id="report-category"
             placeholder="Seleccione una categoría"
             select-label="Agregar"
             deselectLabel="Eliminar"
@@ -29,7 +33,11 @@
             :searchable="true"
             ></multiselect>
             <p class="errorValidate" v-if="categoryError">{{completeFieldMessage}}</p>
+            <label for="report-subcategory" class="visually-hidden" v-if="categories.length">
+              Seleccione una subcategoría
+            </label>
             <multiselect
+            id="report-subcategory"
             class="create-report__step-1-subcategory-select"
             placeholder="Seleccione una subcategoría"
             select-label="Agregar"
@@ -52,7 +60,11 @@
         </div>
         <div v-if="formStep === 2" class="create-report__step create-report__step-2">
           <div class="create-report__step-2-search">
+            <label for="report-search-place" class="visually-hidden">
+              Buscar un lugar
+            </label>
             <input
+              id="report-search-place"
               class="create-report__step-2-search-input"
               type="text" placeholder="Buscar un lugar"
               v-model="searchText"
@@ -98,8 +110,12 @@
           </button>
         </div>
         <div v-if="formStep === 3" class="create-report__step create-report__step-3">
+          <label for="report-description" class="visually-hidden">
+            Escribí tu reporte
+          </label>
           <textarea
-          v-bind:class="{ reportTextError: reportTextError }"
+            id="report-description"
+            v-bind:class="{ reportTextError: reportTextError }"
             @click="reportTextError = false"
             v-model="reportText">
           </textarea>
@@ -136,19 +152,25 @@
             El FDI te puede brindar el apoyo y asesoría necesaria para realizar una denuncia formal.
             Este acompañamiento sería durante todo el proceso, en caso de que decidás continuar.
           </p>
+          <label for="report-person-name" class="visually-hidden">
+            Nombre
+          </label>
           <input @click="personNameError = false"
            v-bind:class="{ personNameError: personNameError }"
-           type="text" placeholder="Nombre" v-model="personName">
-           <p class="errorValidate" v-if="personNameError">{{completeFieldMessage}}</p>
-
+           type="text" placeholder="Nombre" v-model="personName" id="report-person-name">
+          <p class="errorValidate" v-if="personNameError">{{completeFieldMessage}}</p>
+          <label for="report-person-email" class="visually-hidden">
+            Correo electrónico
+          </label>
           <input @click="personEmailError = false, personInvalidEmail = false"
           v-bind:class="{ personEmailError: personEmailError }"
-          type="email" placeholder="Correo electrónico" v-model="personEmail">
+          type="email" placeholder="Correo electrónico" v-model="personEmail" id="report-person-email">
           <p class="errorValidate" v-if="personEmailError">{{completeFieldMessage}}</p>
           <p class="errorValidate" v-if="personInvalidEmail">Ingresá un correo válido</p>
-
-          <input  type="text" placeholder="Teléfono" v-model="personPhone">
-
+          <label for="report-person-phone" class="visually-hidden">
+            Teléfono
+          </label>
+          <input  type="text" placeholder="Teléfono" v-model="personPhone" id="report-person-phone">
           <button @click="gotoStep(6, true)" class="btn btn--fill-highlight1">Enviar</button>
           <div>
             <p v-if="submittingReport" class="create-report__submitting">
