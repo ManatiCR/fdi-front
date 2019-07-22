@@ -21,8 +21,16 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "00:e0:7a:72:c7:e3:5b:0d:61:3f:35:e5:f5:d1:b7:db"
+            - "2a:cc:22:5b:bc:8f:2b:60:5f:7a:ec:fa:e3:66:aa:89"
       - checkout
+      - run:
+          name: Install Google Chrome
+          command: |
+            sudo apt-get update && sudo apt-get install -yq libgconf-2-4
+            sudo wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - \
+            && sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
+            && sudo apt-get update \
+            && sudo apt-get install -y google-chrome-unstable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst ttf-freefont --no-install-recommends
       - run: npm install
       - run:
           name: Deploy Application to Github Pages
