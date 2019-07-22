@@ -159,7 +159,7 @@ export default {
   padding-left: 10px;
   &::placeholder {
     font-style: italic;
-    color: #e0e0e0;
+    color: $text;
   }
   @media (min-width: 480px) {
     width: 218px;

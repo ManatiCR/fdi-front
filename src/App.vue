@@ -270,12 +270,12 @@ li {
   color: $text;
   &:hover {
     background: $highlight2;
-    color: #fff;
+    color: $text;
   }
 }
 
 .btn--fill-highlight2 {
-  color: #fff;
+  color: $text;
   background: $highlight2;
   &:hover {
     background: darken($highlight2, 10%);
