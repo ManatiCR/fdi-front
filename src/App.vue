@@ -66,7 +66,7 @@
     <footer class="site-footer">
       <img class="site-footer__logo" src="./assets/images/logo.svg" alt="logo">
       <nav class="site-footer__social">
-        <h3 class="site-footer__social-title">Contacto:</h3>
+        <h2 class="site-footer__social-title">Contacto:</h2>
         <ul class="site-footer__social-list">
           <li>
             <a
