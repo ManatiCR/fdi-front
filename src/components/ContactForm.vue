@@ -58,6 +58,7 @@
           type="text"
           v-model="spaceName"
           name="spaceName"
+          id="spaceName"
         >
       </div>
       <div v-if="reasonPicked === 'recomendar_espacio'" class="input-wrapper">
@@ -72,6 +73,7 @@
           type="url"
           v-model="webSite"
           name="webSite"
+          id="webSite"
         >
       </div>
       <div v-if="reasonPicked === 'otro'" class="input-wrapper">
@@ -104,6 +106,7 @@
           type="text"
           v-model="name"
           name="name"
+          id="name"
         >
       </div>
       <div class="input-wrapper">
@@ -116,6 +119,7 @@
           type="email"
           v-model="email"
           name="email"
+          id="email"
         >
       </div>
       <div class="input-wrapper">
@@ -125,6 +129,7 @@
           type="text"
           v-model="phone"
           name="phone"
+          id="phone"
         >
       </div>
       <div class="input-wrapper">
@@ -136,6 +141,7 @@
           class="contacto-form__texarea"
           v-model="description"
           name="description"
+          id="description"
         >
         </textarea>
       </div>

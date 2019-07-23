@@ -3,7 +3,9 @@
     <content-block id="recursos"></content-block>
     <div class="directory-page">
       <h3 class="directory-page__title">{{ this.pageTitle }}</h3>
+      <label for="directory-search" class="visually-hidden">Buscar</label>
       <input
+        id="directory-search"
         type="text"
         placeholder="Buscar"
         class="directory-page-input"
@@ -157,7 +159,7 @@ export default {
   padding-left: 10px;
   &::placeholder {
     font-style: italic;
-    color: #e0e0e0;
+    color: $text;
   }
   @media (min-width: 480px) {
     width: 218px;

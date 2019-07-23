@@ -66,7 +66,7 @@
     <footer class="site-footer">
       <img class="site-footer__logo" src="./assets/images/logo.svg" alt="logo">
       <nav class="site-footer__social">
-        <h3 class="site-footer__social-title">Contacto:</h3>
+        <h2 class="site-footer__social-title">Contacto:</h2>
         <ul class="site-footer__social-list">
           <li>
             <a
@@ -182,7 +182,7 @@ a {
   font-family: $opensans;
   font-size: 1.4rem;
   font-weight: 700;
-  color: #2dbcdb;
+  color: #1c73a6;
 }
 
 li {
@@ -190,6 +190,17 @@ li {
   font-size: 1.4rem;
   color: $text;
   margin-bottom: 5px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .btn {
@@ -259,12 +270,12 @@ li {
   color: $text;
   &:hover {
     background: $highlight2;
-    color: #fff;
+    color: $text;
   }
 }
 
 .btn--fill-highlight2 {
-  color: #fff;
+  color: $text;
   background: $highlight2;
   &:hover {
     background: darken($highlight2, 10%);
